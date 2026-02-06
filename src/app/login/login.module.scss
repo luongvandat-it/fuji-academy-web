@@ -1,0 +1,129 @@
+@reference "../globals.css";
+
+/* Layout - @apply Tailwind utilities từ globals */
+.page {
+  @apply flex min-h-screen flex-col bg-white text-gray-900;
+}
+
+.header {
+  @apply flex items-center justify-between border-b border-gray-200 px-6 py-4 lg:px-12;
+}
+
+.logoLink {
+  @apply flex items-center gap-2 font-semibold text-gray-900;
+}
+
+.logoIcon {
+  @apply flex h-9 w-9 items-center justify-center rounded-lg bg-primary text-white;
+}
+
+.nav {
+  @apply hidden items-center gap-8 md:flex;
+}
+
+.navLink {
+  @apply text-gray-700 hover:text-gray-900;
+}
+
+.signUpBtn {
+  @apply inline-flex items-center justify-center rounded-lg bg-primary px-4 py-2.5 font-medium text-black shadow-sm transition-colors hover:bg-primary-600 ;
+}
+
+/* Main */
+.main {
+  @apply flex flex-1 flex-col lg:flex-row;
+}
+
+/* Hero section */
+.hero {
+  @apply relative flex flex-1 flex-col items-center justify-center overflow-hidden bg-gradient-to-br from-sky-50 to-sky-100 px-8 py-16 lg:py-24;
+}
+
+.heroBlur1 {
+  @apply absolute right-0 top-0 h-64 w-64 rounded-full bg-sky-200/60 blur-2xl;
+}
+
+.heroBlur2 {
+  @apply absolute bottom-0 left-0 h-72 w-72 rounded-full bg-sky-200/50 blur-2xl;
+}
+
+.heroTitle {
+  @apply relative z-10 text-center text-3xl font-bold tracking-tight text-gray-900 md:text-4xl;
+}
+
+.heroIconWrap {
+  @apply relative z-10 mt-8 flex h-32 w-32 items-center justify-center rounded-full bg-white/70 shadow-lg backdrop-blur;
+}
+
+/* Login form section */
+.formSection {
+  @apply flex flex-1 items-center justify-center bg-gray-50 px-6 py-12 lg:px-12 lg:py-16;
+}
+
+.card {
+  @apply w-full max-w-md rounded-2xl bg-white p-8 shadow-lg;
+}
+
+.cardTitle {
+  @apply text-2xl font-bold text-gray-900;
+}
+
+.cardSubtitle {
+  @apply mt-2 text-sm text-gray-600;
+}
+
+.form {
+  @apply mt-6 space-y-4;
+}
+
+.formRow {
+  @apply flex items-center justify-between;
+}
+
+.checkboxLabel {
+  @apply flex cursor-pointer items-center gap-2 text-sm text-gray-700;
+}
+
+.checkbox {
+  @apply h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary;
+}
+
+.forgotLink {
+  @apply text-sm font-medium text-primary hover:text-primary-600;
+}
+
+.submitBtn {
+  @apply w-full py-3 text-black;
+}
+
+.dividerWrap {
+  @apply relative my-6;
+}
+
+.dividerLine {
+  @apply absolute inset-0 flex items-center;
+}
+
+.dividerBorder {
+  @apply w-full border-t border-gray-200;
+}
+
+.dividerText {
+  @apply relative flex justify-center text-sm text-gray-500;
+}
+
+.socialButtons {
+  @apply flex gap-3;
+}
+
+.socialBtn {
+  @apply flex-1;
+}
+
+.footerText {
+  @apply mt-6 text-center text-sm text-gray-600;
+}
+
+.signUpLink {
+  @apply font-semibold text-primary hover:text-primary-600;
+}
