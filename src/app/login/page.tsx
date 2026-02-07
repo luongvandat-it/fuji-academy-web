@@ -1,10 +1,35 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { Button, Input, Text } from "@/components";
 import styles from "./login.module.scss";
+import { Logo } from "@/icon/Logo";
+import { useState } from "react";
+import { AUTH_TOKEN_KEY } from "@/lib";
+import { login } from "@/service/modules/login/logic";
 
 export default function LoginPage() {
+  const router = useRouter();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [dbname, setDbname] = useState('fuji_stg');
+  const [error, setError] = useState("");
+
+  const handleLogin = async () => {
+    setError("");
+    try {
+      const response = await login(username, password, dbname);
+      if (response.success) {
+        router.replace("/");
+      } else {
+        setError(response.message ?? "Đăng nhập thất bại.");
+      }
+    } catch (err) {
+      console.error(err);
+      setError("Đăng nhập thất bại. Vui lòng thử lại.");
+    }
+  };
   return (
     <div className={styles.page}>
       {/* Header */}
@@ -34,21 +59,18 @@ export default function LoginPage() {
         </Link>
       </header>
 
-      {/* Main: 2 columns */}
       <main className={styles.main}>
-        {/* Left column - Hero */}
         <section className={styles.hero}>
           <div className={styles.heroBlur1} />
           <div className={styles.heroBlur2} />
           <Text variant="HEADING.ONE" className={styles.heroTitle}>
               Master English Today
             </Text>
-          <div className={styles.heroIconWrap}>
-            <MountainBookIcon className="h-16 w-16 text-primary" />
+          <div className={styles.heroLogo}>
+            <Logo />
           </div>
         </section>
 
-        {/* Right column - Login card */}
         <section className={styles.formSection}>
           <div className={styles.card}>
             <Text variant="HEADING.TWO" className={styles.cardTitle}>
@@ -68,6 +90,8 @@ export default function LoginPage() {
                 type="email"
                 placeholder="example@email.com"
                 autoComplete="email"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
               />
               <Input
                 label="Password"
@@ -75,8 +99,23 @@ export default function LoginPage() {
                 type="password"
                 placeholder="Enter your password"
                 autoComplete="current-password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
-
+              <Input
+                label="DB NAME"
+                name="dbname"
+                type="text"
+                placeholder="Enter your DB name"
+                autoComplete="database-name"
+                value={dbname}
+                readOnly
+              />
+              {error && (
+                <p className={styles.errorText} role="alert">
+                  {error}
+                </p>
+              )}
               <div className={styles.formRow}>
                 <label className={styles.checkboxLabel}>
                   <input
@@ -97,9 +136,10 @@ export default function LoginPage() {
                 type="submit"
                 variant="primary"
                 className={styles.submitBtn}
+                onClick={handleLogin}
               >
-                <Text variant="BUTTON_LABEL.MEDIUM">
-                  Login to Your Account
+                <Text variant="BUTTON_LABEL.LARGE">
+                  Login
                 </Text>
               </Button>
             </form>
