@@ -1,0 +1,93 @@
+@reference "../../app/globals.css";
+
+.aside {
+  @apply fixed left-0 top-0 z-40 h-screen w-56 shrink-0 border-r border-gray-200 bg-white shadow-sm;
+  @apply transition-transform duration-200 ease-out;
+  @apply lg:translate-x-0;
+}
+
+.asideOpen {
+  @apply translate-x-0;
+}
+
+.asideClosed {
+  @apply -translate-x-full lg:translate-x-0;
+}
+
+.inner {
+  @apply flex h-full flex-col;
+}
+
+.closeBar {
+  @apply flex justify-end border-b border-gray-100 p-2 lg:hidden;
+}
+
+.closeBtn {
+  @apply rounded-lg p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700;
+}
+
+.userSection {
+  @apply border-b border-gray-100 p-4;
+}
+
+.userRow {
+  @apply flex items-center gap-3;
+}
+
+.avatar {
+  @apply h-10 w-10 shrink-0 rounded-full border-2 border-gray-200 bg-gray-50;
+}
+
+.userInfo {
+  @apply min-w-0;
+}
+
+.userName {
+  @apply truncate text-sm font-medium text-gray-900;
+}
+
+.userLevel {
+  @apply truncate text-xs text-gray-500;
+}
+
+.nav {
+  @apply flex-1 space-y-0.5 overflow-y-auto p-3;
+}
+
+.link {
+  @apply flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors;
+  @apply text-gray-700 hover:bg-gray-50 hover:text-gray-900;
+}
+
+.linkActive {
+  @apply bg-primary-50 text-primary-700;
+}
+
+.icon {
+  @apply text-gray-500;
+}
+
+.iconActive {
+  @apply text-primary-600;
+}
+
+.bottom {
+  @apply border-t border-gray-100 p-3;
+}
+
+.bottomLink {
+  @apply flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors;
+  @apply text-gray-600 hover:bg-gray-50 hover:text-gray-900;
+}
+
+.bottomLinkActive {
+  @apply bg-primary-50 text-primary-700;
+}
+
+.bottomIcon {
+  @apply text-gray-400;
+}
+
+.bottomIconActive {
+  @apply text-primary-600;
+}
