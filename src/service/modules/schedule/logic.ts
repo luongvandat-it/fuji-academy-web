@@ -28,11 +28,14 @@ export interface ScheduleItem {
     end_time: string;
 }
 
-export const getSchedule = async (): Promise<ScheduleResponse | undefined> => {
+export type GetScheduleResult = ScheduleResponse | { success: false; status?: number };
+
+export const getSchedule = async (): Promise<GetScheduleResult> => {
     try {
         const response = await api.get('/class/schedules')
         return response as ScheduleResponse
-    } catch (error) {
-        throw error;
+    } catch (error: unknown) {
+        const status = (error as { status?: number })?.status;
+        return { success: false, status };
     }
 }

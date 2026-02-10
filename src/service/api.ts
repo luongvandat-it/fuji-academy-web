@@ -28,7 +28,10 @@ client.interceptors.response.use(
   (response) => response,
   (error) => {
     const message = error.response?.data?.message ?? error.message ?? "Request failed";
-    return Promise.reject(new Error(typeof message === "string" ? message : JSON.stringify(message)));
+    const status = error.response?.status;
+    const err = new Error(typeof message === "string" ? message : JSON.stringify(message)) as Error & { status?: number };
+    err.status = status;
+    return Promise.reject(err);
   }
 );
 

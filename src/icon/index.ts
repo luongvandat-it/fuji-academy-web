@@ -1,0 +1,10 @@
+export { BookIcon } from "./BookIcon";
+export { CalendarIcon } from "./CalendarIcon";
+export { ClassIcon } from "./ClassIcon";
+export { CloseIcon } from "./CloseIcon";
+export { GridIcon } from "./GridIcon";
+export { Logo } from "./Logo";
+export { MenuIcon } from "./MenuIcon";
+export { ReportIcon } from "./ReportIcon";
+export { SettingsIcon } from "./SettingsIcon";
+export { SupportIcon } from "./SupportIcon";
