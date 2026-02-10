@@ -1,5 +1,5 @@
 
-export const APP_NAME = "Fuji Web";
+export const APP_NAME = "Fuji Academy";
 export const APP_DESCRIPTION = "Next.js app - clean & maintainable";
 
 export const AUTH_TOKEN_KEY = "auth_token";

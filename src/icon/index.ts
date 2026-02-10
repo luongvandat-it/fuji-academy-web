@@ -12,4 +12,5 @@ export { MenuIcon } from "./MenuIcon";
 export { ReportIcon } from "./ReportIcon";
 export { SettingsIcon } from "./SettingsIcon";
 export { SupportIcon } from "./SupportIcon";
+export { TuitionIcon } from "./TuitionIcon";
 export { LogoutIcon } from "./LogoutIcon";

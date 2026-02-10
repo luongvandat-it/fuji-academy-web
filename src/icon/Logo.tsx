@@ -30,6 +30,5 @@ export const Logo = ({ className, style }: { className?: string, style?: React.C
             <path d="M0 0 C0.33 0.66 0.66 1.32 1 2 C0.0625 4.625 0.0625 4.625 -1 7 C-0.34 7.33 0.32 7.66 1 8 C-0.32 8.33 -1.64 8.66 -3 9 C-4 7 -4 7 -3.1875 4.5 C-2 2 -2 2 0 0 Z " fill="#9FD6D5" transform="translate(229,604)" />
             <path d="M0 0 C0 0.99 0 1.98 0 3 C-1.96466413 4.06775224 -3.96855359 5.06553465 -6 6 C-6.66 5.67 -7.32 5.34 -8 5 C-2.25 0 -2.25 0 0 0 Z " fill="#5ABDB8" transform="translate(259,573)" />
         </svg>
-
     )
 }

@@ -9,6 +9,7 @@ import {
   ReportIcon,
   SettingsIcon,
   SupportIcon,
+  TuitionIcon,
 } from "@/icon";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -20,6 +21,7 @@ const navItems = [
   { href: "/homework", label: "Homework", icon: BookIcon },
   { href: "/class", label: "Class", icon: ClassIcon },
   { href: "/report", label: "Report", icon: ReportIcon },
+  { href: "/tuition", label: "Tuition", icon: TuitionIcon },
 ] as const;
 
 const bottomItems = [
