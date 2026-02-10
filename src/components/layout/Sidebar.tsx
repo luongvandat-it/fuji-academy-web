@@ -35,6 +35,8 @@ export interface SidebarProps {
 export function Sidebar({ open = true, onClose }: SidebarProps) {
   const pathname = usePathname();
 
+  const user = localStorage.getItem("user");
+  const userData = user ? JSON.parse(user) : null;
   return (
     <aside
       className={`${styles.aside} ${open ? styles.asideOpen : styles.asideClosed}`}
@@ -56,8 +58,8 @@ export function Sidebar({ open = true, onClose }: SidebarProps) {
           <div className={styles.userRow}>
             <div className={styles.avatar} />
             <div className={styles.userInfo}>
-              <p className={styles.userName}>Alex Johnson</p>
-              <p className={styles.userLevel}>Level 4 Intermediate</p>
+              <p className={styles.userName}>{userData?.name}</p>
+              <p className={styles.userLevel}>{userData?.email}</p>
             </div>
           </div>
         </div>

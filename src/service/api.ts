@@ -2,6 +2,13 @@ import axios, { type AxiosInstance } from "axios";
 import { AUTH_TOKEN_KEY, SESSION_ID_HEADER } from "@/lib";
 import { API_BASE_URL } from "@/lib/constants";
 
+const LOGIN_PATH = "/login";
+
+function redirectToLogin(): void {
+  if (typeof window === "undefined") return;
+  window.location.href = LOGIN_PATH;
+}
+
 function getToken(): string | null {
   if (typeof window === "undefined") return null;
   return sessionStorage.getItem(AUTH_TOKEN_KEY);
@@ -27,8 +34,11 @@ client.interceptors.request.use((config) => {
 client.interceptors.response.use(
   (response) => response,
   (error) => {
-    const message = error.response?.data?.message ?? error.message ?? "Request failed";
     const status = error.response?.status;
+    if (status === 404 || status === 401) {
+      redirectToLogin();
+    }
+    const message = error.response?.data?.message ?? error.message ?? "Request failed";
     const err = new Error(typeof message === "string" ? message : JSON.stringify(message)) as Error & { status?: number };
     err.status = status;
     return Promise.reject(err);

@@ -1,5 +1,9 @@
+export { BarChartIcon } from "./BarChartIcon";
+export { BellIcon } from "./BellIcon";
 export { BookIcon } from "./BookIcon";
 export { CalendarIcon } from "./CalendarIcon";
+export { ChevronLeftIcon } from "./ChevronLeftIcon";
+export { ChevronRightIcon } from "./ChevronRightIcon";
 export { ClassIcon } from "./ClassIcon";
 export { CloseIcon } from "./CloseIcon";
 export { GridIcon } from "./GridIcon";
@@ -8,3 +12,4 @@ export { MenuIcon } from "./MenuIcon";
 export { ReportIcon } from "./ReportIcon";
 export { SettingsIcon } from "./SettingsIcon";
 export { SupportIcon } from "./SupportIcon";
+export { LogoutIcon } from "./LogoutIcon";

@@ -20,6 +20,7 @@ export default function LoginPage() {
     try {
       const response = await login(username, password, dbname);
       if (response.success) {
+        localStorage.setItem('user', JSON.stringify(response.data));
         router.replace("/");
       } else {
         setError(response.message ?? "Đăng nhập thất bại.");
