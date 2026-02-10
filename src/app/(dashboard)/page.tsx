@@ -14,7 +14,7 @@ export default function Home() {
   }, []);
   return (
     <div className="p-6">
-      <p>Hello World</p>
+      <p>Comming soon...</p>
     </div>
   );
 }

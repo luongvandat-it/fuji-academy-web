@@ -52,6 +52,11 @@ export const api = {
   post: <T>(path: string, body?: object) =>
     client.post<T>(path, body).then((res) => res.data),
 
+  postFormData: <T>(path: string, formData: FormData) =>
+    client.post<T>(path, formData, {
+      headers: { "Content-Type": "multipart/form-data" },
+    }).then((res) => res.data),
+
   put: <T>(path: string, body?: object) =>
     client.put<T>(path, body).then((res) => res.data),
 

@@ -3,6 +3,7 @@
 import { ClassData, getClass } from "@/service/modules/class/logic";
 import type { ScheduleData } from "@/service/modules/schedule/logic";
 import { getSchedule } from "@/service/modules/schedule/logic";
+import Link from "next/link";
 import { useMemo, useEffect, useState } from "react";
 import { ClassCard } from "./components";
 import { getClassIdsWithClassToday } from "./utils";
@@ -45,11 +46,16 @@ export default function ClassPage() {
       </header>
       <div className={styles.grid}>
         {classes.map((c) => (
-          <ClassCard
+          <Link
             key={c.class_id}
-            item={c}
-            hasClassToday={classIdsWithClassToday.has(c.class_id)}
-          />
+            href={`/class/${c.class_id}`}
+            className={styles.cardLink}
+          >
+            <ClassCard
+              item={c}
+              hasClassToday={classIdsWithClassToday.has(c.class_id)}
+            />
+          </Link>
         ))}
       </div>
     </div>

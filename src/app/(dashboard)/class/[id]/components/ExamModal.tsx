@@ -1,0 +1,141 @@
+"use client";
+
+import { CloseIcon } from "@/icon";
+import type { ExamData } from "@/service/modules/exam/logic";
+import { submitExam } from "@/service/modules/exam/logic";
+import { useRef, useState } from "react";
+import styles from "../classDetail.module.scss";
+
+function formatDateTime(iso: string): string {
+  const d = new Date(iso);
+  return d.toLocaleString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+}
+
+interface ExamModalProps {
+  exam: ExamData;
+  onClose: () => void;
+  onSubmitted?: () => void;
+}
+
+export function ExamModal({ exam, onClose, onSubmitted }: ExamModalProps) {
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    const files = fileInputRef.current?.files;
+    if (!files?.length) {
+      setError("Please select at least one file.");
+      return;
+    }
+    setError(null);
+    setSubmitting(true);
+    try {
+      const res = await submitExam(exam.exam_id, Array.from(files));
+      if (res.success) {
+        onSubmitted?.();
+        onClose();
+      } else {
+        setError(res.message || "Submit failed. Please try again.");
+      }
+    } catch {
+      setError("Submit failed. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
+  }
+
+  return (
+    <div className={styles.modalOverlay} onClick={onClose} role="dialog" aria-modal="true" aria-labelledby="exam-modal-title">
+      <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+        <div className={styles.modalHeader}>
+          <h2 id="exam-modal-title" className={styles.modalTitle}>{exam.exam_name}</h2>
+          <button
+            type="button"
+            className={styles.modalClose}
+            onClick={onClose}
+            aria-label="Close"
+          >
+            <CloseIcon />
+          </button>
+        </div>
+        <div className={styles.modalBody}>
+          <dl className={styles.modalInfo}>
+            <div className={styles.modalRow}>
+              <dt className={styles.modalLabel}>Class</dt>
+              <dd className={styles.modalValue}>{exam.class_name}</dd>
+            </div>
+            <div className={styles.modalRow}>
+              <dt className={styles.modalLabel}>Subject</dt>
+              <dd className={styles.modalValue}>{exam.subject_name}</dd>
+            </div>
+            <div className={styles.modalRow}>
+              <dt className={styles.modalLabel}>Open</dt>
+              <dd className={styles.modalValue}>{formatDateTime(exam.open_datetime)}</dd>
+            </div>
+            <div className={styles.modalRow}>
+              <dt className={styles.modalLabel}>Close</dt>
+              <dd className={styles.modalValue}>{formatDateTime(exam.close_datetime)}</dd>
+            </div>
+            {exam.submitted && (
+              <>
+                {exam.score != null && (
+                  <div className={styles.modalRow}>
+                    <dt className={styles.modalLabel}>Score</dt>
+                    <dd className={styles.modalValue}>{exam.score}</dd>
+                  </div>
+                )}
+                {exam.comment != null && exam.comment !== "" && (
+                  <div className={styles.modalRow}>
+                    <dt className={styles.modalLabel}>Comment</dt>
+                    <dd className={styles.modalValue}>{exam.comment}</dd>
+                  </div>
+                )}
+              </>
+            )}
+          </dl>
+
+          {exam.exam_files?.length > 0 && (
+            <div className={styles.modalSection}>
+              <h3 className={styles.modalSectionTitle}>Attached files</h3>
+              <ul className={styles.modalFileList}>
+                {exam.exam_files.map((f) => (
+                  <li key={f.id}>
+                    <a href={f.url} target="_blank" rel="noopener noreferrer" className={styles.modalFileLink}>
+                      {f.name}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {!exam.submitted && (
+            <form onSubmit={handleSubmit} className={styles.modalSection}>
+              <h3 className={styles.modalSectionTitle}>Submit your work</h3>
+              <input
+                ref={fileInputRef}
+                type="file"
+                multiple
+                accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
+                className={styles.modalFileInput}
+                aria-label="Choose files to upload"
+              />
+              {error && <p className={styles.modalError} role="alert">{error}</p>}
+              <button type="submit" className={styles.modalSubmit} disabled={submitting}>
+                {submitting ? "Uploading..." : "Submit"}
+              </button>
+            </form>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}

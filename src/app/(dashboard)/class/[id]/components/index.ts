@@ -1,0 +1,1 @@
+export { ExamModal } from "./ExamModal";

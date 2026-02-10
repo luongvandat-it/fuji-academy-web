@@ -1,0 +1,177 @@
+@reference "../../../globals.css";
+
+.page {
+  @apply flex min-h-0 min-w-0 flex-col gap-4 p-3 sm:gap-5 sm:p-4 md:gap-6 md:p-6;
+}
+
+.backLink {
+  @apply inline-flex w-fit items-center gap-1.5 text-xs font-medium text-gray-600 no-underline outline-none transition-colors hover:text-gray-900 focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-white sm:text-sm;
+}
+
+.header {
+  @apply flex flex-wrap items-start justify-between gap-2 border-b border-gray-200 pb-3 sm:gap-3 sm:pb-4;
+}
+
+.title {
+  @apply min-w-0 truncate text-lg font-bold text-gray-900 sm:text-xl md:text-2xl;
+}
+
+.badge {
+  @apply shrink-0 rounded-full px-2 py-0.5 text-xs font-medium sm:px-2.5 sm:py-1;
+}
+
+.badgeOffline {
+  @apply bg-primary-50 text-primary-700;
+}
+
+.badgeOnline {
+  @apply bg-emerald-50 text-emerald-700;
+}
+
+.section {
+  @apply flex min-w-0 flex-col gap-2 sm:gap-3;
+}
+
+.sectionTitle {
+  @apply text-xs font-semibold uppercase tracking-wider text-gray-500 sm:text-sm;
+}
+
+.card {
+  @apply min-w-0 rounded-lg border border-gray-200 bg-white p-3 shadow-sm sm:rounded-xl sm:p-4 md:p-5;
+}
+
+.row {
+  @apply flex flex-wrap items-center gap-2 py-1.5 text-xs first:pt-0 last:pb-0 only:py-0 sm:py-2 sm:text-sm;
+}
+
+.rowLabel {
+  @apply w-20 shrink-0 text-gray-500 sm:w-28 md:w-32;
+}
+
+.rowValue {
+  @apply min-w-0 flex-1 truncate font-medium text-gray-900;
+}
+
+.scheduleList {
+  @apply space-y-1.5 sm:space-y-2;
+}
+
+.scheduleItem {
+  @apply flex flex-wrap items-center justify-between gap-2 rounded-lg border border-gray-100 bg-gray-50/50 px-2.5 py-2 text-xs sm:px-3 sm:py-2.5 sm:text-sm;
+}
+
+.scheduleDay {
+  @apply font-medium text-gray-900;
+}
+
+.scheduleTime {
+  @apply shrink-0 text-gray-600;
+}
+
+.examList {
+  @apply space-y-1.5 sm:space-y-2;
+}
+
+.examItem {
+  @apply flex w-full cursor-pointer flex-col gap-2 rounded-lg border border-gray-200 bg-white px-2.5 py-2 text-left text-xs shadow-sm transition-colors hover:bg-gray-50 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between sm:px-3 sm:py-2.5 sm:text-sm;
+}
+
+.examName {
+  @apply font-medium text-gray-900;
+}
+
+.examMeta {
+  @apply min-w-0 truncate text-gray-500;
+}
+
+.examBadge {
+  @apply w-fit shrink-0 rounded-full px-2 py-0.5 text-xs font-medium;
+}
+
+.examBadgeSubmitted {
+  @apply bg-emerald-50 text-emerald-700;
+}
+
+.examBadgePending {
+  @apply bg-amber-50 text-amber-700;
+}
+
+.loading {
+  @apply flex items-center justify-center py-12 text-sm text-gray-500 sm:py-16 sm:text-base;
+}
+
+.notFound {
+  @apply rounded-lg border border-amber-200 bg-amber-50 py-6 text-center text-sm text-amber-800 sm:py-8 sm:text-base;
+}
+
+.modalOverlay {
+  @apply fixed inset-0 z-50 flex min-h-screen items-center justify-center overflow-y-auto bg-black/50 p-2 py-4 sm:p-4;
+  -webkit-overflow-scrolling: touch;
+}
+
+.modal {
+  @apply my-auto min-w-0 max-h-[85vh] w-full max-w-lg shrink-0 overflow-hidden rounded-lg border border-gray-200 bg-white shadow-xl sm:max-h-[90vh] sm:rounded-xl;
+}
+
+.modalHeader {
+  @apply flex items-center justify-between gap-2 border-b border-gray-200 bg-gray-50 px-3 py-2 sm:px-4 sm:py-3;
+}
+
+.modalTitle {
+  @apply min-w-0 truncate text-sm font-semibold text-gray-900 sm:text-base md:text-lg;
+}
+
+.modalClose {
+  @apply shrink-0 rounded-lg p-1.5 text-gray-500 transition-colors hover:bg-gray-200 hover:text-gray-700 sm:p-2;
+  min-width: 2.25rem;
+  min-height: 2.25rem;
+}
+
+.modalBody {
+  @apply max-h-[60vh] overflow-y-auto p-3 sm:max-h-[70vh] sm:p-4;
+  -webkit-overflow-scrolling: touch;
+}
+
+.modalInfo {
+  @apply space-y-1.5 sm:space-y-2;
+}
+
+.modalRow {
+  @apply flex flex-wrap gap-1.5 text-xs sm:gap-2 sm:text-sm;
+}
+
+.modalLabel {
+  @apply w-16 shrink-0 font-medium text-gray-500 sm:w-20 md:w-24;
+}
+
+.modalValue {
+  @apply min-w-0 flex-1 truncate text-gray-900;
+}
+
+.modalSection {
+  @apply mt-3 border-t border-gray-100 pt-3 first:mt-0 first:border-t-0 first:pt-0 sm:mt-4 sm:pt-4;
+}
+
+.modalSectionTitle {
+  @apply mb-1.5 text-xs font-semibold uppercase tracking-wider text-gray-500 sm:mb-2 sm:text-sm;
+}
+
+.modalFileList {
+  @apply list-inside list-disc space-y-0.5 text-xs text-gray-700 sm:space-y-1 sm:text-sm;
+}
+
+.modalFileLink {
+  @apply break-all text-primary-600 underline hover:text-primary-700;
+}
+
+.modalFileInput {
+  @apply block w-full min-w-0 text-xs file:mr-2 file:rounded-md file:border-0 file:bg-primary-50 file:px-2 file:py-1.5 file:text-primary-700 file:hover:bg-primary-100 sm:text-sm sm:file:rounded-lg sm:file:px-3 sm:file:py-2;
+}
+
+.modalError {
+  @apply mt-2 text-xs text-red-600 sm:text-sm;
+}
+
+.modalSubmit {
+  @apply mt-3 w-full min-h-[2.75rem] rounded-lg bg-primary-600 px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-primary-700 disabled:opacity-50 sm:min-h-0 sm:py-3;
+}
