@@ -1,0 +1,93 @@
+@reference "../../globals.css";
+
+.page {
+  @apply flex min-h-0 min-w-0 flex-col gap-4 p-3 sm:gap-5 sm:p-4 md:gap-6 md:p-6;
+}
+
+.header {
+  @apply flex flex-wrap items-center justify-between gap-2 sm:gap-3;
+}
+
+.title {
+  @apply text-lg font-bold text-gray-900 sm:text-xl md:text-2xl;
+}
+
+.grid {
+  @apply grid min-h-0 min-w-0 grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3 lg:gap-5;
+}
+
+.card {
+  @apply flex min-w-0 flex-col rounded-lg border border-gray-200 bg-white p-3 shadow-sm transition-shadow hover:shadow-md sm:rounded-xl sm:p-4 md:p-5;
+}
+
+.cardToday {
+  @apply border-primary-300 bg-primary-50/50 shadow-md ring-1 ring-primary-100;
+}
+
+.badgeToday {
+  @apply shrink-0 rounded-full bg-primary-500 px-2 py-0.5 text-xs font-medium text-white;
+}
+
+.cardHeader {
+  @apply flex flex-wrap items-start justify-between gap-2 border-b border-gray-100 pb-3;
+}
+
+.cardHeaderTitle {
+  @apply flex min-w-0 flex-1 flex-wrap items-center gap-2;
+}
+
+.className {
+  @apply min-w-0 truncate text-base font-semibold text-gray-900 sm:text-lg;
+}
+
+.badge {
+  @apply shrink-0 rounded-full px-2 py-0.5 text-xs font-medium;
+}
+
+.badgeOffline {
+  @apply bg-primary-50 text-primary-700;
+}
+
+.badgeOnline {
+  @apply bg-emerald-50 text-emerald-700;
+}
+
+.cardBody {
+  @apply mt-2 flex flex-1 flex-col gap-1.5 text-xs sm:mt-3 sm:gap-2 sm:text-sm;
+}
+
+.row {
+  @apply flex items-center gap-2 text-gray-600;
+}
+
+.rowLabel {
+  @apply w-20 shrink-0 text-xs text-gray-500 sm:w-24 sm:text-sm;
+}
+
+.rowValue {
+  @apply min-w-0 flex-1 truncate font-medium text-gray-900;
+}
+
+.dates {
+  @apply min-w-0 truncate text-gray-500;
+}
+
+.studentCount {
+  @apply mt-1 rounded-lg bg-gray-50 px-2 py-1.5 text-center text-xs font-medium text-gray-700 sm:px-3 sm:py-2 sm:text-sm;
+}
+
+.loading {
+  @apply flex flex-col items-center justify-center gap-3 py-16 text-gray-500;
+}
+
+.empty {
+  @apply flex flex-col items-center justify-center gap-2 rounded-xl border border-dashed border-gray-200 bg-gray-50/50 py-16 text-gray-500;
+}
+
+.emptyTitle {
+  @apply font-medium text-gray-700;
+}
+
+.error {
+  @apply rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700;
+}
