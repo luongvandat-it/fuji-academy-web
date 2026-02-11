@@ -37,7 +37,7 @@
 }
 
 .monthNavLabel {
-  @apply min-w-0 truncate text-center text-xs sm:min-w-[80px] sm:text-sm md:min-w-[120px];
+  @apply min-w-0 truncate text-center text-xs text-gray-900 sm:min-w-[80px] sm:text-sm md:min-w-[120px];
 }
 
 .monthNavBtn {
@@ -296,7 +296,7 @@
 }
 
 .weekDayHeader {
-  @apply min-w-[56px] border-b border-gray-200 bg-gray-50 px-1 py-1.5 text-center sm:min-w-[72px] sm:py-2 md:min-w-[90px] lg:min-w-[100px];
+  @apply min-w-[56px] border-b border-gray-200 bg-gray-50 px-1 py-1.5 text-center text-gray-900 sm:min-w-[72px] sm:py-2 md:min-w-[90px] lg:min-w-[100px];
 }
 
 .weekDayHeaderToday {
@@ -304,11 +304,11 @@
 }
 
 .weekDayName {
-  @apply block text-[10px] font-medium sm:text-xs;
+  @apply block text-[10px] font-medium text-gray-900 sm:text-xs;
 }
 
 .weekDayNum {
-  @apply block text-sm font-semibold sm:text-base md:text-lg;
+  @apply block text-sm font-semibold text-gray-900 sm:text-base md:text-lg;
 }
 
 .weekCell {

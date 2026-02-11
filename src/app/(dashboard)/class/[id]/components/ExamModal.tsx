@@ -8,7 +8,7 @@ import styles from "../classDetail.module.scss";
 
 function formatDateTime(iso: string): string {
   const d = new Date(iso);
-  return d.toLocaleString("en-US", {
+  return d.toLocaleString("vi-VN", {
     month: "short",
     day: "numeric",
     year: "numeric",
@@ -27,6 +27,7 @@ export function ExamModal({ exam, onClose, onSubmitted }: ExamModalProps) {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [fileCount, setFileCount] = useState(0);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -120,14 +121,24 @@ export function ExamModal({ exam, onClose, onSubmitted }: ExamModalProps) {
           {!exam.submitted && (
             <form onSubmit={handleSubmit} className={styles.modalSection}>
               <h3 className={styles.modalSectionTitle}>Nộp bài</h3>
-              <input
-                ref={fileInputRef}
-                type="file"
-                multiple
-                accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
-                className={styles.modalFileInput}
-                aria-label="Chọn tệp để tải lên"
-              />
+              <div className={styles.modalFileWrap}>
+                <input
+                  ref={fileInputRef}
+                  id="exam-file-input"
+                  type="file"
+                  multiple
+                  accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
+                  className={styles.modalFileInput}
+                  aria-label="Chọn tệp để tải lên"
+                  onChange={(e) => setFileCount(e.target.files?.length ?? 0)}
+                />
+                <label htmlFor="exam-file-input" className={styles.modalFileLabel}>
+                  Chọn tệp
+                </label>
+                <span className={styles.modalFileHint}>
+                  {fileCount === 0 ? "Chưa có tệp nào được chọn" : `${fileCount} tệp đã chọn`}
+                </span>
+              </div>
               {error && <p className={styles.modalError} role="alert">{error}</p>}
               <button type="submit" className={styles.modalSubmit} disabled={submitting}>
                 {submitting ? "Đang tải lên..." : "Nộp bài"}

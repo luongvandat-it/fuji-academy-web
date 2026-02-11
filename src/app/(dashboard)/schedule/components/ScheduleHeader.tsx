@@ -34,11 +34,6 @@ export const ScheduleHeader = memo(function ScheduleHeader({
           </button>
         </div>
       </div>
-      <div className={styles.headerRight}>
-        <button type="button" className={styles.newBtn}>
-          Mới
-        </button>
-      </div>
     </header>
   );
 });

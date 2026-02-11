@@ -14,20 +14,32 @@ import { useCallback, useEffect, useState } from "react";
 import { ExamModal } from "./components";
 import styles from "./classDetail.module.scss";
 
+const LOCALE_VI = "vi-VN";
+
 function formatDate(ymd: string): string {
   const d = new Date(ymd + "T00:00:00");
-  return d.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+  return d.toLocaleDateString(LOCALE_VI, { month: "short", day: "numeric", year: "numeric" });
 }
 
+const DAY_OF_WEEK_VI: Record<string, string> = {
+  monday: "Thứ Hai",
+  tuesday: "Thứ Ba",
+  wednesday: "Thứ Tư",
+  thursday: "Thứ Năm",
+  friday: "Thứ Sáu",
+  saturday: "Thứ Bảy",
+  sunday: "Chủ Nhật",
+};
+
 function formatDayLabel(dayOfWeek: string): string {
-  const s = (dayOfWeek || "").trim();
+  const s = (dayOfWeek || "").trim().toLowerCase();
   if (!s) return "";
-  return s.charAt(0).toUpperCase() + s.slice(1).toLowerCase();
+  return DAY_OF_WEEK_VI[s] ?? s.charAt(0).toUpperCase() + s.slice(1);
 }
 
 function formatDateTime(iso: string): string {
   const d = new Date(iso);
-  return d.toLocaleString("en-US", {
+  return d.toLocaleString(LOCALE_VI, {
     month: "short",
     day: "numeric",
     year: "numeric",
@@ -227,7 +239,7 @@ export default function ClassDetailPage() {
                     <div className={styles.examName}>{e.exam_name}</div>
                     <div className={styles.examMeta}>
                       {formatDateTime(e.open_datetime)} – {formatDateTime(e.close_datetime)}
-                      {e.submitted && e.score != null && ` · Score: ${e.score}`}
+                      {e.submitted && e.score != null && ` · Điểm: ${e.score}`}
                     </div>
                   </div>
                   <span
