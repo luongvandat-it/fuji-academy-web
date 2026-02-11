@@ -77,6 +77,22 @@ export function addDays(d: Date, n: number): Date {
   return r;
 }
 
+export function getMonthWeeks(monthDate: Date): Date[][] {
+  const y = monthDate.getFullYear();
+  const m = monthDate.getMonth();
+  const firstDay = new Date(y, m, 1);
+  const start = getWeekStart(firstDay);
+  const weeks: Date[][] = [];
+  for (let w = 0; w < 6; w++) {
+    const week: Date[] = [];
+    for (let d = 0; d < 7; d++) {
+      week.push(addDays(start, w * 7 + d));
+    }
+    weeks.push(week);
+  }
+  return weeks;
+}
+
 const dateOnlyCache = new Map<string, Date>();
 
 function parseDateOnly(ymd: string): Date {
@@ -114,6 +130,27 @@ export function toDateKey(d: Date): string {
   const m = d.getMonth();
   const day = d.getDate();
   return `${y}-${String(m + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+}
+
+/** Nhóm danh sách buổi học theo ngày (date YYYY-MM-DD). */
+export function buildSessionsByDate<T extends { date: string }>(
+  sessions: T[]
+): Map<string, T[]> {
+  const map = new Map<string, T[]>();
+  for (const s of sessions) {
+    const key = s.date;
+    const list = map.get(key) ?? [];
+    list.push(s);
+    map.set(key, list);
+  }
+  return map;
+}
+
+/** Lấy giờ dạng "HH:mm" từ chuỗi datetime (vd "2026-02-11 11:00:00"). */
+export function formatTimeFromDatetime(datetime: string): string {
+  if (!datetime) return "";
+  const match = datetime.match(/(\d{1,2}):(\d{2})/);
+  return match ? `${match[1].padStart(2, "0")}:${match[2]}` : "";
 }
 
 type EventWithRange = { dayIndex: number; startDate?: string; endDate?: string };

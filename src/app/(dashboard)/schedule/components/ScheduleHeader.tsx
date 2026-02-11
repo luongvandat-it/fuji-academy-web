@@ -2,18 +2,18 @@
 
 import { memo } from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@/icon";
-import { formatWeekRange } from "@/app/(dashboard)/schedule/utils";
 import styles from "../schedule.module.scss";
 
 interface ScheduleHeaderProps {
-  weekStart: Date;
+  /** Label for current period (e.g. "tháng 2 năm 2026") */
+  label: string;
   onPrev: () => void;
   onNext: () => void;
   onToday: () => void;
 }
 
 export const ScheduleHeader = memo(function ScheduleHeader({
-  weekStart,
+  label,
   onPrev,
   onNext,
   onToday,
@@ -25,11 +25,13 @@ export const ScheduleHeader = memo(function ScheduleHeader({
           Hôm nay
         </button>
         <div className={styles.weekNav}>
-          <button type="button" onClick={onPrev} className={styles.monthNavBtn} aria-label="Tuần trước">
+          <button type="button" onClick={onPrev} className={styles.monthNavBtn} aria-label="Tháng trước">
             <ChevronLeftIcon />
+            <span className={styles.monthNavBtnText}>Tháng trước</span>
           </button>
-          <span className={styles.monthNavLabel}>{formatWeekRange(weekStart)}</span>
-          <button type="button" onClick={onNext} className={styles.monthNavBtn} aria-label="Tuần sau">
+          <span className={styles.monthNavLabel}>{label}</span>
+          <button type="button" onClick={onNext} className={styles.monthNavBtn} aria-label="Tháng sau">
+            <span className={styles.monthNavBtnText}>Tháng sau</span>
             <ChevronRightIcon />
           </button>
         </div>

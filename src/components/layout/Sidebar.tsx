@@ -3,8 +3,6 @@
 import {
   BookIcon,
   CalendarIcon,
-  ClassIcon,
-  CloseIcon,
   GridIcon,
   ReportIcon,
   SettingsIcon,
@@ -20,7 +18,7 @@ const navItems = [
   { href: "/", label: "Trang chủ", icon: GridIcon, main: true },
   { href: "/schedule", label: "Lịch", icon: CalendarIcon, main: true },
   { href: "/homework", label: "Bài tập", icon: BookIcon, main: false },
-  { href: "/class", label: "Lớp học", icon: ClassIcon, main: true },
+  // { href: "/class", label: "Lớp học", icon: ClassIcon, main: true },
   { href: "/report", label: "Báo cáo", icon: ReportIcon, main: false },
   { href: "/tuition", label: "Học phí", icon: TuitionIcon, main: true },
 ] as const;
@@ -49,18 +47,6 @@ export function Sidebar({ open = true, onClose }: SidebarProps) {
       className={`${styles.aside} ${open ? styles.asideOpen : styles.asideClosed}`}
     >
       <div className={styles.inner}>
-        {onClose && (
-          <div className={styles.closeBar}>
-            <button
-              type="button"
-              onClick={onClose}
-              className={styles.closeBtn}
-              aria-label="Đóng menu"
-            >
-              <CloseIcon />
-            </button>
-          </div>
-        )}
         <div className={styles.userSection}>
           <div className={styles.userRow}>
             <div className={styles.avatar} />

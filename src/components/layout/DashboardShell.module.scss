@@ -1,12 +1,15 @@
 @reference "../../app/globals.css";
 
 .wrapper {
-  @apply min-h-screen bg-gray-50/50;
+  @apply flex min-h-screen flex-col bg-surface-raised;
+}
+
+.topHeader {
+  @apply sticky top-0 z-30 flex h-14 shrink-0 items-center gap-3 border-b border-gray-200 bg-surface-raised px-4 shadow-sm;
 }
 
 .overlay {
-  @apply fixed inset-0 z-30 bg-black/50 transition-opacity duration-200;
-  @apply lg:hidden;
+  @apply fixed inset-0 z-30 transition-opacity duration-200 lg:hidden;
 }
 
 .overlayVisible {
@@ -18,23 +21,23 @@
 }
 
 .main {
-  @apply min-h-screen pb-16 pl-0 transition-[padding] duration-200 lg:pb-0 lg:pl-56;
-}
-
-.header {
-  @apply sticky top-0 z-20 flex h-14 items-center gap-3 border-b border-gray-200 bg-white px-4 shadow-sm lg:hidden;
+  @apply min-h-0 flex-1 pb-16 pl-0 transition-[padding] duration-200 lg:pb-0 lg:pl-56;
 }
 
 .menuBtn {
-  @apply rounded-lg p-2 text-gray-600 hover:bg-gray-100 hover:text-gray-900;
+  @apply rounded-lg p-2 text-gray-600 hover:bg-gray-100 hover:text-gray-900 lg:hidden;
 }
 
 .logoLink {
-  @apply flex shrink-0 items-center rounded focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-white;
+  @apply flex shrink-0 items-center gap-2 rounded focus:outline-none focus:ring-2 focus:ring-focus focus:ring-offset-2 focus:ring-offset-white;
 }
 
 .logo {
-  @apply h-10 w-10;
+  @apply h-10 w-10 shrink-0;
+}
+
+.brandName {
+  @apply text-lg font-semibold text-gray-900;
 }
 
 .menuLabel {

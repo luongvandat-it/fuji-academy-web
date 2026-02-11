@@ -37,7 +37,7 @@ export default function LoginPage() {
           <div className={styles.heroBlur1} />
           <div className={styles.heroBlur2} />
           <Text variant="HEADING.ONE" className={styles.heroTitle}>
-              Master English Today
+              Làm chủ tiếng Anh hôm nay
             </Text>
           <div className={styles.heroLogo}>
             <Logo />
@@ -47,10 +47,10 @@ export default function LoginPage() {
         <section className={styles.formSection}>
           <div className={styles.card}>
             <Text variant="HEADING.TWO" className={styles.cardTitle}>
-              Welcome Back
+              Chào mừng trở lại
             </Text>
             <Text variant="BODY.SMALL" className={styles.cardSubtitle}>
-              Log in to your account to continue your learning journey.
+              Đăng nhập vào tài khoản để tiếp tục hành trình học tập.
             </Text>
 
             <form
@@ -58,28 +58,28 @@ export default function LoginPage() {
               onSubmit={(e) => e.preventDefault()}
             >
               <Input
-                label="Email Address"
+                label="Địa chỉ email"
                 name="email"
                 type="email"
-                placeholder="example@email.com"
+                placeholder="vidu@email.com"
                 autoComplete="email"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
               />
               <Input
-                label="Password"
+                label="Mật khẩu"
                 name="password"
                 type="password"
-                placeholder="Enter your password"
+                placeholder="Nhập mật khẩu"
                 autoComplete="current-password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
               <Input
-                label="Center code"
+                label="Mã trung tâm"
                 name="dbname"
                 type="text"
-                placeholder="Enter your DB name"
+                placeholder="Tên cơ sở dữ liệu"
                 autoComplete="database-name"
                 value={dbname}
                 readOnly
@@ -97,11 +97,11 @@ export default function LoginPage() {
                     className={styles.checkbox}
                   />
                   <Text variant="LABEL.SMALL" as="span">
-                    Remember Me
+                    Ghi nhớ đăng nhập
                   </Text>
                 </label>
                 <Link href="/forgot-password" className={styles.forgotLink}>
-                  <Text variant="LABEL.SMALL">Forgot Password?</Text>
+                  <Text variant="LABEL.SMALL">Quên mật khẩu?</Text>
                 </Link>
               </div>
 
@@ -112,15 +112,15 @@ export default function LoginPage() {
                 onClick={handleLogin}
               >
                 <Text variant="BUTTON_LABEL.LARGE">
-                  Login
+                  Đăng nhập
                 </Text>
               </Button>
             </form>
 
             <Text variant="BODY.SMALL" as="p" className={styles.footerText}>
-              Don&apos;t have an account?{" "}
+              Chưa có tài khoản?{" "}
               <Link href="/signup" className={styles.signUpLink}>
-                Sign up for free
+                Đăng ký miễn phí
               </Link>
             </Text>
           </div>
