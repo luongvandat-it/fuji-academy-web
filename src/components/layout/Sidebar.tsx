@@ -13,6 +13,7 @@ import {
 } from "@/icon";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 import styles from "./Sidebar.module.scss";
 
 const navItems = [
@@ -36,9 +37,13 @@ export interface SidebarProps {
 
 export function Sidebar({ open = true, onClose }: SidebarProps) {
   const pathname = usePathname();
+  const [userData, setUserData] = useState<{ name?: string; email?: string } | null>(null);
 
-  const user = localStorage.getItem("user");
-  const userData = user ? JSON.parse(user) : null;
+  useEffect(() => {
+    const user = typeof window !== "undefined" ? localStorage.getItem("user") : null;
+    setUserData(user ? JSON.parse(user) : null);
+  }, []);
+
   return (
     <aside
       className={`${styles.aside} ${open ? styles.asideOpen : styles.asideClosed}`}
