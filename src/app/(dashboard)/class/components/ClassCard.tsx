@@ -23,39 +23,39 @@ export function ClassCard({ item, hasClassToday = false }: ClassCardProps) {
         <div className={styles.cardHeaderTitle}>
           <h2 className={styles.className}>{item.class_name}</h2>
           {hasClassToday && (
-            <span className={styles.badgeToday} title="Has class today">
-              Today
+            <span className={styles.badgeToday} title="Có lịch hôm nay">
+              Hôm nay
             </span>
           )}
         </div>
         <span
           className={`${styles.badge} ${isOnline ? styles.badgeOnline : styles.badgeOffline}`}
         >
-          {isOnline ? "Online" : "Offline"}
+          {isOnline ? "Trực tuyến" : "Trực tiếp"}
         </span>
       </div>
       <div className={styles.cardBody}>
         <div className={styles.row}>
-          <span className={styles.rowLabel}>Subject</span>
+          <span className={styles.rowLabel}>Môn học</span>
           <span className={styles.rowValue}>{item.subject_name}</span>
         </div>
         <div className={styles.row}>
-          <span className={styles.rowLabel}>Teacher</span>
+          <span className={styles.rowLabel}>Giáo viên</span>
           <span className={styles.rowValue}>{item.teacher_name}</span>
         </div>
         <div className={styles.row}>
-          <span className={styles.rowLabel}>Room</span>
+          <span className={styles.rowLabel}>Phòng</span>
           <span className={styles.rowValue}>{item.classroom_name}</span>
         </div>
         <div className={styles.row}>
-          <span className={styles.rowLabel}>Period</span>
+          <span className={styles.rowLabel}>Kỳ học</span>
           <span className={styles.dates}>
             {formatDate(item.start_date)} – {formatDate(item.end_date)}
           </span>
         </div>
       </div>
       <div className={styles.studentCount}>
-        {item.student_count} student{item.student_count !== 1 ? "s" : ""}
+        {item.student_count} học viên
       </div>
     </article>
   );

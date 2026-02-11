@@ -17,17 +17,17 @@ import { useEffect, useState } from "react";
 import styles from "./Sidebar.module.scss";
 
 const navItems = [
-  { href: "/", label: "Dashboard", icon: GridIcon },
-  { href: "/schedule", label: "Schedule", icon: CalendarIcon },
-  { href: "/homework", label: "Homework", icon: BookIcon },
-  { href: "/class", label: "Class", icon: ClassIcon },
-  { href: "/report", label: "Report", icon: ReportIcon },
-  { href: "/tuition", label: "Tuition", icon: TuitionIcon },
+  { href: "/", label: "Trang chủ", icon: GridIcon, main: true },
+  { href: "/schedule", label: "Lịch", icon: CalendarIcon, main: true },
+  { href: "/homework", label: "Bài tập", icon: BookIcon, main: false },
+  { href: "/class", label: "Lớp học", icon: ClassIcon, main: true },
+  { href: "/report", label: "Báo cáo", icon: ReportIcon, main: false },
+  { href: "/tuition", label: "Học phí", icon: TuitionIcon, main: true },
 ] as const;
 
 const bottomItems = [
-  { href: "/settings", label: "Settings", icon: SettingsIcon },
-  { href: "/support", label: "Support", icon: SupportIcon },
+  { href: "/settings", label: "Cài đặt", icon: SettingsIcon },
+  { href: "/support", label: "Hỗ trợ", icon: SupportIcon },
 ] as const;
 
 export interface SidebarProps {
@@ -55,7 +55,7 @@ export function Sidebar({ open = true, onClose }: SidebarProps) {
               type="button"
               onClick={onClose}
               className={styles.closeBtn}
-              aria-label="close menu"
+              aria-label="Đóng menu"
             >
               <CloseIcon />
             </button>
@@ -72,14 +72,14 @@ export function Sidebar({ open = true, onClose }: SidebarProps) {
         </div>
 
         <nav className={styles.nav}>
-          {navItems.map(({ href, label, icon: Icon }) => {
+          {navItems.map(({ href, label, icon: Icon, main }) => {
             const isActive = pathname === href || (href !== "/" && pathname.startsWith(href));
             return (
               <Link
                 key={href}
                 href={href}
                 onClick={onClose}
-                className={`${styles.link} ${isActive ? styles.linkActive : ""}`}
+                className={`${styles.link} ${main ? styles.linkMain : ""} ${isActive ? styles.linkActive : ""}`}
               >
                 <Icon className={isActive ? styles.iconActive : styles.icon} />
                 {label}

@@ -50,7 +50,7 @@ export default function ClassPage() {
     return (
       <div className={styles.page}>
         <header className={styles.header}>
-          <h1 className={styles.title}>Classes</h1>
+          <h1 className={styles.title}>Lớp học</h1>
         </header>
         <div className={styles.loading}>
           <Loading />
@@ -62,7 +62,7 @@ export default function ClassPage() {
   return (
     <div className={styles.page}>
       <header className={styles.header}>
-        <h1 className={styles.title}>Classes</h1>
+        <h1 className={styles.title}>Lớp học</h1>
       </header>
       <div className={styles.grid}>
         {classes.map((c) => (

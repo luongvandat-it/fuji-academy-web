@@ -55,8 +55,20 @@ export function getWeekStart(d: Date): Date {
   return date;
 }
 
+const LOCALE_VI = "vi-VN";
+
 export function formatMonthYear(d: Date): string {
-  return d.toLocaleDateString("en-US", { month: "long", year: "numeric" });
+  return d.toLocaleDateString(LOCALE_VI, { month: "long", year: "numeric" });
+}
+
+export function formatWeekRange(weekStart: Date): string {
+  const weekEnd = addDays(weekStart, 6);
+  const sameMonth = weekStart.getMonth() === weekEnd.getMonth();
+  const sameYear = weekStart.getFullYear() === weekEnd.getFullYear();
+  if (sameMonth && sameYear) {
+    return `${weekStart.getDate()}-${weekEnd.getDate()} ${weekStart.toLocaleDateString(LOCALE_VI, { month: "long", year: "numeric" })}`;
+  }
+  return `${weekStart.getDate()} ${weekStart.toLocaleDateString(LOCALE_VI, { month: "short" })} - ${weekEnd.getDate()} ${weekEnd.toLocaleDateString(LOCALE_VI, { month: "short", year: "numeric" })}`;
 }
 
 export function addDays(d: Date, n: number): Date {

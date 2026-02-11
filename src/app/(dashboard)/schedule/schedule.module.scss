@@ -8,20 +8,20 @@
   @apply flex flex-wrap items-center justify-between gap-2 sm:gap-3;
 }
 
+.headerLeft {
+  @apply flex min-w-0 flex-1 flex-wrap items-center gap-2 sm:gap-3;
+}
+
+.weekNav {
+  @apply flex items-center gap-0.5 rounded-lg border border-gray-200 bg-white px-1.5 py-1 sm:gap-1 sm:px-2 sm:py-1.5;
+}
+
 .title {
   @apply truncate text-lg font-bold text-gray-900 sm:text-xl md:text-2xl;
 }
 
 .headerRight {
   @apply flex flex-shrink-0 items-center gap-1.5 sm:gap-2 md:gap-4;
-}
-
-.searchWrap {
-  @apply hidden min-w-0 max-w-xs md:block;
-}
-
-.searchInput {
-  @apply w-full rounded-lg border border-gray-200 bg-gray-50 px-3 py-2 text-sm text-gray-900 placeholder-gray-500 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary;
 }
 
 .iconBtn {
@@ -37,11 +37,7 @@
 }
 
 .monthNavLabel {
-  @apply min-w-0 text-center text-xs sm:min-w-[100px] sm:text-sm md:min-w-[120px];
-}
-
-.monthNav {
-  @apply flex items-center gap-0.5 rounded-lg border border-gray-200 bg-white px-1.5 py-1 text-sm font-medium text-gray-700 sm:gap-1 sm:px-2 sm:py-1.5;
+  @apply min-w-0 truncate text-center text-xs sm:min-w-[80px] sm:text-sm md:min-w-[120px];
 }
 
 .monthNavBtn {
@@ -74,8 +70,16 @@
   @apply min-h-[80px] align-top border-b border-r border-gray-100 p-1.5 last:border-r-0 sm:min-h-[90px] sm:p-2 md:min-h-[100px];
 }
 
+.monthCellToday {
+  @apply bg-primary-50/60;
+}
+
 .monthCellDayNum {
   @apply text-sm font-medium text-gray-900;
+}
+
+.monthCellDayNumToday {
+  @apply text-sm font-semibold text-primary-700;
 }
 
 .monthCellDayNumMuted {
@@ -192,4 +196,149 @@
 
 .reminderList {
   @apply list-inside list-disc space-y-1 text-sm text-gray-600;
+}
+
+/* Schedule layout: sidebar + week grid */
+.scheduleBody {
+  @apply flex min-h-0 flex-1 flex-col overflow-hidden md:flex-row md:gap-4 lg:gap-6;
+}
+
+.sidebar {
+  @apply flex shrink-0 flex-col gap-3 overflow-hidden rounded-lg border border-gray-200 bg-white p-3 shadow-sm;
+  @apply w-full md:w-56 md:max-w-[200px] lg:w-64 lg:max-w-none;
+}
+
+.sidebarTitle {
+  @apply text-sm font-semibold text-gray-900;
+}
+
+.miniCalendar {
+  @apply flex flex-col gap-2;
+}
+
+.miniCalendarHeader {
+  @apply flex items-center justify-between gap-2;
+}
+
+.miniCalendarMonth {
+  @apply text-sm font-medium text-gray-900;
+}
+
+.miniCalendarNav {
+  @apply flex items-center gap-0.5;
+}
+
+.miniCalendarNavBtn {
+  @apply flex size-7 items-center justify-center rounded text-gray-500 hover:bg-gray-100 hover:text-gray-900;
+}
+
+.miniCalendarWeekdays {
+  @apply grid grid-cols-7 gap-0.5 text-center text-xs font-medium text-gray-500;
+}
+
+.miniCalendarWeekday {
+  @apply py-1;
+}
+
+.miniCalendarGrid {
+  @apply grid grid-cols-7 gap-0.5;
+}
+
+.miniCalendarDay {
+  @apply flex size-7 items-center justify-center rounded text-xs text-gray-900 hover:bg-gray-100 sm:size-8 sm:text-sm;
+}
+
+.miniCalendarDayMuted {
+  @apply text-gray-400;
+}
+
+.miniCalendarDayInWeek {
+  @apply bg-primary-50/70 text-primary-800;
+}
+
+.miniCalendarDayToday {
+  @apply bg-primary-500 font-semibold text-white hover:bg-primary-600;
+}
+
+.weekGridWrap {
+  @apply relative min-h-[320px] min-w-0 flex-1 overflow-auto rounded-lg border border-gray-200 bg-white shadow-sm;
+  -webkit-overflow-scrolling: touch;
+}
+
+.weekGrid {
+  @apply relative min-h-full;
+  min-width: 400px;
+}
+@media (min-width: 640px) {
+  .weekGrid {
+    min-width: 560px;
+  }
+}
+@media (min-width: 768px) {
+  .scheduleBody .weekGridWrap {
+    min-height: 0;
+  }
+  .weekGrid {
+    min-width: 600px;
+  }
+}
+
+.weekTable {
+  @apply w-full border-collapse;
+}
+
+.weekTimeCol {
+  @apply w-12 shrink-0 border-b border-r border-gray-200 bg-gray-50 sm:w-14 md:w-16;
+}
+
+.weekTimeCell {
+  @apply sticky left-0 z-10 w-12 border-b border-r border-gray-100 bg-white py-1 pr-1 text-right text-[10px] text-gray-500 sm:w-14 sm:pr-2 sm:text-xs md:w-16;
+}
+
+.weekDayHeader {
+  @apply min-w-[56px] border-b border-gray-200 bg-gray-50 px-1 py-1.5 text-center sm:min-w-[72px] sm:py-2 md:min-w-[90px] lg:min-w-[100px];
+}
+
+.weekDayHeaderToday {
+  @apply bg-primary-50 text-primary-700;
+}
+
+.weekDayName {
+  @apply block text-[10px] font-medium sm:text-xs;
+}
+
+.weekDayNum {
+  @apply block text-sm font-semibold sm:text-base md:text-lg;
+}
+
+.weekCell {
+  @apply min-w-[56px] border-b border-r border-gray-100 align-top sm:min-w-[72px] md:min-w-[90px] lg:min-w-[100px];
+}
+
+.weekCellToday {
+  @apply bg-primary-50/30;
+}
+
+.weekCellInner {
+  @apply min-h-[44px] p-0.5 sm:min-h-[52px] sm:p-1;
+}
+
+.currentTimeLine {
+  @apply pointer-events-none absolute left-0 right-0 z-20 flex items-center;
+}
+
+.currentTimeDot {
+  @apply size-2 shrink-0 rounded-full bg-primary-500;
+}
+
+.currentTimeRule {
+  @apply flex-1 border-t-2 border-dashed border-primary-400;
+}
+
+.todayBtn {
+  @apply shrink-0 rounded-lg border border-gray-200 bg-white px-3 py-2 text-xs font-medium text-gray-700 shadow-sm hover:bg-gray-50 sm:text-sm;
+}
+
+.newBtn {
+  @apply shrink-0 rounded-lg bg-primary-500 px-3 py-2 text-xs font-medium text-white shadow-sm hover:bg-primary-600 sm:text-sm;
 }

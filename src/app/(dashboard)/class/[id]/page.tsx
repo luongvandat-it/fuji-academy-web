@@ -124,9 +124,9 @@ export default function ClassDetailPage() {
   if (loading) {
     return (
       <div className={styles.page}>
-        <Link href="/class" className={styles.backLink} aria-label="Back to classes">
+        <Link href="/class" className={styles.backLink} aria-label="Về danh sách lớp">
           <ChevronLeftIcon />
-          Back
+          Quay lại
         </Link>
         <div className={styles.loading}>
           <Loading />
@@ -138,11 +138,11 @@ export default function ClassDetailPage() {
   if (notFound || !classData) {
     return (
       <div className={styles.page}>
-        <Link href="/class" className={styles.backLink} aria-label="Back to classes">
+        <Link href="/class" className={styles.backLink} aria-label="Về danh sách lớp">
           <ChevronLeftIcon />
-          Back
+          Quay lại
         </Link>
-        <div className={styles.notFound}>Class not found.</div>
+        <div className={styles.notFound}>Không tìm thấy lớp.</div>
       </div>
     );
   }
@@ -152,43 +152,43 @@ export default function ClassDetailPage() {
 
   return (
     <div className={styles.page}>
-      <Link href="/class" className={styles.backLink} aria-label="Back to classes">
+      <Link href="/class" className={styles.backLink} aria-label="Về danh sách lớp">
         <ChevronLeftIcon />
-        Back
+        Quay lại
       </Link>
 
       <header className={styles.header}>
         <h1 className={styles.title}>{classData.class_name}</h1>
         <span className={`${styles.badge} ${isOnline ? styles.badgeOnline : styles.badgeOffline}`}>
-          {isOnline ? "Online" : "Offline"}
+          {isOnline ? "Trực tuyến" : "Trực tiếp"}
         </span>
       </header>
 
       <section className={styles.section}>
-        <h2 className={styles.sectionTitle}>Overview</h2>
+        <h2 className={styles.sectionTitle}>Tổng quan</h2>
         <div className={styles.card}>
           <div className={styles.row}>
-            <span className={styles.rowLabel}>Subject</span>
+            <span className={styles.rowLabel}>Môn học</span>
             <span className={styles.rowValue}>{classData.subject_name}</span>
           </div>
           <div className={styles.row}>
-            <span className={styles.rowLabel}>Teacher</span>
+            <span className={styles.rowLabel}>Giáo viên</span>
             <span className={styles.rowValue}>{classData.teacher_name}</span>
           </div>
           <div className={styles.row}>
-            <span className={styles.rowLabel}>Room</span>
+            <span className={styles.rowLabel}>Phòng</span>
             <span className={styles.rowValue}>{classData.classroom_name}</span>
           </div>
           <div className={styles.row}>
-            <span className={styles.rowLabel}>Period</span>
+            <span className={styles.rowLabel}>Kỳ học</span>
             <span className={styles.rowValue}>
               {formatDate(classData.start_date)} – {formatDate(classData.end_date)}
             </span>
           </div>
           <div className={styles.row}>
-            <span className={styles.rowLabel}>Students</span>
+            <span className={styles.rowLabel}>Học viên</span>
             <span className={styles.rowValue}>
-              {classData.student_count} student{classData.student_count !== 1 ? "s" : ""}
+              {classData.student_count} học viên
             </span>
           </div>
         </div>
@@ -196,7 +196,7 @@ export default function ClassDetailPage() {
 
       {scheduleItems.length > 0 && (
         <section className={styles.section}>
-          <h2 className={styles.sectionTitle}>Schedule</h2>
+          <h2 className={styles.sectionTitle}>Lịch học</h2>
           <ul className={styles.scheduleList}>
             {scheduleItems.map((s) => (
               <li key={s.schedule_id} className={styles.scheduleItem}>
@@ -211,9 +211,9 @@ export default function ClassDetailPage() {
       )}
 
       <section className={styles.section}>
-        <h2 className={styles.sectionTitle}>Exams</h2>
+        <h2 className={styles.sectionTitle}>Bài thi</h2>
         {exams.length === 0 ? (
-          <p className={styles.examMeta}>No exams for this class.</p>
+          <p className={styles.examMeta}>Chưa có bài thi cho lớp này.</p>
         ) : (
           <ul className={styles.examList}>
             {exams.map((e) => (
@@ -233,7 +233,7 @@ export default function ClassDetailPage() {
                   <span
                     className={`${styles.examBadge} ${e.submitted ? styles.examBadgeSubmitted : styles.examBadgePending}`}
                   >
-                    {e.submitted ? "Submitted" : "Pending"}
+                    {e.submitted ? "Đã nộp" : "Chưa nộp"}
                   </span>
                 </button>
               </li>

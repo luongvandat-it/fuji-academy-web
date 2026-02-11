@@ -23,7 +23,7 @@ export function TuitionDebtCard({ item }: TuitionDebtCardProps) {
     <article
       className={styles.debtCard}
       aria-labelledby={titleId}
-      aria-label={`Tuition debt: ${item.name}`}
+      aria-label={`Công nợ học phí: ${item.name}`}
     >
       <div className="min-w-0 flex-1">
         <h3 id={titleId} className={styles.debtName}>
@@ -32,21 +32,21 @@ export function TuitionDebtCard({ item }: TuitionDebtCardProps) {
         <div className={styles.debtMeta}>
           {item.class_name && <span>{item.class_name}</span>}
           <span>{item.debt_type || item.debt_type_code}</span>
-          {showDueDate && <span>Due {formatDate(item.due_date)}</span>}
+          {showDueDate && <span>Hạn {formatDate(item.due_date)}</span>}
           {item.paid_date != null && item.paid_date !== "" && (
-            <span>Paid {formatDate(item.paid_date)}</span>
+            <span>Đã thanh toán {formatDate(item.paid_date)}</span>
           )}
         </div>
         <div className={styles.debtAmounts}>
           {showRemaining && (
             <span className={styles.debtRemaining}>
-              {formatAmount(item.amount_remaining, item.currency_symbol)} remaining
+              {formatAmount(item.amount_remaining, item.currency_symbol)} còn lại
             </span>
           )}
         </div>
       </div>
       <span className={`${styles.debtBadge} ${getDebtBadgeClass(item.status)}`}>
-        {item.status_label || item.status || "Pending"}
+        {item.status_label || item.status || "Chờ thanh toán"}
       </span>
     </article>
   );

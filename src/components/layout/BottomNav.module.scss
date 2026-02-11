@@ -1,0 +1,27 @@
+@reference "../../app/globals.css";
+
+.bottomNav {
+  @apply fixed bottom-0 left-0 right-0 z-20 flex items-center justify-around border-t border-gray-200 bg-white py-2 shadow-[0_-2px_10px_rgba(0,0,0,0.05)];
+  padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
+  @apply lg:hidden;
+}
+
+.item {
+  @apply flex flex-1 flex-col items-center gap-1 py-1;
+}
+
+.icon {
+  @apply size-6 text-gray-400;
+}
+
+.iconActive {
+  @apply size-6 text-primary-600;
+}
+
+.label {
+  @apply text-[10px] font-medium text-gray-500;
+}
+
+.itemActive .label {
+  @apply text-primary-600;
+}

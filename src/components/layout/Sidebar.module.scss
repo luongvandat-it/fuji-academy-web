@@ -59,6 +59,11 @@
   @apply text-gray-700 hover:bg-gray-50 hover:text-gray-900;
 }
 
+/* Main items (Dashboard, Schedule, Class, Tuition) shown in bottom nav on mobile – hide in sidebar */
+.linkMain {
+  @apply hidden lg:flex;
+}
+
 .linkActive {
   @apply bg-primary-50 text-primary-700;
 }

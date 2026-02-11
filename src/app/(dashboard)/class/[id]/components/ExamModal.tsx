@@ -32,7 +32,7 @@ export function ExamModal({ exam, onClose, onSubmitted }: ExamModalProps) {
     e.preventDefault();
     const files = fileInputRef.current?.files;
     if (!files?.length) {
-      setError("Please select at least one file.");
+      setError("Vui lòng chọn ít nhất một tệp.");
       return;
     }
     setError(null);
@@ -43,10 +43,10 @@ export function ExamModal({ exam, onClose, onSubmitted }: ExamModalProps) {
         onSubmitted?.();
         onClose();
       } else {
-        setError(res.message || "Submit failed. Please try again.");
+        setError(res.message || "Nộp bài thất bại. Vui lòng thử lại.");
       }
     } catch {
-      setError("Submit failed. Please try again.");
+      setError("Nộp bài thất bại. Vui lòng thử lại.");
     } finally {
       setSubmitting(false);
     }
@@ -61,7 +61,7 @@ export function ExamModal({ exam, onClose, onSubmitted }: ExamModalProps) {
             type="button"
             className={styles.modalClose}
             onClick={onClose}
-            aria-label="Close"
+            aria-label="Đóng"
           >
             <CloseIcon />
           </button>
@@ -69,32 +69,32 @@ export function ExamModal({ exam, onClose, onSubmitted }: ExamModalProps) {
         <div className={styles.modalBody}>
           <dl className={styles.modalInfo}>
             <div className={styles.modalRow}>
-              <dt className={styles.modalLabel}>Class</dt>
+              <dt className={styles.modalLabel}>Lớp</dt>
               <dd className={styles.modalValue}>{exam.class_name}</dd>
             </div>
             <div className={styles.modalRow}>
-              <dt className={styles.modalLabel}>Subject</dt>
+              <dt className={styles.modalLabel}>Môn học</dt>
               <dd className={styles.modalValue}>{exam.subject_name}</dd>
             </div>
             <div className={styles.modalRow}>
-              <dt className={styles.modalLabel}>Open</dt>
+              <dt className={styles.modalLabel}>Mở</dt>
               <dd className={styles.modalValue}>{formatDateTime(exam.open_datetime)}</dd>
             </div>
             <div className={styles.modalRow}>
-              <dt className={styles.modalLabel}>Close</dt>
+              <dt className={styles.modalLabel}>Đóng</dt>
               <dd className={styles.modalValue}>{formatDateTime(exam.close_datetime)}</dd>
             </div>
             {exam.submitted && (
               <>
                 {exam.score != null && (
                   <div className={styles.modalRow}>
-                    <dt className={styles.modalLabel}>Score</dt>
+                    <dt className={styles.modalLabel}>Điểm</dt>
                     <dd className={styles.modalValue}>{exam.score}</dd>
                   </div>
                 )}
                 {exam.comment != null && exam.comment !== "" && (
                   <div className={styles.modalRow}>
-                    <dt className={styles.modalLabel}>Comment</dt>
+                    <dt className={styles.modalLabel}>Nhận xét</dt>
                     <dd className={styles.modalValue}>{exam.comment}</dd>
                   </div>
                 )}
@@ -104,7 +104,7 @@ export function ExamModal({ exam, onClose, onSubmitted }: ExamModalProps) {
 
           {exam.exam_files?.length > 0 && (
             <div className={styles.modalSection}>
-              <h3 className={styles.modalSectionTitle}>Attached files</h3>
+              <h3 className={styles.modalSectionTitle}>Tệp đính kèm</h3>
               <ul className={styles.modalFileList}>
                 {exam.exam_files.map((f) => (
                   <li key={f.id}>
@@ -119,18 +119,18 @@ export function ExamModal({ exam, onClose, onSubmitted }: ExamModalProps) {
 
           {!exam.submitted && (
             <form onSubmit={handleSubmit} className={styles.modalSection}>
-              <h3 className={styles.modalSectionTitle}>Submit your work</h3>
+              <h3 className={styles.modalSectionTitle}>Nộp bài</h3>
               <input
                 ref={fileInputRef}
                 type="file"
                 multiple
                 accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
                 className={styles.modalFileInput}
-                aria-label="Choose files to upload"
+                aria-label="Chọn tệp để tải lên"
               />
               {error && <p className={styles.modalError} role="alert">{error}</p>}
               <button type="submit" className={styles.modalSubmit} disabled={submitting}>
-                {submitting ? "Uploading..." : "Submit"}
+                {submitting ? "Đang tải lên..." : "Nộp bài"}
               </button>
             </form>
           )}

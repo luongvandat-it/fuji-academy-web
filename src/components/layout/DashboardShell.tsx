@@ -1,8 +1,10 @@
 "use client";
 
-import { MenuIcon } from "@/icon";
+import { Logo, MenuIcon } from "@/icon";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
+import { BottomNav } from "./BottomNav";
 import { Sidebar } from "./Sidebar";
 import styles from "./DashboardShell.module.scss";
 
@@ -20,22 +22,25 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
     <div className={styles.wrapper}>
       <button
         type="button"
-        aria-label="close menu"
+        aria-label="Đóng menu"
         onClick={closeSidebar}
         className={`${styles.overlay} ${sidebarOpen ? styles.overlayVisible : styles.overlayHidden}`}
       />
       <Sidebar open={sidebarOpen} onClose={closeSidebar} />
+      <BottomNav />
       <main className={styles.main}>
         <header className={styles.header}>
           <button
             type="button"
             onClick={() => setSidebarOpen(true)}
             className={styles.menuBtn}
-            aria-label="open menu"
+            aria-label="Mở menu"
           >
             <MenuIcon />
           </button>
-          <span className={styles.menuLabel}>Menu</span>
+          <Link href="/" className={styles.logoLink} aria-label="Trang chủ">
+            <Logo className={styles.logo} />
+          </Link>
         </header>
         {children}
       </main>

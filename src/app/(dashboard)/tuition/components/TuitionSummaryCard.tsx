@@ -13,10 +13,10 @@ export function TuitionSummaryCard({ totalDebt, currencySymbol }: TuitionSummary
     <section
       className={styles.summaryCard}
       aria-labelledby="tuition-total-label"
-      aria-label="Total tuition debt summary"
+      aria-label="Tổng công nợ học phí"
     >
       <p id="tuition-total-label" className={styles.summaryLabel}>
-        Total debt
+        Tổng công nợ
       </p>
       <p className={styles.summaryAmount}>
         {currencySymbol ? formatAmount(totalDebt, currencySymbol) : "—"}

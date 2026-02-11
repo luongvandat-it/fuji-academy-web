@@ -9,7 +9,7 @@ export function Loading({ className }: LoadingProps) {
     <div
       className={`inline-block size-8 animate-spin rounded-full border-2 border-gray-200 border-t-primary-500 ${className ?? ""}`}
       role="status"
-      aria-label="Loading"
+      aria-label="Đang tải"
     />
   );
 }
