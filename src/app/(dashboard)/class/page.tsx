@@ -1,5 +1,6 @@
 "use client";
 
+import { Loading } from "@/components/ui";
 import { ClassData, getClass } from "@/service/modules/class/logic";
 import type { ScheduleData } from "@/service/modules/schedule/logic";
 import { getSchedule } from "@/service/modules/schedule/logic";
@@ -12,6 +13,7 @@ import styles from "./class.module.scss";
 export default function ClassPage() {
   const [classes, setClasses] = useState<ClassData[]>([]);
   const [scheduleData, setScheduleData] = useState<ScheduleData[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const loadClasses = async () => {
     const response = await getClass();
@@ -30,14 +32,32 @@ export default function ClassPage() {
   };
 
   useEffect(() => {
-    loadClasses();
-    loadSchedule();
+    let mounted = true;
+    Promise.all([loadClasses(), loadSchedule()]).finally(() => {
+      if (mounted) setIsLoading(false);
+    });
+    return () => {
+      mounted = false;
+    };
   }, []);
 
   const classIdsWithClassToday = useMemo(
     () => getClassIdsWithClassToday(scheduleData),
     [scheduleData]
   );
+
+  if (isLoading) {
+    return (
+      <div className={styles.page}>
+        <header className={styles.header}>
+          <h1 className={styles.title}>Classes</h1>
+        </header>
+        <div className={styles.loading}>
+          <Loading />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className={styles.page}>

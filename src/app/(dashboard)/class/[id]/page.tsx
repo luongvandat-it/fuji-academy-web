@@ -1,5 +1,6 @@
 "use client";
 
+import { Loading } from "@/components/ui";
 import { ChevronLeftIcon } from "@/icon";
 import { getClass } from "@/service/modules/class/logic";
 import type { ClassData } from "@/service/modules/class/logic";
@@ -127,7 +128,9 @@ export default function ClassDetailPage() {
           <ChevronLeftIcon />
           Back
         </Link>
-        <div className={styles.loading}>Loading...</div>
+        <div className={styles.loading}>
+          <Loading />
+        </div>
       </div>
     );
   }

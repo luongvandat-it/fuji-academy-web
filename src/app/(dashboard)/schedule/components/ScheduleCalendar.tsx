@@ -1,5 +1,6 @@
 "use client";
 
+import { Loading } from "@/components/ui";
 import { memo, useMemo } from "react";
 import type { ViewMode } from "@/app/(dashboard)/schedule/types";
 import { DAY_LABELS, TIME_SLOTS } from "@/app/(dashboard)/schedule/types";
@@ -66,7 +67,7 @@ export const ScheduleCalendar = memo(function ScheduleCalendar({
     return (
       <div className={styles.calendarWrap}>
         <div className={styles.loadingState}>
-          Loading schedule...
+          <Loading />
         </div>
       </div>
     );

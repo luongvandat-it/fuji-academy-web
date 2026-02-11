@@ -1,5 +1,6 @@
 "use client";
 
+import { Loading } from "@/components/ui";
 import { TuitionIcon } from "@/icon";
 import { getTuitionDebts, type TuitionDebtData } from "@/service/modules/tuition/logic";
 import { useEffect, useMemo, useState } from "react";
@@ -10,6 +11,7 @@ const defaultTuitionData: TuitionDebtData = { total_debt: 0, debts: [] };
 
 export default function TuitionPage() {
   const [tuitionData, setTuitionData] = useState<TuitionDebtData>(defaultTuitionData);
+  const [isLoading, setIsLoading] = useState(true);
 
   const loadTuitionDebts = async () => {
     const response = await getTuitionDebts();
@@ -17,7 +19,13 @@ export default function TuitionPage() {
   };
 
   useEffect(() => {
-    loadTuitionDebts();
+    let mounted = true;
+    loadTuitionDebts().finally(() => {
+      if (mounted) setIsLoading(false);
+    });
+    return () => {
+      mounted = false;
+    };
   }, []);
 
   const { totalDebt, allItems, currencySymbol } = useMemo(() => {
@@ -28,6 +36,22 @@ export default function TuitionPage() {
       currencySymbol: list[0]?.currency_symbol ?? "",
     };
   }, [tuitionData]);
+
+  if (isLoading) {
+    return (
+      <article className={styles.page} aria-labelledby="tuition-page-title">
+        <header className={styles.header}>
+          <h1 id="tuition-page-title" className={styles.title}>
+            Tuition
+          </h1>
+          <TuitionIcon className="shrink-0 text-gray-500" aria-hidden />
+        </header>
+        <div className={styles.loading}>
+          <Loading />
+        </div>
+      </article>
+    );
+  }
 
   return (
     <article className={styles.page} aria-labelledby="tuition-page-title">
