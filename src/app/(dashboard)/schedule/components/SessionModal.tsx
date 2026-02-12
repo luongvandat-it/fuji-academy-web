@@ -42,7 +42,7 @@ export function SessionModal({ session, onClose }: SessionModalProps) {
           </button>
         </div>
         <div className={styles.sessionModalBody}>
-          <dl className="space-y-2">
+          <dl className={styles.sessionModalDl}>
             <div className={styles.sessionModalRow}>
               <dt className={styles.sessionModalLabel}>Lớp</dt>
               <dd className={styles.sessionModalValue}>{session.class_name}</dd>

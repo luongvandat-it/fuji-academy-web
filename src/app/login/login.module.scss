@@ -1,12 +1,10 @@
 @reference "../globals.css";
 
-/* Layout - @apply Tailwind utilities từ globals */
 .page {
-  @apply flex min-h-screen flex-col bg-white text-gray-900;
-  @apply min-h-dvh sm:min-h-screen;
+  @apply flex min-h-screen flex-col min-h-dvh sm:min-h-screen;
+  @apply bg-[var(--theme-surface)] text-[var(--theme-text)];
 }
 
-/* Header - responsive padding & spacing */
 .header {
   @apply flex flex-wrap items-center justify-between gap-2 border-b border-gray-200;
   @apply px-4 py-3 sm:px-6 sm:py-4 md:gap-4 lg:px-12 lg:py-4;
@@ -34,13 +32,11 @@
   @apply text-sm sm:text-base;
 }
 
-/* Main - column trên mobile, row từ lg */
 .main {
   @apply flex flex-1 flex-col lg:flex-row;
   @apply min-h-0;
 }
 
-/* Hero section - padding & blur responsive */
 .hero {
   @apply relative flex flex-1 flex-col items-center justify-center overflow-hidden bg-gradient-to-br from-sky-50 to-sky-100;
   @apply px-4 py-10 sm:px-6 sm:py-14 md:py-16 lg:px-8 lg:py-24;
@@ -63,15 +59,10 @@
 }
 
 .heroLogo {
-  @apply relative z-10 mt-4 flex items-center justify-center rounded-full bg-white/80 shadow-lg backdrop-blur;
-  @apply h-20 w-20 sm:mt-5 sm:h-24 sm:w-24 md:mt-6 md:h-28 md:w-28 lg:h-32 lg:w-32;
+  @apply relative z-10 mt-4 flex h-20 w-20 items-center justify-center rounded-full bg-white/80 shadow-lg backdrop-blur sm:mt-5 sm:h-24 sm:w-24 md:mt-6 md:h-28 md:w-28 lg:h-32 lg:w-32;
 
   svg {
-    flex-shrink: 0;
-    object-fit: contain;
-    width: 3rem;
-    height: 3rem;
-    @apply sm:w-16 sm:h-16 md:w-[4.5rem] md:h-[4.5rem] lg:w-20 lg:h-20;
+    @apply size-12 shrink-0 object-contain sm:size-16 md:size-[4.5rem] lg:size-20;
   }
 }
 
@@ -79,29 +70,42 @@
   @apply relative z-10 mt-8 flex h-32 w-32 items-center justify-center rounded-full bg-white/70 shadow-lg backdrop-blur;
 }
 
-/* Login form section - padding responsive */
 .formSection {
-  @apply flex flex-1 items-center justify-center overflow-auto bg-gray-50;
+  @apply flex flex-1 items-center justify-center overflow-auto bg-[var(--theme-surface)];
   @apply px-4 py-8 sm:px-6 sm:py-10 md:py-12 lg:px-12 lg:py-16;
 }
 
 .card {
-  @apply w-full rounded-2xl bg-white shadow-lg;
-  @apply max-w-full p-5 sm:max-w-md sm:p-6 md:p-8;
+  @apply w-full max-w-full rounded-2xl p-5 shadow-lg sm:max-w-md sm:p-6 md:p-8;
+  @apply bg-[var(--theme-surface-raised)] text-[var(--theme-text)];
 }
 
 .cardTitle {
-  @apply font-bold text-gray-900;
-  @apply text-xl sm:text-2xl;
+  @apply text-xl font-bold text-[var(--theme-text)] sm:text-2xl;
 }
 
 .cardSubtitle {
-  @apply mt-1.5 text-gray-600 sm:mt-2;
-  @apply text-xs sm:text-sm;
+  @apply mt-1.5 text-xs text-[var(--theme-text-secondary)] sm:mt-2 sm:text-sm;
 }
 
 .form {
   @apply mt-4 space-y-3 sm:mt-6 sm:space-y-4;
+
+  label {
+    @apply text-[var(--theme-text-secondary)];
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="password"] {
+    @apply border border-[var(--theme-border)] bg-[var(--theme-surface-raised)] text-[var(--theme-text)] outline-none;
+    &::placeholder {
+      @apply text-[var(--theme-text-muted)];
+    }
+    &:focus {
+      @apply border-[var(--theme-focus)] shadow-[0_0_0_1px_var(--theme-focus)];
+    }
+  }
 }
 
 .errorText {
@@ -113,12 +117,12 @@
 }
 
 .checkboxLabel {
-  @apply flex cursor-pointer items-center gap-2 text-gray-700;
-  @apply text-xs sm:text-sm;
+  @apply flex cursor-pointer items-center gap-2 text-xs text-[var(--theme-text-secondary)] sm:text-sm;
 }
 
 .checkbox {
-  @apply h-4 w-4 rounded border-gray-300 text-primary focus:ring-focus;
+  @apply h-4 w-4 rounded border-[var(--theme-border)];
+  accent-color: var(--theme-primary-500);
 }
 
 .forgotLink {
@@ -127,7 +131,7 @@
 }
 
 .submitBtn {
-  @apply w-full text-black;
+  @apply w-full text-white;
   @apply py-2.5 sm:py-3;
   @apply text-sm sm:text-base;
 }
@@ -157,8 +161,7 @@
 }
 
 .footerText {
-  @apply mt-4 text-center text-gray-600 sm:mt-6;
-  @apply text-xs sm:text-sm;
+  @apply mt-4 text-center text-xs text-[var(--theme-text-secondary)] sm:mt-6 sm:text-sm;
 }
 
 .signUpLink {

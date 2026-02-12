@@ -25,7 +25,7 @@ export function TuitionDebtCard({ item }: TuitionDebtCardProps) {
       aria-labelledby={titleId}
       aria-label={`Công nợ học phí: ${item.name}`}
     >
-      <div className="min-w-0 flex-1">
+      <div className={styles.debtCardBody}>
         <h3 id={titleId} className={styles.debtName}>
           {item.name}
         </h3>

@@ -74,6 +74,7 @@ export default function SchedulePage() {
 
   return (
     <main className={styles.page} aria-label="Lịch">
+      <h1 className={styles.pageTitle}>Lịch</h1>
       <ScheduleHeader
         label={formatMonthYear(displayMonth)}
         onPrev={prevMonth}

@@ -8,6 +8,8 @@ import type { ScheduleEvent } from "./ScheduleCalendar";
 import styles from "../schedule.module.scss";
 
 const ROW_HEIGHT_PX = 56;
+const ROW_STYLE = { height: ROW_HEIGHT_PX } as const;
+const DAY_INDICES = [0, 1, 2, 3, 4, 5, 6] as const;
 const FIRST_HOUR = TIME_SLOTS[0] ?? 6;
 const WEEK_HEADER_HEIGHT_PX = 52;
 
@@ -39,7 +41,7 @@ export const ScheduleWeekGrid = memo(function ScheduleWeekGrid({
   }, []);
 
   const weekDays = useMemo(
-    () => [0, 1, 2, 3, 4, 5, 6].map((i) => addDays(weekStart, i)),
+    () => DAY_INDICES.map((i) => addDays(weekStart, i)),
     [weekStart]
   );
 
@@ -64,6 +66,11 @@ export const ScheduleWeekGrid = memo(function ScheduleWeekGrid({
       return null;
     return WEEK_HEADER_HEIGHT_PX + (hours - FIRST_HOUR) * ROW_HEIGHT_PX;
   }, [now]);
+
+  const currentTimeLineStyle = useMemo(
+    () => (currentTimeTop != null ? { top: currentTimeTop } : undefined),
+    [currentTimeTop]
+  );
 
   if (loading) {
     return (
@@ -95,11 +102,11 @@ export const ScheduleWeekGrid = memo(function ScheduleWeekGrid({
           </thead>
           <tbody>
             {TIME_SLOTS.map((hour) => (
-              <tr key={hour} style={{ height: ROW_HEIGHT_PX }}>
+              <tr key={hour} style={ROW_STYLE}>
                 <td className={styles.weekTimeCell}>
                   {hour <= 12 ? hour : hour - 12}:00 {hour < 12 ? "SA" : "CH"}
                 </td>
-                {[0, 1, 2, 3, 4, 5, 6].map((dayIdx) => {
+                {DAY_INDICES.map((dayIdx) => {
                   const cellEvents = eventsMap.get(`${dayIdx}-${hour}`) ?? [];
                   return (
                     <td
@@ -133,7 +140,7 @@ export const ScheduleWeekGrid = memo(function ScheduleWeekGrid({
         {currentTimeTop != null && (
           <div
             className={styles.currentTimeLine}
-            style={{ top: currentTimeTop }}
+            style={currentTimeLineStyle}
             aria-hidden
           >
             <span className={styles.currentTimeDot} />

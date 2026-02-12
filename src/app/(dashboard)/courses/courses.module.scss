@@ -1,0 +1,622 @@
+@reference "../../globals.css";
+
+.pageLayout {
+  @apply flex min-h-0 flex-1 flex-col gap-4 overflow-hidden;
+  @media (min-width: 1024px) {
+    @apply flex-row gap-0;
+  }
+}
+
+.pageLayoutFull {
+  @apply flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden;
+}
+
+.listWrap {
+  @apply flex min-h-0 shrink-0 flex-col overflow-hidden;
+  @media (max-width: 1023px) {
+    @apply w-full;
+  }
+  @media (min-width: 1024px) {
+    width: 360px;
+    min-width: 360px;
+  }
+}
+
+.detailWrap {
+  @apply flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden rounded-xl border border-gray-200/80 bg-white p-4 shadow-sm;
+  @media (min-width: 640px) {
+    @apply p-5;
+  }
+  @media (min-width: 1024px) {
+    @apply p-6;
+  }
+}
+
+.listPanel {
+  @apply flex min-h-0 w-full min-w-0 flex-1 flex-col overflow-hidden;
+}
+
+.listHeader {
+  @apply flex items-center justify-between gap-2;
+}
+
+.listTitle {
+  @apply truncate text-xl font-bold tracking-tight text-gray-900;
+  @media (min-width: 640px) {
+    @apply text-2xl;
+  }
+}
+
+.listToolbar {
+  @apply mt-2 flex items-center justify-between gap-3;
+
+  .tabsRoot {
+    @apply shrink-0;
+  }
+}
+
+.searchWrap {
+  @apply relative flex max-w-[14rem] flex-1 items-center;
+  min-width: 0;
+}
+
+.searchWrapIcon {
+  @apply pointer-events-none absolute left-3 size-4 text-gray-400;
+}
+
+.searchInput {
+  @apply w-full rounded-lg border border-gray-200 bg-white py-1.5 pl-9 pr-3 text-sm text-gray-900 placeholder:text-gray-400 focus:border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-300;
+}
+
+.searchBtn {
+  @apply shrink-0 rounded-lg p-1.5 text-gray-500 hover:bg-gray-100 hover:text-gray-700;
+}
+
+.searchIcon {
+  @apply size-4;
+}
+
+.tabsWrap {
+  @apply flex flex-col;
+}
+
+.listScroll {
+  @apply mt-3 min-h-0 min-w-0 flex-1 overflow-x-hidden overflow-y-auto;
+}
+
+.list {
+  @apply flex flex-col gap-2 pb-4;
+}
+
+.listGrid {
+  @apply grid gap-6 pb-8;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+}
+
+.listGrid > li {
+  @apply min-w-0;
+}
+
+.tabsRoot {
+  @apply flex gap-0.5 rounded-lg border border-gray-200 bg-gray-50 p-0.5;
+}
+
+.tabBtn {
+  @apply rounded-md px-3 py-1.5 text-sm font-medium transition-colors;
+}
+
+.tabBtnActive {
+  @apply bg-white text-gray-900 shadow-sm;
+}
+
+.tabBtnInactive {
+  @apply text-gray-600 hover:text-gray-900;
+}
+
+.cardBtn {
+  @apply flex min-w-0 flex-col overflow-hidden rounded-xl border border-gray-200 bg-white text-left shadow-[0_1px_3px_rgba(0,0,0,0.06)] transition-all duration-200 hover:border-gray-200;
+  &:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
+  }
+}
+
+.cardBtnSelected {
+  @apply border-orange-400 bg-orange-50/50 shadow-md;
+}
+
+.cardBtnDefault {
+  @apply border-gray-200 bg-white;
+}
+
+.cardImageWrap {
+  @apply aspect-[16/10] w-full shrink-0 overflow-hidden bg-gray-100;
+}
+
+.cardImage {
+  @apply size-full object-cover;
+}
+
+.cardImagePlaceholder {
+  @apply size-full bg-gradient-to-br from-slate-200 via-gray-100 to-slate-200;
+}
+
+.cardContent {
+  @apply flex flex-col gap-1 p-4;
+}
+
+.cardProvider {
+  @apply text-xs font-medium text-gray-500;
+}
+
+.cardTitle {
+  @apply line-clamp-2 text-sm font-semibold leading-snug text-gray-900;
+  @media (min-width: 640px) {
+    @apply text-base;
+  }
+}
+
+.cardType {
+  @apply mt-1 text-xs font-medium text-gray-600;
+}
+
+.detailEmpty {
+  @apply flex min-h-[320px] flex-1 flex-col items-center justify-center rounded-xl border border-dashed border-gray-200 bg-gray-50/50 p-8 text-center;
+}
+
+.detailEmptyText {
+  @apply text-gray-500;
+}
+
+.detailPanel {
+  @apply relative flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden;
+}
+
+.detailScroll {
+  @apply min-h-0 flex-1 overflow-y-auto;
+}
+
+.detailNextBtnWrap {
+  @apply shrink-0 pt-3 flex justify-end;
+}
+
+.detailNextBtn {
+  @apply rounded-xl border-2 border-red-500 bg-white px-4 py-2.5 text-sm font-semibold text-red-600 transition-colors hover:bg-red-50 hover:text-red-700;
+}
+
+.detailNextBtnQuiz {
+  @apply rounded-xl border-2 border-amber-500 bg-amber-500 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-amber-600;
+}
+
+.detailVideoWrap {
+  @apply w-full shrink-0;
+}
+
+.detailRatingRow {
+  @apply mt-4 flex flex-wrap items-center gap-3;
+}
+
+.detailRating {
+  @apply inline-flex items-center gap-0.5 text-amber-600;
+}
+
+.detailRatingCount {
+  @apply ml-1 text-gray-600;
+}
+
+.detailLevel {
+  @apply rounded-full bg-gray-100 px-2.5 py-1 text-sm font-medium text-gray-600;
+}
+
+.detailTitle {
+  @apply mt-4 text-xl font-bold text-gray-900;
+  @media (min-width: 640px) {
+    @apply text-2xl;
+  }
+}
+
+.detailDesc {
+  @apply mt-2 whitespace-pre-line text-gray-600;
+}
+
+.detailInstructorWrap {
+  @apply mt-6;
+}
+
+.detailLessonText {
+  @apply rounded-xl border border-gray-200/80 bg-gray-50/50 p-4 text-gray-700 sm:p-5;
+  white-space: pre-line;
+}
+
+.detailQuizPage {
+  @apply flex flex-col;
+}
+
+.detailQuizCard {
+  @apply flex flex-col items-center justify-center rounded-xl border-2 border-dashed border-amber-200 bg-amber-50/50 p-8 text-center sm:p-10;
+}
+
+.detailQuizTitle {
+  @apply text-lg font-semibold text-amber-900 sm:text-xl;
+}
+
+.detailQuizDesc {
+  @apply mt-2 text-sm text-amber-800/90;
+}
+
+.detailQuizBtn {
+  @apply mt-4 rounded-xl bg-amber-500 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-amber-600;
+}
+
+.detailQuizModalOverlay {
+  @apply fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4;
+}
+
+.detailQuizModal {
+  @apply max-h-[80vh] w-full max-w-lg overflow-y-auto rounded-2xl border border-gray-200 bg-white p-6 shadow-xl sm:p-8;
+}
+
+.detailQuizModalTitle {
+  @apply text-xl font-bold text-gray-900;
+}
+
+.detailQuizModalBody {
+  @apply mt-4 text-gray-600;
+}
+
+.detailQuizModalHint {
+  @apply mt-2 text-sm text-gray-500;
+}
+
+.detailQuizModalClose {
+  @apply mt-6 w-full rounded-xl border border-gray-300 bg-white px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50;
+}
+
+.quizQuestion {
+  @apply mb-6 border-b border-gray-100 pb-6 last:mb-0 last:border-b-0 last:pb-0;
+}
+
+.quizQuestionText {
+  @apply mb-3 font-medium text-gray-900;
+}
+
+.quizOptionList {
+  @apply flex flex-col gap-2;
+}
+
+.quizOptionListSubmitted .quizOption {
+  pointer-events: none;
+}
+
+.quizOption {
+  @apply flex cursor-pointer items-center gap-3 rounded-lg border border-gray-200 bg-white px-3 py-2.5 text-left text-gray-700 transition-colors hover:border-amber-300 hover:bg-amber-50/50;
+}
+
+.quizOptionSelected {
+  @apply border-amber-400 bg-amber-50;
+}
+
+.quizOptionCorrect {
+  @apply border-emerald-400 bg-emerald-50;
+}
+
+.quizOptionWrong {
+  @apply border-red-300 bg-red-50/80;
+}
+
+.quizOptionCorrectLabel {
+  @apply shrink-0 text-xs font-semibold text-emerald-600;
+}
+
+.quizOptionWrongLabel {
+  @apply shrink-0 text-xs font-semibold text-red-600;
+}
+
+.quizOptionInput {
+  @apply size-4 shrink-0 accent-amber-600;
+}
+
+.quizQuestionFeedback {
+  @apply mt-3 flex items-center gap-2 text-sm font-medium;
+}
+
+.quizQuestionFeedbackCorrect {
+  @apply text-emerald-600;
+}
+
+.quizQuestionFeedbackWrong {
+  @apply text-red-600;
+}
+
+.quizSubmit {
+  @apply mt-6 w-full rounded-xl bg-amber-500 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-amber-600;
+}
+
+.quizResult {
+  @apply mt-4 rounded-xl border border-gray-200 bg-gray-50 p-4 text-center text-gray-900;
+}
+
+.quizQuestionsWrap {
+  @apply mt-6;
+}
+
+.detailQuizEmpty {
+  @apply mt-4 text-gray-500;
+}
+
+.detailLessonsWrap {
+  @apply mt-8;
+}
+
+.videoWrap {
+  @apply relative aspect-video w-full overflow-hidden rounded-xl bg-gray-900;
+}
+
+.videoIframe {
+  @apply absolute inset-0 size-full;
+}
+
+.instructorRoot {
+  @apply flex items-center gap-3;
+}
+
+.instructorAvatar {
+  @apply size-12 shrink-0 overflow-hidden rounded-full bg-gray-200;
+}
+
+.instructorAvatarImg {
+  @apply size-full object-cover;
+}
+
+.instructorInitial {
+  @apply flex size-full items-center justify-center text-lg font-semibold text-gray-500;
+}
+
+.instructorName {
+  @apply font-semibold text-gray-900;
+}
+
+.instructorTitle {
+  @apply text-sm text-gray-500;
+}
+
+.contentSection {
+  @apply mb-4 flex flex-wrap items-center justify-between gap-2;
+}
+
+.contentHeading {
+  @apply text-lg font-bold text-gray-900;
+  @media (min-width: 640px) {
+    @apply text-xl;
+  }
+}
+
+.contentMeta {
+  @apply text-sm text-gray-500;
+}
+
+.contentList {
+  @apply flex flex-col gap-2;
+}
+
+.lessonRow {
+  @apply flex items-start gap-3 rounded-xl border p-3 transition-colors;
+  @media (min-width: 640px) {
+    @apply p-4;
+  }
+}
+
+.lessonRowActive {
+  @apply border-orange-200 bg-orange-50/70;
+}
+
+.lessonRowDefault {
+  @apply border-gray-100 bg-white hover:bg-gray-50/80;
+}
+
+.lessonIconBox {
+  @apply flex size-10 shrink-0 items-center justify-center rounded-lg;
+  @media (min-width: 640px) {
+    @apply size-12;
+  }
+}
+
+.lessonIconBoxActive {
+  @apply bg-orange-500 text-white;
+}
+
+.lessonIconBoxDefault {
+  @apply bg-gray-100 text-gray-600;
+}
+
+.lessonDots {
+  @apply flex flex-col items-center gap-1;
+}
+
+.lessonDot {
+  @apply block size-1.5 rounded-full bg-white;
+}
+
+.lessonIconPlay {
+  @apply size-5;
+}
+
+.lessonBody {
+  @apply min-w-0 flex-1;
+}
+
+.lessonDuration {
+  @apply text-xs font-medium text-gray-500;
+  @media (min-width: 640px) {
+    @apply text-sm;
+  }
+}
+
+.lessonTitle {
+  @apply mt-0.5 font-semibold;
+  @media (min-width: 640px) {
+    @apply text-base;
+  }
+}
+
+.lessonTitleActive {
+  @apply text-orange-900;
+}
+
+.lessonTitleDefault {
+  @apply text-gray-900;
+}
+
+.lessonDesc {
+  @apply mt-1 line-clamp-2 text-sm text-gray-500;
+}
+
+.lessonPlayBtn {
+  @apply shrink-0 rounded-full p-2 text-gray-500 hover:bg-gray-100 hover:text-orange-500;
+}
+
+.lessonPlayIcon {
+  @apply size-5;
+}
+
+.curriculumRoot {
+  @apply flex min-h-0 w-full min-w-0 flex-1 flex-col overflow-hidden;
+}
+
+.curriculumBackWrap {
+  @apply shrink-0 pb-3;
+}
+
+.curriculumBackBtn {
+  @apply inline-flex items-center gap-2 rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm font-medium text-gray-700 transition-colors hover:border-gray-400 hover:bg-gray-50;
+}
+
+.curriculumBackIcon {
+  @apply size-4 shrink-0;
+}
+
+.curriculumHeader {
+  @apply flex shrink-0 items-start justify-between gap-3 border-b border-gray-200/80 pb-4;
+}
+
+.curriculumTitle {
+  @apply min-w-0 flex-1 break-words text-base font-bold tracking-tight text-gray-900 sm:text-lg;
+}
+
+.curriculumDropdownWrap {
+  @apply relative shrink-0;
+}
+
+.curriculumDropdownTrigger {
+  @apply flex shrink-0 items-center justify-center rounded-lg p-2 text-gray-500 transition-colors hover:bg-gray-100 hover:text-gray-700;
+}
+
+.curriculumDropdownChevron {
+  @apply size-5 transition-transform duration-200;
+}
+
+.curriculumDropdownChevronOpen {
+  @apply rotate-180;
+}
+
+.curriculumDropdown {
+  @apply absolute right-0 top-full z-20 mt-2 max-h-72 min-w-[240px] overflow-y-auto rounded-2xl border border-gray-200/90 bg-white py-2 shadow-[0_4px_20px_rgba(0,0,0,0.08),0_2px_8px_rgba(0,0,0,0.04)];
+}
+
+.curriculumDropdownItem {
+  @apply mx-1.5 cursor-pointer break-words rounded-xl px-3 py-2.5 text-left text-sm text-gray-700 transition-colors first:mt-0 last:mb-0 hover:bg-orange-50/60 hover:text-gray-900;
+}
+
+.curriculumDropdownItemCurrent {
+  @apply bg-orange-50/80 font-semibold text-orange-800;
+}
+
+.curriculumScroll {
+  @apply min-h-0 flex-1 overflow-y-auto pt-3;
+}
+
+.curriculumModule {
+  @apply border-b border-gray-100 last:border-b-0;
+}
+
+.curriculumModuleHeader {
+  @apply flex w-full cursor-pointer items-start gap-3 rounded-xl py-3 pr-2 text-left transition-colors hover:bg-gray-50/80;
+}
+
+.curriculumModuleTitle {
+  @apply min-w-0 flex-1 break-words font-semibold text-gray-900;
+}
+
+.curriculumChevron {
+  @apply shrink-0 text-gray-400 transition-transform duration-300 ease-out;
+}
+
+.curriculumChevronOpen {
+  @apply rotate-180;
+}
+
+.curriculumModuleContent {
+  @apply overflow-hidden;
+  max-height: 0;
+  transition: max-height 0.3s ease-out;
+}
+
+.curriculumModuleContentOpen {
+  max-height: 2000px;
+  transition: max-height 0.35s ease-in-out;
+}
+
+.curriculumLessonList {
+  @apply list-none space-y-0.5 pb-3 pl-1;
+}
+
+.curriculumLessonList > li {
+  @apply w-full;
+}
+
+.curriculumLessonItem {
+  font-family: var(--font-source-sans), sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  @apply relative flex w-full cursor-pointer items-start gap-3 rounded-lg border-l-2 border-transparent py-2.5 pl-4 pr-3 text-left hover:border-blue-300 hover:bg-[#EBF0F5]/60;
+}
+
+.curriculumLessonItemActive {
+  @apply rounded-l-none transition-none;
+  background-color: #ebf0f5;
+  border-left: 8px solid #3478f6;
+}
+
+.curriculumLessonItemActive .curriculumLessonTitle {
+  font-weight: 700;
+  @apply text-gray-900;
+}
+
+.curriculumLessonIcon {
+  @apply mt-0.5 flex shrink-0 items-center justify-center;
+}
+
+.curriculumLessonIconCompleted {
+  @apply size-5;
+}
+
+.curriculumLessonIconNotCompleted {
+  @apply size-5 text-gray-300;
+}
+
+.curriculumLessonContent {
+  @apply flex min-w-0 flex-1 flex-col gap-0.5;
+}
+
+.curriculumLessonTitle {
+  font-family: var(--font-source-sans), sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  @apply leading-snug text-gray-900;
+}
+
+.curriculumLessonMeta {
+  font-family: var(--font-source-sans), sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  @apply text-gray-500;
+}

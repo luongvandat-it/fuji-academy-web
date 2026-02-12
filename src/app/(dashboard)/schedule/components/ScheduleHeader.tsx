@@ -5,7 +5,6 @@ import { ChevronLeftIcon, ChevronRightIcon } from "@/icon";
 import styles from "../schedule.module.scss";
 
 interface ScheduleHeaderProps {
-  /** Label for current period (e.g. "tháng 2 năm 2026") */
   label: string;
   onPrev: () => void;
   onNext: () => void;

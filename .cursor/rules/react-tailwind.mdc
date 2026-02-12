@@ -1,0 +1,46 @@
+---
+description: React + Tailwind conventions - components và styling đồng nhất
+globs: "**/*.tsx,**/*.ts,**/*.scss"
+alwaysApply: true
+---
+
+# React + Tailwind
+
+## React
+
+- Dùng functional components; type props rõ ràng (interface).
+- Component cần client state/hooks: thêm `"use client"` ở đầu file.
+- List render: luôn có `key` ổn định (id), không dùng index làm key khi list thay đổi.
+- Callback truyền xuống child: đặt tên rõ (onSelect, onChange, onClose); tránh inline function phức tạp trong JSX khi có thể tách ra.
+
+## Tailwind – đồng nhất (chỉ trong SCSS)
+
+- **TSX**: Không dùng Tailwind trực tiếp trong file `.tsx`. Chỉ dùng `className={styles.xxx}` với class định nghĩa trong file `.module.scss`.
+- **SCSS**: Toàn bộ styling dùng Tailwind qua `@apply` trong `.module.scss`. Không viết thuộc tính CSS thuần trừ khi bắt buộc (ví dụ `-webkit-overflow-scrolling`). Màu/kích thước/shadow: `@apply bg-white p-4 shadow-lg` hoặc arbitrary `@apply bg-[#332d2b]`.
+- **Màu theme**: Dùng `var(--theme-*)` trong arbitrary: `@apply text-[var(--theme-focus)]`.
+- **Responsive**: Dùng prefix `sm:`, `md:`, `lg:` trong SCSS.
+
+## Ví dụ
+
+```tsx
+// ✅ TSX: chỉ className từ styles
+import styles from "./MyFeature.module.scss";
+
+export function Card({ title }: { title: string }) {
+  return (
+    <div className={styles.card}>
+      <h2 className={styles.cardTitle}>{title}</h2>
+    </div>
+  );
+}
+```
+
+```scss
+// ✅ SCSS: Tailwind qua @apply
+.card {
+  @apply rounded-xl border border-black/[0.06] bg-white p-4 shadow-[0_2px_8px_rgba(0,0,0,0.06)];
+}
+.cardTitle {
+  @apply text-lg font-bold text-gray-900;
+}
+```

@@ -44,7 +44,7 @@ export default function TuitionPage() {
           <h1 id="tuition-page-title" className={styles.title}>
             Học phí
           </h1>
-          <TuitionIcon className="shrink-0 text-gray-500" aria-hidden />
+          <TuitionIcon className={styles.headerIcon} aria-hidden />
         </header>
         <div className={styles.loading}>
           <Loading />
@@ -59,7 +59,7 @@ export default function TuitionPage() {
         <h1 id="tuition-page-title" className={styles.title}>
           Học phí
         </h1>
-        <TuitionIcon className="shrink-0 text-gray-500" aria-hidden />
+        <TuitionIcon className={styles.headerIcon} aria-hidden />
       </header>
 
       <TuitionSummaryCard totalDebt={totalDebt} currencySymbol={currencySymbol} />

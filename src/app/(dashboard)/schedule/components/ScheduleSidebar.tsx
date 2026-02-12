@@ -5,9 +5,7 @@ import { addDays } from "@/app/(dashboard)/schedule/utils";
 import styles from "../schedule.module.scss";
 
 interface ScheduleSidebarProps {
-  /** Date that determines which month to show in mini calendar */
   displayMonth: Date;
-  /** Start of the week currently shown in the main grid */
   weekStart: Date;
   onPrevMonth: () => void;
   onNextMonth: () => void;

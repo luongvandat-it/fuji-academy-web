@@ -1,7 +1,7 @@
 @reference "../../globals.css";
 
 .page {
-  @apply flex min-h-0 min-w-0 flex-col gap-4 p-3 sm:gap-5 sm:p-4 md:gap-6 md:p-6;
+  @apply flex min-h-0 min-w-0 flex-col gap-4 bg-transparent sm:gap-5 md:gap-6;
 }
 
 .header {
@@ -9,15 +9,19 @@
 }
 
 .headerLeft {
-  @apply flex min-w-0 flex-1 flex-wrap items-center gap-2 sm:gap-3;
+  @apply flex min-w-0 flex-1 flex-wrap items-center gap-3 sm:gap-4;
 }
 
 .weekNav {
-  @apply flex items-center gap-0.5 rounded-lg border border-gray-200 bg-surface-raised px-1.5 py-1 sm:gap-1 sm:px-2 sm:py-1.5;
+  @apply flex items-center gap-0.5 rounded-lg border border-gray-200 bg-white px-1.5 py-1 shadow-sm sm:gap-1 sm:px-2 sm:py-1.5;
+}
+
+.pageTitle {
+  @apply mb-1 truncate text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl md:mb-2;
 }
 
 .title {
-  @apply truncate text-lg font-bold text-gray-900 sm:text-xl md:text-2xl;
+  @apply truncate text-lg font-bold text-gray-800 sm:text-xl md:text-2xl;
 }
 
 .headerRight {
@@ -37,11 +41,11 @@
 }
 
 .monthNavLabel {
-  @apply min-w-0 truncate text-center text-xs text-gray-900 sm:min-w-[80px] sm:text-sm md:min-w-[120px];
+  @apply min-w-0 truncate text-center text-xs font-medium text-gray-700 sm:min-w-[80px] sm:text-sm md:min-w-[120px];
 }
 
 .monthNavBtn {
-  @apply flex items-center gap-1 rounded px-1.5 py-1 text-gray-600 hover:bg-gray-100 hover:text-gray-700 sm:gap-1.5 sm:px-2;
+  @apply flex items-center gap-1 rounded px-1.5 py-1 text-gray-600 hover:bg-gray-100 hover:text-gray-800 sm:gap-1.5 sm:px-2;
 }
 
 .monthNavBtnText {
@@ -62,7 +66,7 @@
 }
 
 .calendarWrap {
-  @apply min-h-0 min-w-0 flex-1 overflow-auto rounded-lg border border-gray-200 bg-surface-raised shadow-sm sm:rounded-xl;
+  @apply min-h-0 min-w-0 flex-1 overflow-auto rounded-2xl border border-black/[0.06] bg-white shadow-[0_2px_8px_rgba(0,0,0,0.06)];
   -webkit-overflow-scrolling: touch;
 }
 
@@ -71,11 +75,11 @@
 }
 
 .monthCell {
-  @apply min-h-[80px] align-top border-b border-r border-gray-100 p-1.5 last:border-r-0 sm:min-h-[90px] sm:p-2 md:min-h-[100px];
+  @apply h-[100px] align-top border-b border-r border-gray-100 p-2 last:border-r-0 sm:h-[110px] sm:p-2.5 md:h-[120px];
 }
 
 .monthCellToday {
-  @apply bg-primary-100 ring-2 ring-inset ring-primary-400;
+  @apply bg-[#e0f2f7];
 }
 
 .monthCellDayNum {
@@ -83,7 +87,7 @@
 }
 
 .monthCellDayNumToday {
-  @apply inline-flex h-6 min-w-6 items-center justify-center rounded-full bg-primary-500 text-sm font-semibold text-white sm:h-7 sm:min-w-7;
+  @apply inline-flex h-6 min-w-6 items-center justify-center rounded-full bg-[#007bff] text-sm font-semibold text-white sm:h-7 sm:min-w-7;
 }
 
 .monthCellDayNumMuted {
@@ -91,11 +95,17 @@
 }
 
 .monthCellEvents {
-  @apply mt-1 space-y-1;
+  @apply mt-1.5 flex flex-wrap items-start gap-1.5;
 }
 
 .monthMore {
-  @apply text-xs text-gray-500;
+  @apply shrink-0 text-xs text-gray-500;
+}
+
+.monthCellEvents .block {
+  @apply shrink-0;
+  min-width: 4.5rem;
+  max-width: 100%;
 }
 
 .table {
@@ -103,7 +113,7 @@
 }
 
 .table th {
-  @apply border-b border-gray-200 bg-gray-50 px-1.5 py-2 text-left text-xs font-medium uppercase tracking-wider text-gray-500 sm:px-2 sm:py-3;
+  @apply border-b border-gray-200 bg-[#fafafa] px-1.5 py-2 text-left text-xs font-medium uppercase tracking-wider text-gray-700 sm:px-2 sm:py-3;
 }
 
 .table td {
@@ -111,11 +121,7 @@
 }
 
 .timeCell {
-  @apply w-14 shrink-0 border-r border-gray-200 bg-gray-50 px-1.5 py-2 text-xs font-medium text-gray-600 sm:w-16 sm:px-2 md:w-20;
-  position: sticky;
-  left: 0;
-  z-index: 10;
-  box-shadow: 2px 0 4px -2px rgb(0 0 0 / 0.06);
+  @apply sticky left-0 z-10 w-14 shrink-0 border-r border-gray-200 bg-gray-50 px-1.5 py-2 text-xs font-medium text-gray-600 shadow-[2px_0_4px_-2px_rgba(0,0,0,0.06)] sm:w-16 sm:px-2 md:w-20;
 }
 
 .dayHeader {
@@ -131,7 +137,7 @@
 }
 
 .block {
-  @apply flex flex-col gap-0.5 rounded-md border-l-4 px-1.5 py-1 text-left text-xs sm:rounded-lg sm:px-2 sm:py-1.5;
+  @apply flex flex-col gap-0.5 rounded border-l-2 border-gray-200 px-1.5 py-1 text-left text-xs sm:rounded-md sm:px-2 sm:py-1.5;
 }
 
 .blockTime {
@@ -139,11 +145,11 @@
 }
 
 .blockTitle {
-  @apply font-semibold;
+  @apply text-xs font-semibold sm:text-xs;
 }
 
 .blockBlue {
-  @apply border-primary-400 bg-primary-50 text-gray-800;
+  @apply border-l-[#007bff] bg-[#e0f2f7] text-[#1e3a5f];
 }
 
 .blockClickable {
@@ -210,7 +216,6 @@
   @apply list-inside list-disc space-y-1 text-sm text-gray-600;
 }
 
-/* Schedule layout: sidebar + week grid */
 .scheduleBody {
   @apply flex min-h-0 flex-1 flex-col overflow-hidden md:flex-row md:gap-4 lg:gap-6;
 }
@@ -278,21 +283,11 @@
 }
 
 .weekGrid {
-  @apply relative min-h-full;
-  min-width: 400px;
+  @apply relative min-h-full min-w-[400px] sm:min-w-[560px] md:min-w-[600px];
 }
-@media (min-width: 640px) {
-  .weekGrid {
-    min-width: 560px;
-  }
-}
-@media (min-width: 768px) {
-  .scheduleBody .weekGridWrap {
-    min-height: 0;
-  }
-  .weekGrid {
-    min-width: 600px;
-  }
+
+.scheduleBody .weekGridWrap {
+  @apply md:min-h-0;
 }
 
 .weekTable {
@@ -348,14 +343,13 @@
 }
 
 .todayBtn {
-  @apply shrink-0 rounded-lg border border-gray-200 bg-surface-raised px-3 py-2 text-xs font-medium text-gray-700 shadow-sm hover:bg-gray-50 sm:text-sm;
+  @apply shrink-0 rounded-lg border border-gray-200 bg-white px-3 py-2 text-xs font-medium text-gray-700 shadow-sm hover:bg-gray-50 sm:text-sm;
 }
 
 .newBtn {
   @apply shrink-0 rounded-lg bg-primary-500 px-3 py-2 text-xs font-medium text-white shadow-sm hover:bg-primary-600 sm:text-sm;
 }
 
-/* Session modal (popup chi tiết buổi học) */
 .sessionModalOverlay {
   @apply fixed inset-0 z-50 flex min-h-screen items-center justify-center overflow-y-auto bg-black/50 p-2 py-4 sm:p-4;
 }
@@ -378,6 +372,10 @@
 
 .sessionModalBody {
   @apply max-h-[60vh] overflow-y-auto p-3 sm:max-h-[70vh] sm:p-4;
+}
+
+.sessionModalDl {
+  @apply space-y-2;
 }
 
 .sessionModalRow {

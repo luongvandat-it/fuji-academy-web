@@ -1,5 +1,8 @@
 "use client";
 
+import { cn } from "@/lib";
+import styles from "./Loading.module.scss";
+
 interface LoadingProps {
   className?: string;
 }
@@ -7,7 +10,7 @@ interface LoadingProps {
 export function Loading({ className }: LoadingProps) {
   return (
     <div
-      className={`inline-block size-8 animate-spin rounded-full border-2 border-gray-200 border-t-primary-500 ${className ?? ""}`}
+      className={cn(styles.spinner, className)}
       role="status"
       aria-label="Đang tải"
     />

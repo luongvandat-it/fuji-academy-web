@@ -27,7 +27,6 @@ interface ScheduleCalendarProps {
   events: ScheduleEvent[];
   currentDate: Date;
   monthWeeks: Date[][];
-  /** Buổi học từ API class-sessions; click vào card sẽ gọi onSessionClick */
   sessions?: ClassSessionData[];
   onSessionClick?: (session: ClassSessionData) => void;
 }
@@ -95,7 +94,7 @@ export const ScheduleCalendar = memo(function ScheduleCalendar({
                   ? sessionsForDay.slice(0, 3).map((s) => ({
                       key: `session-${s.session_id}`,
                       time: formatTimeFromDatetime(s.start_time),
-                      title: s.session_name || s.class_name,
+                      title: s.subject_name || s.class_name || s.session_name,
                       session: s,
                     }))
                   : eventsForDay.slice(0, 3).map((ev) => ({

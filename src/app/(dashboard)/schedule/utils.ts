@@ -28,7 +28,7 @@ export function toEvents(
       colorIndex++;
       events.push({
         id: `${cls.class_id}-${item.schedule_id}-${idx}`,
-        title: item.schedule_name || cls.class_name || cls.subject_name,
+        title: cls.subject_name || cls.class_name || item.schedule_name,
         room: cls.classroom_name || "",
         teacher: cls.teacher_name || "",
         dayIndex,
@@ -132,7 +132,6 @@ export function toDateKey(d: Date): string {
   return `${y}-${String(m + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
 }
 
-/** Nhóm danh sách buổi học theo ngày (date YYYY-MM-DD). */
 export function buildSessionsByDate<T extends { date: string }>(
   sessions: T[]
 ): Map<string, T[]> {
@@ -146,7 +145,6 @@ export function buildSessionsByDate<T extends { date: string }>(
   return map;
 }
 
-/** Lấy giờ dạng "HH:mm" từ chuỗi datetime (vd "2026-02-11 11:00:00"). */
 export function formatTimeFromDatetime(datetime: string): string {
   if (!datetime) return "";
   const match = datetime.match(/(\d{1,2}):(\d{2})/);

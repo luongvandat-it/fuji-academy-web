@@ -21,6 +21,10 @@
   --theme-text: #1C1917;
   --theme-text-secondary: #57534E;
   --theme-text-muted: #78716C;
+
+  --theme-content-bg: #F9F7F5;
+  --theme-content-highlight: #E0F2F7;
+  --theme-content-accent: #007BFF;
 }
 
 @theme inline {

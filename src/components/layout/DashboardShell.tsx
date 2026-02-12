@@ -1,7 +1,6 @@
 "use client";
 
-import { Logo, MenuIcon } from "@/icon";
-import Link from "next/link";
+import { MenuIcon } from "@/icon";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { BottomNav } from "./BottomNav";
@@ -20,21 +19,14 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
 
   return (
     <div className={styles.wrapper}>
-      <header className={styles.topHeader}>
-        <button
-          type="button"
-          onClick={() => setSidebarOpen(true)}
-          className={styles.menuBtn}
-          aria-label="Mở menu"
-        >
-          <MenuIcon />
-        </button>
-        <Link href="/" className={styles.logoLink} aria-label="Trang chủ - Fourier LMS">
-          <Logo className={styles.logo} />
-          <span className={styles.brandName}>Fourier LMS</span>
-        </Link>
-      </header>
-
+      <button
+        type="button"
+        onClick={() => setSidebarOpen(true)}
+        className={styles.menuBtnFloat}
+        aria-label="Mở menu"
+      >
+        <MenuIcon />
+      </button>
       <button
         type="button"
         aria-label="Đóng menu"
@@ -44,7 +36,9 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
       <Sidebar open={sidebarOpen} onClose={closeSidebar} />
       <BottomNav />
       <main className={styles.main}>
-        {children}
+        <div className={styles.contentInner}>
+          {children}
+        </div>
       </main>
     </div>
   );

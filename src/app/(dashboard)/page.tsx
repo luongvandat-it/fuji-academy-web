@@ -3,6 +3,7 @@
 import { Loading } from "@/components/ui";
 import { getSchedule, ScheduleData } from "@/service/modules/schedule/logic";
 import { useEffect, useState } from "react";
+import styles from "./placeholder.module.scss";
 
 export default function Home() {
   const [schedule, setSchedule] = useState<ScheduleData[]>([]);
@@ -25,15 +26,21 @@ export default function Home() {
 
   if (isLoading) {
     return (
-      <div className="flex min-h-[200px] items-center justify-center p-6">
-        <Loading />
+      <div className={styles.page}>
+        <h1 className={styles.title}>Trang chủ</h1>
+        <div className={styles.loadingCard}>
+          <Loading />
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="p-6">
-      <p className="text-black">Sắp ra mắt...</p>
+    <div className={styles.page}>
+      <h1 className={styles.title}>Trang chủ</h1>
+      <div className={styles.card}>
+        <p className={styles.cardText}>Sắp ra mắt...</p>
+      </div>
     </div>
   );
 }

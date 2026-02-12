@@ -1,11 +1,12 @@
 @reference "../../app/globals.css";
 
 .aside {
-  @apply fixed left-0 z-20 w-56 shrink-0 border-r border-gray-200 bg-gray-100 shadow-sm;
-  top: 3.5rem; 
-  height: calc(100vh - 3.5rem);
-  @apply transition-transform duration-200 ease-out;
-  @apply lg:translate-x-0;
+  @apply fixed left-0 top-0 z-20 h-screen w-44 min-w-44 rounded-l-xl shadow-[2px_0_12px_rgba(0,0,0,0.2)] transition-transform duration-200 ease-out;
+  background-color: #251b17;
+
+  @media (min-width: 1024px) {
+    @apply translate-x-0;
+  }
 }
 
 .asideOpen {
@@ -13,82 +14,107 @@
 }
 
 .asideClosed {
-  @apply -translate-x-full lg:translate-x-0;
+  @apply -translate-x-full;
+
+  @media (min-width: 1024px) {
+    @apply translate-x-0;
+  }
 }
 
 .inner {
   @apply flex h-full flex-col;
 }
 
-.userSection {
-  @apply border-b border-gray-100 p-4;
+.logoSection {
+  @apply flex shrink-0 justify-center border-b border-white/[0.08] px-4 py-6 text-white;
 }
 
-.userRow {
-  @apply flex items-center gap-3;
-}
-
-.avatar {
-  @apply h-10 w-10 shrink-0 rounded-full border-2 border-gray-200 bg-gray-50;
-}
-
-.userInfo {
-  @apply min-w-0;
-}
-
-.userName {
-  @apply truncate text-sm font-medium text-gray-900;
-}
-
-.userLevel {
-  @apply truncate text-xs text-gray-500;
+.sidebarLogo {
+  @apply size-10 shrink-0 text-inherit;
 }
 
 .nav {
-  @apply flex-1 space-y-0.5 overflow-y-auto p-3;
+  @apply flex flex-1 flex-col gap-2 overflow-y-auto pl-3 pr-0 py-6;
 }
 
 .link {
-  @apply flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors;
-  @apply text-gray-700 hover:bg-gray-50 hover:text-gray-900;
+  @apply relative flex flex-col items-center justify-center gap-1.5 rounded-xl px-3 py-3 text-center text-xs font-medium text-[#9ca3af] transition-colors;
+
+  &:hover {
+    @apply text-white/90;
+  }
 }
 
-/* Main items (Dashboard, Schedule, Class, Tuition) shown in bottom nav on mobile – hide in sidebar */
 .linkMain {
-  @apply hidden lg:flex;
+  @apply max-lg:hidden;
 }
 
 .linkActive {
-  background-color: var(--theme-primary-100);
-  color: var(--theme-focus);
+  @apply font-semibold text-white;
+
+  &:hover {
+    @apply text-white;
+  }
+
+  &::after {
+    content: "";
+    @apply absolute right-0 top-1/2 h-9 w-0.5 -translate-y-1/2 rounded-full bg-white;
+  }
 }
 
 .icon {
-  @apply text-gray-500;
+  @apply size-5 shrink-0 text-inherit;
 }
 
 .iconActive {
-  color: var(--theme-focus);
+  @apply text-white;
+}
+
+.linkLabel {
+  @apply overflow-hidden text-ellipsis whitespace-nowrap;
 }
 
 .bottom {
-  @apply border-t border-gray-100 p-3;
+  @apply flex shrink-0 flex-col gap-2 border-t border-white/[0.08] pl-3 pr-0 pb-5 pt-4;
 }
 
 .bottomLink {
-  @apply flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors;
-  @apply text-gray-600 hover:bg-gray-50 hover:text-gray-900;
+  @apply relative flex flex-col items-center justify-center gap-1.5 rounded-xl border-none px-3 py-3 text-center text-xs font-medium text-[#9ca3af] transition-colors;
+
+  &:hover {
+    @apply text-white/90;
+  }
 }
 
 .bottomLinkActive {
-  background-color: var(--theme-primary-100);
-  color: var(--theme-focus);
+  @apply font-semibold text-white;
+
+  &:hover {
+    @apply text-white;
+  }
+
+  &::after {
+    content: "";
+    @apply absolute right-0 top-1/2 h-9 w-0.5 -translate-y-1/2 rounded-full bg-white;
+  }
 }
 
 .bottomIcon {
-  @apply text-gray-400;
+  @apply size-5 shrink-0 text-inherit;
 }
 
 .bottomIconActive {
-  color: var(--theme-focus);
+  @apply text-white;
+}
+
+.logoutLink {
+  @apply mt-3 flex flex-col items-center justify-center gap-1.5 rounded-xl border-none bg-transparent px-3 py-3 text-center text-xs font-medium text-[#9ca3af] cursor-pointer font-[inherit];
+
+  &:hover {
+    @apply text-white/90;
+  }
+}
+
+.logoutIcon {
+  @apply size-5 shrink-0 text-inherit;
 }

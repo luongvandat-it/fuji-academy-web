@@ -1,15 +1,11 @@
 @reference "../../app/globals.css";
 
 .wrapper {
-  @apply flex min-h-screen flex-col bg-surface-raised;
-}
-
-.topHeader {
-  @apply sticky top-0 z-30 flex h-14 shrink-0 items-center gap-3 border-b border-gray-200 bg-surface-raised px-4 shadow-sm;
+  @apply flex h-screen flex-col overflow-hidden bg-[#332d2b];
 }
 
 .overlay {
-  @apply fixed inset-0 z-30 transition-opacity duration-200 lg:hidden;
+  @apply fixed inset-0 z-30 bg-black/50 transition-opacity duration-200 lg:hidden;
 }
 
 .overlayVisible {
@@ -21,25 +17,14 @@
 }
 
 .main {
-  @apply min-h-0 flex-1 pb-16 pl-0 transition-[padding] duration-200 lg:pb-0 lg:pl-56;
+  @apply flex min-h-0 flex-1 flex-col bg-transparent pb-16 pl-0 transition-[padding] duration-200 lg:pb-0 lg:pl-44;
 }
 
-.menuBtn {
-  @apply rounded-lg p-2 text-gray-600 hover:bg-gray-100 hover:text-gray-900 lg:hidden;
+.contentInner {
+  @apply flex min-h-0 flex-1 flex-col overflow-y-auto bg-white p-4 pb-8 sm:p-5 sm:pb-8 md:p-6 md:pb-10;
+  @apply lg:my-4 lg:mr-4 lg:max-h-[calc(100vh-2rem)] lg:overflow-hidden lg:rounded-2xl lg:px-8 lg:py-10 lg:shadow-[0_2px_12px_rgba(0,0,0,0.06)];
 }
 
-.logoLink {
-  @apply flex shrink-0 items-center gap-2 rounded focus:outline-none focus:ring-2 focus:ring-focus focus:ring-offset-2 focus:ring-offset-white;
-}
-
-.logo {
-  @apply h-10 w-10 shrink-0;
-}
-
-.brandName {
-  @apply text-lg font-semibold text-gray-900;
-}
-
-.menuLabel {
-  @apply text-sm font-medium text-gray-800;
+.menuBtnFloat {
+  @apply fixed left-4 top-4 z-10 rounded-lg bg-gray-800 p-2.5 text-white shadow-lg hover:bg-gray-700 lg:hidden;
 }

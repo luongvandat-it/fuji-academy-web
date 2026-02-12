@@ -10,9 +10,9 @@ interface ScheduleTabsProps {
 }
 
 const MODES: { key: ViewMode; label: string }[] = [
-  { key: "day", label: "Today" },
-  { key: "week", label: "Week" },
-  { key: "month", label: "Month" },
+  { key: "day", label: "Hôm nay" },
+  { key: "week", label: "Tuần" },
+  { key: "month", label: "Tháng" },
 ];
 
 export const ScheduleTabs = memo(function ScheduleTabs({ viewMode, onViewModeChange }: ScheduleTabsProps) {
