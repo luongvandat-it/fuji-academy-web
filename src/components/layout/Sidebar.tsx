@@ -13,6 +13,7 @@ import {
 } from "@/icon";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { logout } from "@/service/modules/login/logic";
 import styles from "./Sidebar.module.scss";
 import { Text } from "../ui";
 
@@ -36,11 +37,8 @@ export function Sidebar({ open = true, onClose }: SidebarProps) {
   const pathname = usePathname();
 
   const handleLogout = () => {
-    if (typeof window !== "undefined") {
-      localStorage.removeItem("user");
-      window.location.href = "/login";
-    }
     onClose?.();
+    logout();
   };
 
   return (

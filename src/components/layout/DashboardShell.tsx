@@ -1,8 +1,9 @@
 "use client";
 
 import { MenuIcon } from "@/icon";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
+import { isAuthenticated } from "@/service/modules/login/logic";
 import { BottomNav } from "./BottomNav";
 import { Sidebar } from "./Sidebar";
 import styles from "./DashboardShell.module.scss";
@@ -10,8 +11,16 @@ import styles from "./DashboardShell.module.scss";
 export function DashboardShell({ children }: { children: React.ReactNode }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const pathname = usePathname();
+  const router = useRouter();
 
   const closeSidebar = useCallback(() => setSidebarOpen(false), []);
+
+  useEffect(() => {
+    if (!isAuthenticated()) {
+      router.replace("/login");
+      return;
+    }
+  }, [router]);
 
   useEffect(() => {
     setSidebarOpen(false);
