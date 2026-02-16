@@ -1,8 +1,8 @@
 @reference "../../app/globals.css";
 
 .aside {
-  @apply fixed left-0 top-0 z-20 h-screen w-44 min-w-44 rounded-l-xl shadow-[2px_0_12px_rgba(0,0,0,0.2)] transition-transform duration-200 ease-out;
-  background-color: #251b17;
+  @apply fixed left-0 top-0 z-20 h-screen  rounded-l-xl shadow-[2px_0_12px_rgba(0,0,0,0.2)] transition-transform duration-200 ease-out;
+  background-color: #150601;
 
   @media (min-width: 1024px) {
     @apply translate-x-0;
@@ -26,7 +26,7 @@
 }
 
 .logoSection {
-  @apply flex shrink-0 justify-center border-b border-white/[0.08] px-4 py-6 text-white;
+  @apply flex shrink-0 justify-center px-4 pt-6 text-white;
 }
 
 .sidebarLogo {
@@ -34,11 +34,11 @@
 }
 
 .nav {
-  @apply flex flex-1 flex-col gap-2 overflow-y-auto pl-3 pr-0 py-6;
+  @apply flex flex-1 flex-col gap-2 overflow-y-auto justify-center;
 }
 
 .link {
-  @apply relative flex flex-col items-center justify-center gap-1.5 rounded-xl px-3 py-3 text-center text-xs font-medium text-[#9ca3af] transition-colors;
+  @apply relative flex flex-col items-center justify-center rounded-xl py-3 text-center text-xs text-white transition-colors;
 
   &:hover {
     @apply text-white/90;
@@ -50,7 +50,7 @@
 }
 
 .linkActive {
-  @apply font-semibold text-white;
+  @apply font-semibold text-white bg-[#3A140C];
 
   &:hover {
     @apply text-white;
@@ -75,11 +75,11 @@
 }
 
 .bottom {
-  @apply flex shrink-0 flex-col gap-2 border-t border-white/[0.08] pl-3 pr-0 pb-5 pt-4;
+  @apply flex shrink-0 flex-col gap-2;
 }
 
 .bottomLink {
-  @apply relative flex flex-col items-center justify-center gap-1.5 rounded-xl border-none px-3 py-3 text-center text-xs font-medium text-[#9ca3af] transition-colors;
+  @apply relative flex flex-col items-center justify-center gap-1.5 rounded-xl border-none px-3 py-3 text-center text-xs font-medium transition-colors;
 
   &:hover {
     @apply text-white/90;
@@ -108,7 +108,7 @@
 }
 
 .logoutLink {
-  @apply mt-3 flex flex-col items-center justify-center gap-1.5 rounded-xl border-none bg-transparent px-3 py-3 text-center text-xs font-medium text-[#9ca3af] cursor-pointer font-[inherit];
+  @apply mt-3 flex flex-col items-center justify-center gap-1.5 rounded-xl border-none bg-transparent px-3 py-3 text-center text-xs font-medium text-white cursor-pointer font-[inherit];
 
   &:hover {
     @apply text-white/90;
