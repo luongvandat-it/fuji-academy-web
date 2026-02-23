@@ -1,10 +1,20 @@
 "use client";
 
 import { Loading } from "@/components/ui";
+import type { ClassSessionData } from "@/service/modules/class/logic";
 import { memo, useMemo, useState, useEffect } from "react";
 import { DAY_LABELS, TIME_SLOTS } from "@/app/(dashboard)/schedule/types";
-import { addDays, buildDayWeekEventsMap, isRangeOverlap } from "@/app/(dashboard)/schedule/utils";
+import {
+  addDays,
+  buildDayWeekEventsMap,
+  formatTimeFromDatetime,
+  isRangeOverlap,
+  isToday,
+  parseTimeToHours,
+  toDateKey,
+} from "@/app/(dashboard)/schedule/utils";
 import type { ScheduleEvent } from "./ScheduleCalendar";
+import { WeekGridDayHeader, WeekGridEventBlock, WeekViewCurrentTimeLine } from "./week";
 import styles from "../schedule.module.scss";
 
 const ROW_HEIGHT_PX = 56;
@@ -13,25 +23,60 @@ const DAY_INDICES = [0, 1, 2, 3, 4, 5, 6] as const;
 const FIRST_HOUR = TIME_SLOTS[0] ?? 6;
 const WEEK_HEADER_HEIGHT_PX = 52;
 
+export type WeekGridEvent = ScheduleEvent & { session?: ClassSessionData };
+
 interface ScheduleWeekGridProps {
   loading: boolean;
   events: ScheduleEvent[];
+  sessions?: ClassSessionData[];
   weekStart: Date;
+  onSessionClick?: (session: ClassSessionData) => void;
+  getColorClass?: (index: number) => string;
 }
 
-function isToday(d: Date): boolean {
-  const t = new Date();
-  return (
-    d.getFullYear() === t.getFullYear() &&
-    d.getMonth() === t.getMonth() &&
-    d.getDate() === t.getDate()
-  );
+function sessionsToWeekEvents(
+  weekStart: Date,
+  weekEnd: Date,
+  sessions: ClassSessionData[],
+  getColorClass: (i: number) => string
+): WeekGridEvent[] {
+  const result: WeekGridEvent[] = [];
+  sessions.forEach((s, idx) => {
+    const sessionDate = s.date;
+    if (!sessionDate || sessionDate < toDateKey(weekStart) || sessionDate > toDateKey(weekEnd))
+      return;
+    const d = new Date(sessionDate + "T00:00:00");
+    const dayIndex = Math.round((d.getTime() - weekStart.getTime()) / 86400000);
+    if (dayIndex < 0 || dayIndex > 6) return;
+    const startH = parseTimeToHours(s.start_time);
+    const endH = parseTimeToHours(s.end_time);
+    const startHour = Math.floor(startH);
+    const endHour = Math.ceil(endH) || startHour + 1;
+    const colorClass = getColorClass(idx);
+    result.push({
+      id: `session-${s.session_id}`,
+      title: s.subject_name || s.class_name || s.session_name,
+      room: s.classroom_name || "",
+      teacher: s.teacher_name || "",
+      dayIndex,
+      startHour,
+      endHour,
+      startTime: formatTimeFromDatetime(s.start_time),
+      endTime: formatTimeFromDatetime(s.end_time),
+      colorClass,
+      session: s,
+    });
+  });
+  return result;
 }
 
 export const ScheduleWeekGrid = memo(function ScheduleWeekGrid({
   loading,
   events,
+  sessions = [],
   weekStart,
+  onSessionClick,
+  getColorClass = () => styles.blockBlue,
 }: ScheduleWeekGridProps) {
   const [now, setNow] = useState(() => new Date());
 
@@ -55,10 +100,22 @@ export const ScheduleWeekGrid = memo(function ScheduleWeekGrid({
     [events, weekStart, weekEnd]
   );
 
-  const eventsMap = useMemo(
-    () => buildDayWeekEventsMap(eventsInWeek),
-    [eventsInWeek]
+  const sessionEvents = useMemo(
+    () => sessionsToWeekEvents(weekStart, weekEnd, sessions, getColorClass),
+    [weekStart, weekEnd, sessions, getColorClass]
   );
+
+  const mergedEvents: WeekGridEvent[] = useMemo(
+    () => [...eventsInWeek, ...sessionEvents],
+    [eventsInWeek, sessionEvents]
+  );
+
+  const eventsMap = useMemo(
+    () => buildDayWeekEventsMap(mergedEvents),
+    [mergedEvents]
+  );
+
+  const todayKey = toDateKey(new Date());
 
   const currentTimeTop = useMemo(() => {
     const hours = now.getHours() + now.getMinutes() / 60;
@@ -66,11 +123,6 @@ export const ScheduleWeekGrid = memo(function ScheduleWeekGrid({
       return null;
     return WEEK_HEADER_HEIGHT_PX + (hours - FIRST_HOUR) * ROW_HEIGHT_PX;
   }, [now]);
-
-  const currentTimeLineStyle = useMemo(
-    () => (currentTimeTop != null ? { top: currentTimeTop } : undefined),
-    [currentTimeTop]
-  );
 
   if (loading) {
     return (
@@ -90,13 +142,12 @@ export const ScheduleWeekGrid = memo(function ScheduleWeekGrid({
             <tr>
               <th className={styles.weekTimeCol} />
               {weekDays.map((d, i) => (
-                <th
+                <WeekGridDayHeader
                   key={i}
-                  className={`${styles.weekDayHeader} ${isToday(d) ? styles.weekDayHeaderToday : ""}`}
-                >
-                  <span className={styles.weekDayName}>{DAY_LABELS[i]}</span>
-                  <span className={styles.weekDayNum}>{d.getDate()}</span>
-                </th>
+                  dayName={DAY_LABELS[i]}
+                  dayNum={d.getDate()}
+                  isToday={isToday(d)}
+                />
               ))}
             </tr>
           </thead>
@@ -107,28 +158,37 @@ export const ScheduleWeekGrid = memo(function ScheduleWeekGrid({
                   {hour <= 12 ? hour : hour - 12}:00 {hour < 12 ? "SA" : "CH"}
                 </td>
                 {DAY_INDICES.map((dayIdx) => {
-                  const cellEvents = eventsMap.get(`${dayIdx}-${hour}`) ?? [];
+                  const cellEvents = (eventsMap.get(`${dayIdx}-${hour}`) ?? []) as WeekGridEvent[];
                   return (
                     <td
                       key={dayIdx}
                       className={`${styles.weekCell} ${isToday(weekDays[dayIdx]) ? styles.weekCellToday : ""}`}
                     >
                       <div className={styles.weekCellInner}>
-                        {cellEvents.map((ev) => (
-                          <div
-                            key={ev.id}
-                            className={`${styles.block} ${ev.colorClass}`}
-                          >
-                            <div className={styles.blockTitle}>{ev.title}</div>
-                            {(ev.room || ev.teacher) && (
-                              <div className={styles.blockMeta}>
-                                {ev.room && `Phòng ${ev.room}`}
-                                {ev.room && ev.teacher ? " • " : ""}
-                                {ev.teacher}
-                              </div>
-                            )}
-                          </div>
-                        ))}
+                        {cellEvents.map((ev) => {
+                          const session = ev.session;
+                          const isPast = session ? session.date < todayKey : false;
+                          const attended = session?.attendance?.is_present === true;
+                          return (
+                            <WeekGridEventBlock
+                              key={ev.id}
+                              id={ev.id}
+                              title={ev.title}
+                              room={ev.room}
+                              teacher={ev.teacher}
+                              startTime={ev.startTime}
+                              endTime={ev.endTime}
+                              colorClass={ev.colorClass}
+                              onClick={
+                                session && onSessionClick
+                                  ? () => onSessionClick(session)
+                                  : undefined
+                              }
+                              isPast={session ? isPast : undefined}
+                              attended={isPast ? attended : undefined}
+                            />
+                          );
+                        })}
                       </div>
                     </td>
                   );
@@ -138,14 +198,7 @@ export const ScheduleWeekGrid = memo(function ScheduleWeekGrid({
           </tbody>
         </table>
         {currentTimeTop != null && (
-          <div
-            className={styles.currentTimeLine}
-            style={currentTimeLineStyle}
-            aria-hidden
-          >
-            <span className={styles.currentTimeDot} />
-            <span className={styles.currentTimeRule} />
-          </div>
+          <WeekViewCurrentTimeLine topPx={currentTimeTop} />
         )}
       </div>
     </div>

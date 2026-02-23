@@ -5,6 +5,7 @@ export { CalendarIcon } from "./CalendarIcon";
 export { ChevronDownIcon } from "./ChevronDownIcon";
 export { ChevronLeftIcon } from "./ChevronLeftIcon";
 export { ChevronRightIcon } from "./ChevronRightIcon";
+export { CheckMarkIcon } from "./CheckMarkIcon";
 export { ClassIcon } from "./ClassIcon";
 export { CloseIcon } from "./CloseIcon";
 export { LessonCompletedIcon } from "./LessonCompletedIcon";

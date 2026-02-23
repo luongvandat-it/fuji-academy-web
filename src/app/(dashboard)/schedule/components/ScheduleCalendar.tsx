@@ -1,10 +1,11 @@
 "use client";
 
 import { Loading } from "@/components/ui";
+import { CheckMarkIcon, CloseIcon } from "@/icon";
 import type { ClassSessionData } from "@/service/modules/class/logic";
 import { memo, useMemo } from "react";
 import { DAY_LABELS } from "@/app/(dashboard)/schedule/types";
-import { buildMonthEventsMap, buildSessionsByDate, formatTimeFromDatetime, toDateKey } from "@/app/(dashboard)/schedule/utils";
+import { buildMonthEventsMap, buildSessionsByDate, formatTimeFromDatetime, isToday, toDateKey } from "@/app/(dashboard)/schedule/utils";
 import styles from "../schedule.module.scss";
 
 export interface ScheduleEvent {
@@ -31,11 +32,6 @@ interface ScheduleCalendarProps {
   onSessionClick?: (session: ClassSessionData) => void;
 }
 
-function isToday(d: Date): boolean {
-  const t = new Date();
-  return d.getFullYear() === t.getFullYear() && d.getMonth() === t.getMonth() && d.getDate() === t.getDate();
-}
-
 export const ScheduleCalendar = memo(function ScheduleCalendar({
   loading,
   events,
@@ -57,6 +53,8 @@ export const ScheduleCalendar = memo(function ScheduleCalendar({
     () => (sessions.length ? buildSessionsByDate(sessions) : new Map<string, ClassSessionData[]>()),
     [sessions]
   );
+
+  const todayKey = toDateKey(new Date());
 
   if (loading) {
     return (
@@ -125,24 +123,47 @@ export const ScheduleCalendar = memo(function ScheduleCalendar({
                     </div>
                     <div className={styles.monthCellEvents}>
                       {hasSessions
-                        ? displayItems.map((item) => (
-                            <button
-                              key={item.key}
-                              type="button"
-                              className={`${styles.block} ${styles.blockBlue} ${styles.blockClickable}`}
-                              onClick={() => item.session && onSessionClick?.(item.session)}
-                            >
-                              <span className={styles.blockTime}>{item.time}</span>
-                              <span className={styles.blockTitle}>{item.title}</span>
-                            </button>
-                          ))
+                        ? displayItems.map((item) => {
+                            const isPast = dateKey < todayKey;
+                            const attended = item.session?.attendance?.is_present === true;
+                            const blockVariant =
+                              isPast && attended
+                                ? styles.blockAttended
+                                : isPast && !attended
+                                  ? styles.blockNotAttended
+                                  : styles.blockBlue;
+                            const isClickable = !isPast;
+                            return (
+                              <button
+                                key={item.key}
+                                type="button"
+                                className={`${styles.block} ${blockVariant} ${isClickable ? styles.blockClickable : ""} ${isPast ? styles.blockWithStatus : ""}`}
+                                onClick={() => isClickable && item.session && onSessionClick?.(item.session)}
+                              >
+                                <div className={styles.blockText}>
+                                  <span className={styles.blockTime}>{item.time}</span>
+                                  <span className={styles.blockTitle}>{item.title}</span>
+                                </div>
+                                {isPast &&
+                                  (attended ? (
+                                    <CheckMarkIcon className={styles.blockCheckIcon} />
+                                  ) : (
+                                    <span className={styles.blockXIconWrap} aria-hidden>
+                                      <CloseIcon className={styles.blockXIcon} />
+                                    </span>
+                                  ))}
+                              </button>
+                            );
+                          })
                         : displayItems.map((item) => (
                             <div
                               key={item.key}
                               className={`${styles.block} ${(item as { colorClass?: string }).colorClass ?? styles.blockBlue}`}
                             >
-                              <span className={styles.blockTime}>{item.time}</span>
-                              <span className={styles.blockTitle}>{item.title}</span>
+                              <div className={styles.blockText}>
+                                <span className={styles.blockTime}>{item.time}</span>
+                                <span className={styles.blockTitle}>{item.title}</span>
+                              </div>
                             </div>
                           ))}
                       {moreCount > 0 && (

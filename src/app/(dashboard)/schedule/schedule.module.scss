@@ -28,6 +28,19 @@
   @apply flex flex-shrink-0 items-center gap-1.5 sm:gap-2 md:gap-4;
 }
 
+.viewToggle {
+  @apply flex rounded-lg border border-gray-200 bg-gray-100 p-0.5;
+}
+
+.viewToggleSegment {
+  @apply min-w-[4rem] rounded-md border-0 bg-transparent px-3 py-2 text-center text-xs font-medium transition-colors sm:min-w-[5rem] sm:px-4 sm:text-sm;
+  @apply text-gray-500 shadow-none;
+}
+
+.viewToggleSegmentActive {
+  @apply bg-white text-gray-900 shadow-sm;
+}
+
 .iconBtn {
   @apply rounded-lg p-2 text-gray-500 transition-colors hover:bg-gray-100 hover:text-gray-700;
 }
@@ -79,7 +92,7 @@
 }
 
 .monthCellToday {
-  @apply bg-[#e0f2f7];
+  @apply border-2 border-[#0066cc];
 }
 
 .monthCellDayNum {
@@ -95,7 +108,7 @@
 }
 
 .monthCellEvents {
-  @apply mt-1.5 flex flex-wrap items-start gap-1.5;
+  @apply mt-1.5 flex flex-col gap-1.5;
 }
 
 .monthMore {
@@ -103,9 +116,7 @@
 }
 
 .monthCellEvents .block {
-  @apply shrink-0;
-  min-width: 4.5rem;
-  max-width: 100%;
+  @apply w-full min-w-0;
 }
 
 .table {
@@ -170,6 +181,38 @@
 
 .blockRed {
   @apply border-red-400 bg-red-50 text-gray-800;
+}
+
+.blockAttended {
+  @apply border-emerald-500 bg-emerald-100 text-emerald-800;
+}
+
+.blockNotAttended {
+  @apply border-gray-300 bg-gray-100 text-gray-500;
+}
+
+.blockCheckIcon {
+  @apply shrink-0 text-emerald-600;
+}
+
+.blockXIconWrap {
+  @apply flex shrink-0 items-center justify-center rounded-full border border-gray-400;
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.blockXIcon {
+  @apply shrink-0 text-gray-400;
+  width: 0.75rem;
+  height: 0.75rem;
+}
+
+.blockWithStatus {
+  @apply flex-row items-start gap-1.5;
+}
+
+.blockText {
+  @apply flex min-w-0 flex-1 flex-col gap-0.5;
 }
 
 .blockMeta {
@@ -314,8 +357,20 @@
   @apply block text-[10px] font-medium text-gray-900 sm:text-xs;
 }
 
+.weekDayNumWrap {
+  @apply relative block;
+}
+
 .weekDayNum {
   @apply block text-sm font-semibold text-gray-900 sm:text-base md:text-lg;
+}
+
+.weekDayNumDot {
+  @apply absolute left-1/2 top-full mt-0.5 block size-1.5 -translate-x-1/2 rounded-full bg-[#0066cc];
+}
+
+.weekBlockTime {
+  @apply block text-[10px] font-medium text-gray-600 sm:text-xs;
 }
 
 .weekCell {
@@ -335,11 +390,11 @@
 }
 
 .currentTimeDot {
-  @apply size-2 shrink-0 rounded-full bg-primary-500;
+  @apply size-2 shrink-0 rounded-full bg-red-500;
 }
 
 .currentTimeRule {
-  @apply flex-1 border-t-2 border-dashed border-primary-400;
+  @apply flex-1 border-t-2 border-dashed border-red-400;
 }
 
 .todayBtn {

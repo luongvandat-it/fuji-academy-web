@@ -55,6 +55,15 @@ export function getWeekStart(d: Date): Date {
   return date;
 }
 
+export function isToday(d: Date): boolean {
+  const t = new Date();
+  return (
+    d.getFullYear() === t.getFullYear() &&
+    d.getMonth() === t.getMonth() &&
+    d.getDate() === t.getDate()
+  );
+}
+
 const LOCALE_VI = "vi-VN";
 
 export function formatMonthYear(d: Date): string {
@@ -195,4 +204,11 @@ export function buildDayWeekEventsMap<T extends { dayIndex: number; startHour: n
     }
   }
   return map;
+}
+
+export function parseTimeToHours(datetime: string): number {
+  if (!datetime) return 0;
+  const match = datetime.match(/(\d{1,2}):(\d{2})/);
+  if (!match) return 0;
+  return parseInt(match[1], 10) + parseInt(match[2], 10) / 60;
 }
