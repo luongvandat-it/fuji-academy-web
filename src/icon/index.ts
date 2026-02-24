@@ -8,6 +8,7 @@ export { ChevronRightIcon } from "./ChevronRightIcon";
 export { CheckMarkIcon } from "./CheckMarkIcon";
 export { ClassIcon } from "./ClassIcon";
 export { CloseIcon } from "./CloseIcon";
+export { DocumentIcon } from "./DocumentIcon";
 export { LessonCompletedIcon } from "./LessonCompletedIcon";
 export { LessonNotCompletedIcon } from "./LessonNotCompletedIcon";
 export { FilterIcon } from "./FilterIcon";
