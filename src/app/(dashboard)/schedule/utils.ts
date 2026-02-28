@@ -67,7 +67,9 @@ export function isToday(d: Date): boolean {
 const LOCALE_VI = "vi-VN";
 
 export function formatMonthYear(d: Date): string {
-  return d.toLocaleDateString(LOCALE_VI, { month: "long", year: "numeric" });
+  const month = String(d.getMonth() + 1).padStart(2, "0");
+  const year = d.getFullYear();
+  return `${month}/${year}`;
 }
 
 export function formatWeekRange(weekStart: Date): string {

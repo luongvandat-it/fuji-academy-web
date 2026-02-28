@@ -51,6 +51,24 @@ export default function TuitionPage() {
   const [currencySymbol, setCurrencySymbol] = useState("₫");
 
   useEffect(() => {
+    document.documentElement.classList.add("tuition-page-active");
+    document.body.classList.add("tuition-page-active");
+
+    function preventScrollOutside(e: TouchEvent) {
+      const scrollEl = document.getElementById("tuition-content-scroll");
+      if (!scrollEl || scrollEl.contains(e.target as Node)) return;
+      e.preventDefault();
+    }
+    document.addEventListener("touchmove", preventScrollOutside, { passive: false });
+
+    return () => {
+      document.removeEventListener("touchmove", preventScrollOutside);
+      document.documentElement.classList.remove("tuition-page-active");
+      document.body.classList.remove("tuition-page-active");
+    };
+  }, []);
+
+  useEffect(() => {
     const signal = { cancelled: false };
     
     async function loadTuitionDebts() {
@@ -95,6 +113,15 @@ export default function TuitionPage() {
   }, [debts]);
 
   const handlePayAll = () => {
+    const scrollEl = document.getElementById("tuition-content-scroll");
+    const target = document.getElementById("payment-qr-section");
+    if (scrollEl && target) {
+      const y =
+        target.getBoundingClientRect().top -
+        scrollEl.getBoundingClientRect().top +
+        scrollEl.scrollTop;
+      scrollEl.scrollTo({ top: y, behavior: "smooth" });
+    }
   };
 
   if (loading) {
@@ -130,7 +157,7 @@ export default function TuitionPage() {
         </div>
       </header>
 
-      <div className={styles.contentScroll}>
+      <div id="tuition-content-scroll" className={styles.contentScroll}>
         <div className={styles.grid}>
         <div className={styles.mainCol}>
           <UpcomingPaymentCard

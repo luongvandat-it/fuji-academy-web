@@ -130,7 +130,7 @@ export const ScheduleCalendar = memo(function ScheduleCalendar({
                             const blockVariant =
                               isPast && hasAttendance && attended
                                 ? styles.blockAttended
-                                : isPast && hasAttendance && !attended
+                                : isPast && !attended
                                   ? styles.blockNotAttended
                                   : styles.blockBlue;
                             const isClickable = !isPast;

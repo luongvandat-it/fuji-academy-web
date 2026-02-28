@@ -7,6 +7,8 @@ import { submitExam, type SubmitExamData } from "@/service/modules/exam/logic";
 import { SubmissionSuccessModal } from "./SubmissionSuccessModal";
 import styles from "../assignmentDetail.module.scss";
 
+const MAX_FILE_SIZE_BYTES = 10 * 1024 * 1024; // 10MB
+
 export interface SubmittedFileItem {
   id: string;
   name: string;
@@ -37,24 +39,37 @@ export function AssignmentSubmissionPanel({
   const [submissionData, setSubmissionData] = useState<SubmitExamData | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
+  const fileToItem = useCallback((file: File, i: number, baseId: number): SubmittedFileItem => ({
+    id: `f-${baseId}-${i}`,
+    name: file.name,
+    size: `${(file.size / 1024 / 1024).toFixed(1)} MB`,
+    type: "file",
+    addedAt: new Date().toLocaleTimeString("vi-VN", {
+      hour: "2-digit",
+      minute: "2-digit",
+    }) + " " + new Date().toLocaleDateString("vi-VN"),
+    file,
+    url: URL.createObjectURL(file),
+  }), []);
+
   const handleDrop = useCallback((e: React.DragEvent) => {
     e.preventDefault();
+    setError(null);
     const items = Array.from(e.dataTransfer.files);
     if (items.length === 0) return;
-    const newFiles: SubmittedFileItem[] = items.map((file, i) => ({
-      id: `f-${Date.now()}-${i}`,
-      name: file.name,
-      size: `${(file.size / 1024 / 1024).toFixed(1)} MB`,
-      type: "file",
-      addedAt: new Date().toLocaleTimeString("vi-VN", {
-        hour: "2-digit",
-        minute: "2-digit",
-      }) + " " + new Date().toLocaleDateString("vi-VN"),
-      file,
-      url: URL.createObjectURL(file),
-    }));
+    const baseId = Date.now();
+    const valid: File[] = [];
+    const tooLarge: string[] = [];
+    items.forEach((file) => {
+      if (file.size > MAX_FILE_SIZE_BYTES) tooLarge.push(file.name);
+      else valid.push(file);
+    });
+    if (tooLarge.length > 0) {
+      setError(`Mỗi tệp tối đa 10MB. Các tệp sau bị bỏ qua: ${tooLarge.join(", ")}`);
+    }
+    const newFiles: SubmittedFileItem[] = valid.map((file, i) => fileToItem(file, i, baseId));
     setFiles((prev) => [...prev, ...newFiles]);
-  }, []);
+  }, [fileToItem]);
 
   const handleDragOver = useCallback((e: React.DragEvent) => {
     e.preventDefault();
@@ -66,27 +81,24 @@ export function AssignmentSubmissionPanel({
 
   const handleFileInputChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
+      setError(null);
       const items = Array.from(e.target.files ?? []);
       if (items.length === 0) return;
-      const newFiles: SubmittedFileItem[] = items.map((file, i) => ({
-        id: `f-${Date.now()}-${i}`,
-        name: file.name,
-        size: `${(file.size / 1024 / 1024).toFixed(1)} MB`,
-        type: "file",
-        addedAt:
-          new Date().toLocaleTimeString("vi-VN", {
-            hour: "2-digit",
-            minute: "2-digit",
-          }) +
-          " " +
-          new Date().toLocaleDateString("vi-VN"),
-        file,
-        url: URL.createObjectURL(file),
-      }));
+      const baseId = Date.now();
+      const valid: File[] = [];
+      const tooLarge: string[] = [];
+      items.forEach((file) => {
+        if (file.size > MAX_FILE_SIZE_BYTES) tooLarge.push(file.name);
+        else valid.push(file);
+      });
+      if (tooLarge.length > 0) {
+        setError(`Mỗi tệp tối đa 10MB. Các tệp sau bị bỏ qua: ${tooLarge.join(", ")}`);
+      }
+      const newFiles: SubmittedFileItem[] = valid.map((file, i) => fileToItem(file, i, baseId));
       setFiles((prev) => [...prev, ...newFiles]);
       e.target.value = "";
     },
-    []
+    [fileToItem]
   );
 
   const removeFile = useCallback((id: string) => {
@@ -124,6 +136,12 @@ export function AssignmentSubmissionPanel({
     const fileObjects = files
       .map((f) => f.file)
       .filter((f): f is File => f !== undefined);
+
+    const oversize = fileObjects.filter((f) => f.size > MAX_FILE_SIZE_BYTES);
+    if (oversize.length > 0) {
+      setError(`Mỗi tệp tối đa 10MB. Vui lòng bỏ các tệp: ${oversize.map((f) => f.name).join(", ")}`);
+      return;
+    }
 
     if (fileObjects.length === 0) {
       setError("Không có tệp hợp lệ để nộp bài.");
@@ -198,7 +216,7 @@ export function AssignmentSubmissionPanel({
           Kéo thả file vào đây
         </Text>
         <Text variant="BODY.SMALL" className={styles.dropzoneHint}>
-          hoặc nhấn để chọn file từ máy tính
+          hoặc nhấn để chọn file từ máy tính (tối đa 10MB mỗi tệp)
         </Text>
         <input
           ref={inputRef}

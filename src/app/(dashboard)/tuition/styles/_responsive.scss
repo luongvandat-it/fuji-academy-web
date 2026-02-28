@@ -88,12 +88,7 @@
 }
 
 .grid {
-  @apply md:grid-cols-[1fr_280px] md:gap-5 lg:grid-cols-[1fr_320px] lg:gap-6;
-  
-  @media (min-width: 768px) {
-    padding-right: 0.5rem;
-    margin-right: -0.5rem;
-  }
+  @apply md:grid-cols-[minmax(0,1fr)_280px] md:gap-5 lg:grid-cols-[minmax(0,1fr)_320px] lg:gap-6;
 }
 
 .mainCol {

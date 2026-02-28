@@ -46,7 +46,7 @@ export const WeekGridEventBlock = memo(function WeekGridEventBlock({
   const blockVariant =
     isPast && attended === true
       ? styles.blockAttended
-      : isPast && attended === false
+      : isPast && !attended
         ? styles.blockNotAttended
         : colorClass;
   const showStatus = isPast === true && attended !== undefined;

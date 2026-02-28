@@ -1,16 +1,10 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
-import dynamic from "next/dynamic";
-import "react-quill-new/dist/quill.snow.css";
+import { useCallback, useEffect, useState } from "react";
 import { Button, Text, Loading } from "@/components/ui";
 import { submitExam, type SubmitExamData } from "@/service/modules/exam/logic";
 import { SubmissionSuccessModal } from "./SubmissionSuccessModal";
 import styles from "../assignmentDetail.module.scss";
-
-const ReactQuill = dynamic(() => import("react-quill-new"), {
-  ssr: false,
-});
 
 interface AssignmentInputSubmissionPanelProps {
   examId: number;
@@ -21,38 +15,6 @@ interface AssignmentInputSubmissionPanelProps {
   onModalClose?: () => void;
 }
 
-const createModules = (handleImageUpload: () => void) => ({
-  toolbar: {
-    container: [
-      [{ header: [1, 2, 3, false] }],
-      ["bold", "italic", "underline", "strike"],
-      [{ list: "ordered" }, { list: "bullet" }],
-      [{ color: [] }, { background: [] }],
-      ["link", "image"],
-      ["clean"],
-    ],
-    handlers: {
-      image: handleImageUpload,
-    },
-  },
-  clipboard: {
-    matchVisual: false,
-  },
-});
-
-const formats = [
-  "header",
-  "bold",
-  "italic",
-  "underline",
-  "strike",
-  "list",
-  "color",
-  "background",
-  "link",
-  "image",
-];
-
 export function AssignmentInputSubmissionPanel({
   examId,
   label = "Nội dung bài làm",
@@ -62,98 +24,36 @@ export function AssignmentInputSubmissionPanel({
   onModalClose,
 }: AssignmentInputSubmissionPanelProps) {
   const [value, setValue] = useState("");
-  const [charCount, setCharCount] = useState(0);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [showSuccess, setShowSuccess] = useState(false);
   const [submissionData, setSubmissionData] = useState<SubmitExamData | null>(null);
   const [suspectedAiUsed, setSuspectedAiUsed] = useState(false);
-  const lastCharCountRef = useRef(0);
 
-  const imageInputRef = useRef<HTMLInputElement>(null);
+  const charCount = value.length;
 
-  const handleImageUpload = useCallback(() => {
-    imageInputRef.current?.click();
+  const handleChange = useCallback((e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setValue(e.target.value);
   }, []);
 
-  const handleImageInputChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      const file = e.target.files?.[0];
-      if (!file) return;
-
-      const reader = new FileReader();
-      reader.onload = () => {
-        const src = reader.result as string;
-        const quill = (document.querySelector(".ql-editor") as any)?.__quill;
-        if (quill) {
-          const range = quill.getSelection(true);
-          quill.insertEmbed(range.index, "image", src);
-          quill.setSelection(range.index + 1);
-        }
-      };
-      reader.readAsDataURL(file);
-      e.target.value = "";
-    },
-    []
-  );
-
-  const handleChange = useCallback((content: string) => {
-    setValue(content);
-    
-    const text = content.replace(/<[^>]*>/g, "").trim();
-    const newCharCount = text.length;
-
-    lastCharCountRef.current = newCharCount;
-    setCharCount(newCharCount);
+  const markSuspected = useCallback(() => {
+    console.log("dangerous");
+    setSuspectedAiUsed(true);
   }, []);
 
-  const quillModules = createModules(handleImageUpload);
+  const handlePaste = useCallback(() => {
+    markSuspected();
+  }, [markSuspected]);
 
   useEffect(() => {
-    if (typeof window === "undefined") return;
-    
-    let cleanup: (() => void) | null = null;
-    
-    const timer = setTimeout(() => {
-      const editorElement = document.querySelector(".ql-editor");
-      if (!editorElement) return;
-
-      const handlePaste = (e: ClipboardEvent) => {
-        console.log("dangerous");
-        setSuspectedAiUsed(true);
-      };
-
-      editorElement.addEventListener("paste", handlePaste as EventListener, true);
-      window.addEventListener("paste", handlePaste, true);
-      
-      cleanup = () => {
-        editorElement.removeEventListener("paste", handlePaste as EventListener, true);
-        window.removeEventListener("paste", handlePaste, true);
-      };
-    }, 500);
-
-    return () => {
-      clearTimeout(timer);
-      if (cleanup) cleanup();
-    };
-  }, [value]);
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-
     const handleVisibilityChange = () => {
-      if (document.hidden || document.visibilityState === "hidden") {
-        console.log("dangerous");
-        setSuspectedAiUsed(true);
+      if (document.visibilityState === "hidden") {
+        markSuspected();
       }
     };
-
     document.addEventListener("visibilitychange", handleVisibilityChange);
-
-    return () => {
-      document.removeEventListener("visibilitychange", handleVisibilityChange);
-    };
-  }, []);
+    return () => document.removeEventListener("visibilitychange", handleVisibilityChange);
+  }, [markSuspected]);
 
   const handleConfirm = useCallback(async () => {
     if (!value.trim()) {
@@ -165,13 +65,12 @@ export function AssignmentInputSubmissionPanel({
     setError(null);
 
     try {
-      const result = await submitExam(examId, { 
+      const result = await submitExam(examId, {
         answerText: value,
-        suspectedAiUsed: suspectedAiUsed,
+        suspectedAiUsed,
         aiSuspicionDetails: suspectedAiUsed ? "ai" : undefined,
       });
-      console.log("Submit text result:", result);
-      
+
       if (result.success === true) {
         if ("data" in result && result.data) {
           setSubmissionData(result.data);
@@ -185,8 +84,8 @@ export function AssignmentInputSubmissionPanel({
       } else {
         const errorResult = result as { success: false; status?: number; message?: string };
         setError(
-          errorResult.message || 
-          `Lỗi khi nộp bài. ${errorResult.status ? `Mã lỗi: ${errorResult.status}` : ""}`
+          errorResult.message ||
+            `Lỗi khi nộp bài. ${errorResult.status ? `Mã lỗi: ${errorResult.status}` : ""}`
         );
       }
     } catch (err) {
@@ -195,7 +94,7 @@ export function AssignmentInputSubmissionPanel({
     } finally {
       setSubmitting(false);
     }
-  }, [examId, value, onConfirm]);
+  }, [examId, value, suspectedAiUsed, onConfirm]);
 
   return (
     <>
@@ -218,29 +117,19 @@ export function AssignmentInputSubmissionPanel({
             {label}
           </Text>
           <div className={styles.inputWrapper}>
-            <div className={styles.quillWrapper}>
-              <ReactQuill
-                theme="snow"
-                value={value}
-                onChange={handleChange}
-                modules={quillModules}
-                formats={formats}
-                placeholder={placeholder}
-                className={styles.quillEditor}
-              />
-              <input
-                ref={imageInputRef}
-                type="file"
-                accept="image/*"
-                className="sr-only"
-                aria-hidden
-                onChange={handleImageInputChange}
-              />
-            </div>
+            <textarea
+              value={value}
+              onChange={handleChange}
+              onPaste={handlePaste}
+              placeholder={placeholder}
+              className={styles.submissionTextarea}
+              rows={8}
+              aria-label={label}
+            />
+            <Text variant="BODY.SMALL" className={styles.inputCharHint}>
+              {charCount} ký tự
+            </Text>
           </div>
-          <Text variant="BODY.SMALL" className={styles.inputCharHint}>
-            {charCount} ký tự
-          </Text>
           {error && (
             <div className={styles.errorMessage}>
               <Text variant="BODY.SMALL" className={styles.errorText}>

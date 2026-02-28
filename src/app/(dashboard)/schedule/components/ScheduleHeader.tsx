@@ -37,11 +37,9 @@ export const ScheduleHeader = memo(function ScheduleHeader({
         <div className={styles.weekNav}>
           <Button variant="secondary" onClick={onPrev} className={styles.monthNavBtn} aria-label={viewMode === "month" ? "Tháng trước" : "Tuần trước"}>
             <ChevronLeftIcon />
-            <span className={styles.monthNavBtnText}>{viewMode === "month" ? "Tháng trước" : "Tuần trước"}</span>
           </Button>
           <span className={styles.monthNavLabel}>{label}</span>
           <Button variant="secondary" onClick={onNext} className={styles.monthNavBtn} aria-label={viewMode === "month" ? "Tháng sau" : "Tuần sau"}>
-            <span className={styles.monthNavBtnText}>{viewMode === "month" ? "Tháng sau" : "Tuần sau"}</span>
             <ChevronRightIcon />
           </Button>
         </div>

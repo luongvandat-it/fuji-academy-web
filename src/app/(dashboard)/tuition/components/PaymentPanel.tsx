@@ -43,6 +43,7 @@ export function PaymentPanel({ accounts }: PaymentPanelProps) {
 
   return (
     <section
+      id="payment-qr-section"
       className={styles.paymentPanel}
       aria-labelledby="payment-panel-title"
     >

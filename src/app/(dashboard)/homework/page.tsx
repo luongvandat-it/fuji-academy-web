@@ -21,11 +21,13 @@ function parseExamsResponse(res: unknown): ExamData[] {
 }
 
 function convertExamToAssignment(exam: ExamData): Assignment {
+  const isGraded = exam.submitted && typeof exam.score === "number" && exam.score > 0;
+  const status = !exam.submitted ? "pending_due" : isGraded ? "graded" : "submitted";
   return {
     id: String(exam.exam_id),
     category: exam.subject_name,
     title: exam.exam_name,
-    status: exam.submitted ? (exam.score != null ? "graded" : "submitted") : "pending_due",
+    status,
     dueDate: exam.close_datetime,
     submittedAt: exam.submitted ? exam.close_datetime : undefined,
     score: exam.score ?? undefined,

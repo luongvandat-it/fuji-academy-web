@@ -75,10 +75,22 @@ export default function SchedulePage() {
       next.setDate(next.getDate() - 7);
       return next;
     });
+    setSelectedDate((d) => {
+      if (!d) return d;
+      const next = new Date(d);
+      next.setDate(next.getDate() - 7);
+      return next;
+    });
   }, []);
 
   const nextWeek = useCallback(() => {
     setCurrentDate((d) => {
+      const next = new Date(d);
+      next.setDate(next.getDate() + 7);
+      return next;
+    });
+    setSelectedDate((d) => {
+      if (!d) return d;
       const next = new Date(d);
       next.setDate(next.getDate() + 7);
       return next;
@@ -88,6 +100,15 @@ export default function SchedulePage() {
   const handleSelectDate = useCallback((date: Date) => {
     setSelectedDate(date);
     setCurrentDate(date); // Update currentDate to show correct week
+  }, []);
+
+  const handleViewModeChange = useCallback((mode: ScheduleViewMode) => {
+    setViewMode(mode);
+    if (mode === "week") {
+      const today = new Date();
+      setCurrentDate(today);
+      setSelectedDate(today);
+    }
   }, []);
 
   const loadSchedule = async () => {
@@ -124,7 +145,7 @@ export default function SchedulePage() {
         onNext={viewMode === "month" ? nextMonth : nextWeek}
         onToday={goToday}
         viewMode={viewMode}
-        onViewModeChange={setViewMode}
+        onViewModeChange={handleViewModeChange}
         showMonthCalendar={showMonthCalendar}
         onToggleMonthCalendar={() => setShowMonthCalendar(!showMonthCalendar)}
       />
