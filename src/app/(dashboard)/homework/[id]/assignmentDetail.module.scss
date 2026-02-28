@@ -1,0 +1,796 @@
+@reference "../../../globals.css";
+
+// Import responsive styles
+@import "./styles/_responsive.scss";
+
+.page {
+  @apply flex min-h-0 flex-1 flex-col overflow-y-auto bg-[#f9f9f9];
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  max-width: 100%;
+  
+  @media (max-width: 1023px) {
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    height: 100%;
+    max-height: 100vh;
+    overflow-y: auto;
+  }
+}
+
+.pageInner {
+  @apply relative flex min-h-0 w-full flex-1 flex-col overflow-y-auto bg-[#f9f9f9];
+  max-width: 100%;
+  padding-left: 0;
+  padding-right: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  
+  @media (max-width: 1023px) {
+    padding-bottom: 0;
+    margin-bottom: 0;
+    min-height: auto;
+  }
+}
+
+.breadcrumb {
+  @apply flex flex-wrap items-center gap-1.5 text-sm text-[#666666];
+}
+
+.breadcrumbLink {
+  @apply text-[#666666] hover:underline;
+}
+
+.breadcrumbSep {
+  @apply select-none text-gray-300;
+}
+
+.breadcrumbCurrent {
+  @apply text-[#333333];
+}
+
+.breadcrumbWrap {
+  @apply flex min-h-[3rem] items-center gap-3;
+  padding-top: 0;
+  padding-bottom: 0.75rem;
+  
+  @media (min-width: 640px) {
+    padding-bottom: 1rem;
+  }
+  
+  @media (min-width: 1024px) {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+}
+
+.detailCloseBtn {
+  @apply absolute z-50 flex shrink-0 items-center justify-center rounded-full bg-white p-2.5 text-gray-500 shadow-lg transition-colors hover:bg-gray-100 hover:text-gray-700;
+}
+
+.detailCloseBtn svg {
+  @apply size-5;
+}
+
+.layout {
+  @apply flex min-h-0 flex-1 flex-col lg:flex-row lg:items-stretch;
+  width: 100%;
+  max-width: 100%;
+  
+  @media (max-width: 1023px) {
+    overflow-y: auto;
+  }
+}
+
+.colLeft {
+  @apply flex w-full shrink-0 flex-col bg-[#f9f9f9];
+  min-width: 0;
+  max-width: 100%;
+  
+  @media (min-width: 1024px) {
+    flex: 0 0 40%;
+    width: 40%;
+    min-width: 0;
+    min-height: 0;
+    overflow: hidden;
+  }
+}
+
+.colLeftContent {
+  @apply min-h-0 flex-1 lg:min-w-0 lg:overflow-y-auto;
+  padding-top: 1rem;
+  padding-bottom: 0;
+  
+  @media (min-width: 640px) {
+    padding-top: 1.25rem;
+  }
+  
+  @media (min-width: 1024px) {
+    padding-top: 1.5rem;
+    padding-bottom: 0;
+  }
+}
+
+.colRight {
+  @apply flex min-w-0 flex-1 flex-col pt-4 lg:min-h-0 lg:overflow-y-auto;
+  width: 100%;
+  max-width: 100%;
+  
+  @media (max-width: 1023px) {
+    padding-bottom: 0;
+    margin-bottom: 0;
+  }
+  
+  @media (min-width: 1024px) {
+    padding-bottom: 0;
+  }
+}
+
+.introBlock {
+  @apply rounded-2xl border border-gray-200/80 bg-white p-6;
+}
+
+.titleRow {
+  @apply flex flex-wrap items-start justify-between gap-3;
+}
+
+.title {
+  @apply text-xl font-bold leading-tight text-[#1a1a1a];
+}
+
+.tag {
+  @apply shrink-0 rounded-lg bg-[#f59e0b] px-3 py-1.5 text-sm font-medium text-white;
+}
+
+.subtitle {
+  @apply mt-3 text-sm leading-relaxed text-[#666666];
+}
+
+.subtitleStrong {
+  @apply font-semibold text-[#333333];
+}
+
+.deadlineRow {
+  @apply mt-5 flex flex-col gap-3;
+  width: 100%;
+}
+
+.deadlineCard {
+  @apply flex w-full gap-3 rounded-xl border border-gray-200/80 bg-white p-4;
+}
+
+.deadlineIcon {
+  @apply shrink-0 text-[#f59e0b];
+}
+
+.deadlineIcon svg {
+  @apply size-6;
+}
+
+.deadlineContent label {
+  @apply block text-sm font-medium text-[#333333];
+}
+
+.deadlineContent span {
+  @apply mt-0.5 block text-sm text-[#666666];
+}
+
+.contentSection {
+  @apply mt-8;
+
+  .card + .card {
+    @apply mt-6;
+  }
+}
+
+.card {
+  @apply rounded-2xl border border-gray-200/80 bg-white p-6;
+}
+
+.cardTitle {
+  @apply flex items-center gap-2.5 text-base font-bold text-[#1a1a1a];
+}
+
+.cardTitleIcon {
+  @apply shrink-0 text-amber-600;
+}
+
+.cardTitleIcon svg {
+  @apply size-5;
+}
+
+.descriptionBody {
+  @apply mt-4 whitespace-pre-line text-sm leading-[1.7] text-[#444444];
+}
+
+.requirementsBox {
+  @apply mt-5 rounded-xl border border-gray-200/80 bg-white p-4 text-sm text-[#666666];
+}
+
+.requirementsLabel {
+  @apply mb-2 font-bold text-[#333333];
+}
+
+.attachmentsList {
+  @apply mt-3 flex flex-col gap-3 sm:flex-row sm:flex-wrap;
+}
+
+.attachmentItem {
+  @apply flex min-w-0 items-center gap-3 rounded-lg border border-gray-200/80 bg-white p-3;
+}
+
+.attachmentItemClickable {
+  @apply cursor-pointer transition-colors hover:border-gray-300 hover:bg-gray-50;
+}
+
+.attachmentIcon {
+  @apply shrink-0;
+}
+
+.attachmentIconPdf {
+  @apply text-[#dc2626];
+}
+
+.attachmentIconFile {
+  @apply text-[#2563eb];
+}
+
+.attachmentIcon svg {
+  @apply size-5;
+}
+
+.minW0 {
+  @apply min-w-0 flex-1;
+}
+
+.attachmentName {
+  @apply truncate text-sm font-medium text-[#333333];
+}
+
+.attachmentSize {
+  @apply text-xs text-[#666666];
+}
+
+.submissionStatus {
+  @apply flex flex-col gap-4 p-6;
+}
+
+.statusText {
+  @apply text-gray-700;
+}
+
+.submittedAt {
+  @apply text-gray-500;
+}
+
+.scoreDisplay {
+  @apply text-2xl font-bold text-blue-600;
+}
+
+.actionBtn {
+  @apply w-full;
+}
+
+.submissionCard {
+  @apply flex w-full flex-col rounded-2xl border border-gray-200 bg-white p-6;
+  min-width: 0;
+  
+  @media (max-width: 1023px) {
+    margin-bottom: 0;
+  }
+}
+
+.submissionCardTall {
+  @apply lg:min-h-[70vh];
+}
+
+.submissionCardBody {
+  @apply flex min-h-0 flex-1 flex-col;
+}
+
+.dropzone {
+  @apply flex flex-col items-center justify-center rounded-xl border-2 border-dashed border-gray-200 bg-gray-50/80 py-10 px-6 text-center;
+}
+
+.dropzoneIcon {
+  @apply mb-3 shrink-0 text-[#f59e0b];
+}
+
+.dropzoneIcon svg {
+  @apply size-12;
+}
+
+.dropzoneText {
+  @apply text-sm text-[#666666];
+}
+
+.dropzoneHint {
+  @apply mt-1 text-sm text-[#999999];
+}
+
+.chooseFileBtn {
+  @apply mt-4 rounded-lg bg-[#f59e0b] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#d97706];
+}
+
+.filesListTitle {
+  @apply mt-6 text-xs font-semibold uppercase tracking-wide text-[#999999];
+}
+
+.filesList {
+  @apply mt-2 flex flex-col gap-2;
+}
+
+.fileRow {
+  @apply flex items-center justify-between gap-3 rounded-lg border border-gray-200 bg-gray-50 px-3 py-2.5;
+}
+
+.fileRowLeft {
+  @apply flex min-w-0 flex-1 items-center gap-3 transition-colors hover:bg-gray-100/50;
+}
+
+.fileRowIcon {
+  @apply shrink-0 text-amber-700;
+}
+
+.fileRowIconLink {
+  @apply shrink-0 text-gray-500;
+}
+
+.fileRowIcon svg,
+.fileRowIconLink svg {
+  @apply size-5;
+}
+
+.fileRowName {
+  @apply truncate text-sm font-medium text-[#333333];
+}
+
+.fileRowMeta {
+  @apply text-xs text-[#666666];
+}
+
+.fileRowDelete {
+  @apply shrink-0 rounded p-1.5 text-gray-400 transition-colors hover:bg-gray-200 hover:text-gray-600;
+}
+
+.fileRowDelete svg {
+  @apply size-4;
+}
+
+.errorMessage {
+  @apply mt-4 rounded-lg border border-red-200 bg-red-50 p-3;
+}
+
+.errorText {
+  @apply text-red-700;
+}
+
+.submitActions {
+  @apply mt-6 flex flex-col gap-3;
+  
+  @media (max-width: 1023px) {
+    margin-bottom: 0;
+  }
+}
+
+.submitBtn {
+  @apply rounded-lg bg-[#f59e0b] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#d97706];
+}
+
+.submitLoading {
+  @apply size-4 border-2 border-white/30 border-t-white;
+}
+
+.cancelBtn {
+  @apply rounded-lg border border-gray-300 bg-white px-5 py-2.5 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50;
+}
+
+.inputLabel {
+  @apply mb-2 block text-sm font-semibold text-[#333333];
+}
+
+.inputWrapper {
+  @apply flex min-h-0 flex-1 flex-col overflow-hidden transition-all duration-200;
+  
+  &:focus-within {
+    @apply shadow-md;
+    
+    .quillWrapper {
+      @apply ring-2 ring-[#f59e0b] ring-offset-2;
+    }
+  }
+}
+
+.quillWrapper {
+  @apply flex min-h-[200px] min-w-0 flex-1 flex-col overflow-hidden rounded-xl bg-white shadow-sm lg:min-h-80;
+
+  :global(.ql-container) {
+    @apply min-h-[200px] border-0 font-sans lg:min-h-80;
+    font-family: inherit;
+  }
+
+  :global(.ql-editor) {
+    @apply min-h-[200px] px-4 py-4 text-sm leading-relaxed text-[#333333] lg:min-h-80 lg:px-6 lg:py-5;
+    font-family: inherit;
+
+    &:focus {
+      @apply outline-none;
+    }
+
+    &.ql-blank::before {
+      @apply text-[#999999];
+      font-style: normal;
+      left: 1rem;
+      @apply lg:left-1.5;
+    }
+
+    p {
+      @apply my-2;
+    }
+
+    h1 {
+      @apply mb-3 mt-4 text-2xl font-bold text-[#111827] first:mt-0;
+    }
+
+    h2 {
+      @apply mb-2 mt-3 text-xl font-semibold text-[#111827] first:mt-0;
+    }
+
+    h3 {
+      @apply mb-2 mt-3 text-lg font-semibold text-[#111827] first:mt-0;
+    }
+
+    ul,
+    ol {
+      @apply my-3 ml-6;
+    }
+
+    ul {
+      list-style-type: disc;
+    }
+
+    ol {
+      list-style-type: decimal;
+    }
+
+    li {
+      @apply my-1;
+    }
+
+    a {
+      @apply text-[#f59e0b] underline transition-colors hover:text-[#d97706];
+    }
+
+    img {
+      @apply my-4 max-w-full rounded-lg;
+    }
+
+    blockquote {
+      @apply my-4 border-l-4 border-gray-300 pl-4 italic text-gray-700;
+    }
+
+    code {
+      @apply rounded bg-gray-100 px-1.5 py-0.5 text-xs font-mono text-[#d97706];
+    }
+
+    pre {
+      @apply my-4 rounded-lg bg-gray-100 p-4;
+      code {
+        @apply bg-transparent p-0;
+      }
+    }
+
+    mark {
+      @apply rounded bg-yellow-200 px-1;
+    }
+  }
+
+  :global(.ql-toolbar) {
+    @apply border-b border-gray-200 bg-gray-50/90 px-3 py-2.5 lg:px-4;
+    border-top-left-radius: 0.75rem;
+    border-top-right-radius: 0.75rem;
+  }
+
+  :global(.ql-toolbar .ql-formats) {
+    @apply mr-2;
+    &:last-child {
+      @apply mr-0;
+    }
+  }
+
+  :global(.ql-toolbar button) {
+    @apply h-8 w-8 rounded-md transition-all duration-200;
+    margin: 0 1px;
+
+    &:hover {
+      @apply bg-amber-50;
+    }
+
+    &.ql-active {
+      @apply bg-amber-100;
+    }
+  }
+
+  :global(.ql-toolbar .ql-stroke) {
+    @apply stroke-[#4b5563];
+    stroke-width: 2;
+  }
+
+  :global(.ql-toolbar .ql-fill) {
+    @apply fill-[#4b5563];
+  }
+
+  :global(.ql-toolbar button:hover .ql-stroke),
+  :global(.ql-toolbar button.ql-active .ql-stroke) {
+    @apply stroke-[#f59e0b];
+  }
+
+  :global(.ql-toolbar button:hover .ql-fill),
+  :global(.ql-toolbar button.ql-active .ql-fill) {
+    @apply fill-[#f59e0b];
+  }
+
+  :global(.ql-toolbar .ql-picker) {
+    @apply rounded-md transition-colors hover:bg-amber-50;
+  }
+
+  :global(.ql-toolbar .ql-picker-label) {
+    @apply text-[#4b5563] transition-colors;
+    padding: 4px 8px;
+  }
+
+  :global(.ql-toolbar .ql-picker-label:hover),
+  :global(.ql-toolbar .ql-picker-label.ql-active) {
+    @apply text-[#f59e0b];
+  }
+
+  :global(.ql-toolbar .ql-picker-options) {
+    @apply rounded-lg border border-gray-200 bg-white shadow-lg;
+    padding: 0.5rem;
+  }
+
+  :global(.ql-toolbar .ql-picker-item) {
+    @apply rounded px-2 py-1 transition-colors hover:bg-amber-50;
+  }
+
+  :global(.ql-toolbar .ql-picker-item.ql-selected) {
+    @apply bg-amber-100 text-[#f59e0b];
+  }
+
+  :global(.ql-toolbar .ql-color-picker),
+  :global(.ql-toolbar .ql-background) {
+    @apply rounded-md;
+  }
+
+  :global(.ql-toolbar .ql-color .ql-picker-item) {
+    @apply h-5 w-5 rounded border border-gray-300 transition-transform hover:scale-110;
+    margin: 2px;
+  }
+}
+
+.quillEditor {
+  @apply min-h-[200px] w-full lg:min-h-80;
+
+  :global(.ql-container) {
+    @apply rounded-b-xl;
+  }
+}
+
+.toolbar {
+  @apply flex flex-wrap items-center gap-1 border-b border-gray-100 bg-gray-50/80 px-3 py-2;
+}
+
+.toolbarBtn {
+  @apply flex h-9 min-h-9 w-9 min-w-9 items-center justify-center rounded-lg text-sm font-semibold leading-none text-[#4b5563] transition-[background-color,color,transform] duration-200 ease-in-out hover:bg-gray-100 hover:text-[#111827] active:scale-95;
+}
+
+.toolbarBtnActive {
+  @apply h-9 min-h-9 w-9 min-w-9 bg-amber-50 text-amber-700 transition-[background-color,color,transform] duration-200 ease-in-out hover:bg-amber-100 hover:text-amber-800 active:scale-95;
+}
+
+.toolbarBtnBullet {
+  @apply text-lg font-bold leading-none;
+}
+
+.toolbarBtnNumber {
+  @apply text-sm font-bold leading-none;
+}
+
+.toolbarSep {
+  @apply mx-0.5 min-h-5 w-px self-stretch bg-gray-200;
+}
+
+.toolbarColorWrapper {
+  @apply relative;
+}
+
+.toolbarBtnColor,
+.toolbarBtnHighlight {
+  @apply flex h-9 min-h-9 w-9 min-w-9 items-center justify-center rounded-lg text-sm font-semibold leading-none text-[#4b5563] transition-[background-color,color,transform] duration-200 ease-in-out hover:bg-gray-100 hover:text-[#111827] active:scale-95;
+}
+
+.colorIcon {
+  @apply text-base font-bold;
+}
+
+.highlightIcon {
+  @apply text-base font-bold;
+}
+
+.imageIcon {
+  @apply text-base;
+}
+
+.colorPicker {
+  @apply absolute left-0 top-full z-50 mt-1 grid grid-cols-6 gap-1 rounded-lg border border-gray-200 bg-white p-2 shadow-lg;
+}
+
+.colorSwatch {
+  @apply h-6 w-6 rounded border border-gray-300 transition-transform hover:scale-110 active:scale-95;
+}
+
+.editorWrap {
+  @apply flex min-h-[200px] min-w-0 flex-1 flex-col bg-white lg:min-h-80;
+}
+
+.tiptapWrapper {
+  @apply flex min-h-[200px] min-w-0 flex-1 flex-col lg:min-h-80;
+
+  :global(.tiptap) {
+    @apply flex-1 resize-y px-4 py-3 text-sm leading-[1.6] text-[#333333] outline-none;
+    min-height: 200px;
+    @apply lg:min-h-80;
+
+    &:focus {
+      @apply outline-none;
+    }
+
+    p.is-empty::before {
+      content: attr(data-placeholder);
+      @apply float-left h-0 text-[#999999];
+      pointer-events: none;
+    }
+
+    ul,
+    ol {
+      @apply my-2 min-h-[1.5em] pl-6;
+    }
+    ul {
+      list-style-type: disc;
+    }
+    ol {
+      list-style-type: decimal;
+    }
+    li {
+      @apply min-h-[1.75em] py-0.5;
+    }
+    li p {
+      @apply my-0 min-h-[1.5em];
+    }
+    p {
+      @apply my-1;
+    }
+
+    img {
+      @apply max-w-full rounded-lg;
+    }
+
+    mark {
+      @apply rounded px-0.5;
+    }
+  }
+}
+
+.inputCharHint {
+  @apply mt-2 text-right text-xs font-medium text-[#6b7280] lg:mt-2.5;
+}
+
+.emptyState {
+  @apply flex min-h-[200px] flex-col items-center justify-center rounded-xl border border-dashed border-gray-200 bg-gray-50/50 p-8 text-center;
+}
+
+.emptyStateText {
+  @apply text-sm text-[#666666];
+}
+
+.emptyStateActions {
+  @apply mt-4;
+}
+
+.successModalOverlay {
+  @apply fixed inset-0 z-[9999] flex items-center justify-center bg-black/50 p-4;
+  background: linear-gradient(135deg, rgba(255, 237, 213, 0.3) 0%, rgba(255, 237, 213, 0.1) 100%);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.successModal {
+  @apply relative w-full max-w-lg overflow-hidden rounded-2xl bg-white shadow-2xl;
+}
+
+.successModalContent {
+  @apply flex flex-col items-center px-6 py-8 text-center sm:px-8 sm:py-10;
+}
+
+.successIconWrapper {
+  @apply mb-4;
+}
+
+.successIcon {
+  @apply flex h-20 w-20 items-center justify-center rounded-full bg-[#f59e0b] text-white;
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+}
+
+.successTitle {
+  @apply mb-2 text-[#f59e0b];
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.successMessage {
+  @apply mb-3 font-bold text-[#111827];
+}
+
+.successDescription {
+  @apply mb-6 text-[#6b7280];
+  max-width: 500px;
+}
+
+.successDetails {
+  @apply mb-6 w-full rounded-lg bg-gray-50 p-4 text-left;
+}
+
+.successDetailRow {
+  @apply flex items-center justify-between gap-4 py-2;
+  &:not(:last-child) {
+    @apply border-b border-gray-200;
+  }
+}
+
+.successDetailLabel {
+  @apply font-medium text-gray-600;
+}
+
+.successDetailValue {
+  @apply flex items-center gap-2 text-gray-900;
+}
+
+.successStatusIcon {
+  @apply flex h-5 w-5 items-center justify-center rounded-full bg-green-100 text-green-600;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.successStatusText {
+  @apply text-green-600 font-semibold;
+}
+
+.successActions {
+  @apply flex w-full justify-center;
+}
+
+.successBackBtn {
+  @apply flex items-center justify-center gap-2 rounded-xl border-2 border-[#f59e0b] bg-white px-6 py-3 text-sm font-semibold text-[#f59e0b] transition-colors hover:bg-amber-50;
+}
+
+.successBtnIcon {
+  @apply text-base;
+}
+
+.successFooter {
+  @apply mt-6 pt-4 border-t border-gray-200;
+}
+
+.successFooterText {
+  @apply text-gray-500;
+}
+
+.successFooterLink {
+  @apply text-[#f59e0b] hover:underline;
+}

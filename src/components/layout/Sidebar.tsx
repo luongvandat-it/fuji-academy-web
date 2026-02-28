@@ -7,6 +7,7 @@ import {
   LogoutIcon,
   MessageIcon,
   ReportIcon,
+  SupportIcon,
   TuitionIcon,
 } from "@/icon";
 import Link from "next/link";
@@ -17,13 +18,11 @@ import { Text } from "../ui";
 
 const navItems = [
   { href: "/", label: "Trang chủ", icon: GridIcon, main: true },
-  // { href: "/courses", label: "Khóa học", icon: ClassIcon, main: true },
   { href: "/schedule", label: "Lịch", icon: CalendarIcon, main: true },
-  // { href: "/materials", label: "Tài liệu", icon: MaterialsIcon, main: true  },
   { href: "/homework", label: "Bài tập", icon: BookIcon, main: false },
   { href: "/report", label: "Báo cáo", icon: ReportIcon, main: false },
-  { href: "/messages", label: "Tin nhắn", icon: MessageIcon, main: true },
   { href: "/tuition", label: "Học phí", icon: TuitionIcon, main: true },
+  { href: "/support", label: "Hỗ trợ", icon: SupportIcon, main: false },
 ] as const;
 
 export interface SidebarProps {

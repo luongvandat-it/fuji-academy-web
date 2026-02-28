@@ -21,3 +21,5 @@ export const WeekViewCurrentTimeLine = memo(function WeekViewCurrentTimeLine({
     </div>
   );
 });
+
+WeekViewCurrentTimeLine.displayName = "WeekViewCurrentTimeLine";

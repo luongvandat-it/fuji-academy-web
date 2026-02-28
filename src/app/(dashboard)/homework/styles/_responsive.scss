@@ -1,0 +1,185 @@
+.page {
+  @media (max-width: 1023px) {
+    height: 100vh;
+    max-height: 100vh;
+  }
+}
+
+@media (max-width: 1023px) {
+  body:has(.homework-page),
+  html:has(.homework-page) {
+    overflow: hidden;
+    height: 100vh;
+    max-height: 100vh;
+  }
+}
+
+.title {
+  @apply sm:text-xl md:text-2xl;
+}
+
+.toolbar {
+  @apply sm:flex-row sm:items-center sm:justify-between;
+}
+
+.searchWrap {
+  @apply sm:max-w-[18rem];
+}
+
+.tabsRoot {
+  @apply sm:w-auto;
+}
+
+.tabBtn {
+  @apply sm:px-4 sm:py-2.5 sm:text-sm;
+}
+
+.listScroll {
+  @apply sm:mt-4;
+}
+
+.list {
+  @apply sm:gap-4;
+}
+
+.card {
+  @apply sm:gap-4 sm:rounded-xl sm:p-5;
+}
+
+.cardLeft {
+  @apply sm:gap-4;
+}
+
+.cardIconWrap {
+  @apply sm:size-12 md:size-14;
+
+  svg {
+    @apply sm:size-6 md:size-7;
+  }
+}
+
+.cardCategory {
+  @media (min-width: 640px) {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+}
+
+.cardTitleRow {
+  @media (min-width: 768px) {
+    display: block;
+  }
+}
+
+.cardTitle {
+  @media (max-width: 767px) {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-top: 0;
+  }
+  
+  @media (min-width: 768px) {
+    @apply truncate;
+  }
+  
+  @media (min-width: 640px) {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+  
+  @media (min-width: 768px) {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+  }
+}
+
+.cardTitleActions {
+  @media (min-width: 768px) {
+    display: none;
+  }
+}
+
+.cardDesc,
+.cardMeta {
+  @media (min-width: 640px) {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+}
+
+.cardRight {
+  @media (min-width: 768px) {
+    display: flex;
+    width: auto;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 0.375rem;
+    flex-wrap: wrap;
+  }
+}
+
+.cardFooter {
+  @media (min-width: 768px) {
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+}
+
+.dueBadge {
+  @media (min-width: 640px) {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+}
+
+.dueBadgeNormal {
+  @media (min-width: 640px) {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+}
+
+.scoreLabel {
+  @media (min-width: 640px) {
+    font-size: 0.75rem;
+    line-height: 1rem;
+  }
+}
+
+.scoreValue {
+  @media (min-width: 640px) {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+  }
+}
+
+.gradingLabel {
+  @media (min-width: 640px) {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+}
+
+.actionBtn {
+  @media (min-width: 640px) {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 0.625rem;
+    padding-bottom: 0.625rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+}
+
+.actionLink {
+  @media (min-width: 640px) {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+}

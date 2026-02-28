@@ -1,11 +1,11 @@
 "use client";
 
-import { MenuIcon } from "@/icon";
 import { usePathname, useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { isAuthenticated } from "@/service/modules/login/logic";
 import { BottomNav } from "./BottomNav";
 import { Sidebar } from "./Sidebar";
+import { Text } from "../ui";
 import styles from "./DashboardShell.module.scss";
 
 export function DashboardShell({ children }: { children: React.ReactNode }) {
@@ -28,14 +28,11 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
 
   return (
     <div className={styles.wrapper}>
-      <button
-        type="button"
-        onClick={() => setSidebarOpen(true)}
-        className={styles.menuBtnFloat}
-        aria-label="Mở menu"
-      >
-        <MenuIcon />
-      </button>
+      <header className={styles.mobileHeader}>
+        <Text variant="BUTTON_LABEL.LARGE" className={styles.mobileHeaderText}>
+          Fourier LMS
+        </Text>
+      </header>
       <button
         type="button"
         aria-label="Đóng menu"

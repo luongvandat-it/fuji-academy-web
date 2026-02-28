@@ -1,1 +1,0 @@
-export { ClassCard } from "./ClassCard";

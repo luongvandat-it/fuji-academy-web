@@ -72,12 +72,12 @@ export function formatMonthYear(d: Date): string {
 
 export function formatWeekRange(weekStart: Date): string {
   const weekEnd = addDays(weekStart, 6);
-  const sameMonth = weekStart.getMonth() === weekEnd.getMonth();
-  const sameYear = weekStart.getFullYear() === weekEnd.getFullYear();
-  if (sameMonth && sameYear) {
-    return `${weekStart.getDate()}-${weekEnd.getDate()} ${weekStart.toLocaleDateString(LOCALE_VI, { month: "long", year: "numeric" })}`;
-  }
-  return `${weekStart.getDate()} ${weekStart.toLocaleDateString(LOCALE_VI, { month: "short" })} - ${weekEnd.getDate()} ${weekEnd.toLocaleDateString(LOCALE_VI, { month: "short", year: "numeric" })}`;
+  const startDay = weekStart.getDate();
+  const startMonth = weekStart.getMonth() + 1;
+  const endDay = weekEnd.getDate();
+  const endMonth = weekEnd.getMonth() + 1;
+  
+  return `${startDay}/${startMonth}-${endDay}/${endMonth}`;
 }
 
 export function addDays(d: Date, n: number): Date {
@@ -193,15 +193,13 @@ export function buildDayWeekEventsMap<T extends { dayIndex: number; startHour: n
   const map = new Map<string, T[]>();
   for (let i = 0; i < events.length; i++) {
     const e = events[i];
-    for (let h = e.startHour; h < e.endHour; h++) {
-      const key = `${e.dayIndex}-${h}`;
-      let list = map.get(key);
-      if (!list) {
-        list = [];
-        map.set(key, list);
-      }
-      list.push(e);
+    const key = `${e.dayIndex}-${e.startHour}`;
+    let list = map.get(key);
+    if (!list) {
+      list = [];
+      map.set(key, list);
     }
+    list.push(e);
   }
   return map;
 }

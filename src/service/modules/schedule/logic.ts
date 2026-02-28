@@ -1,34 +1,17 @@
-import { api } from "@/service/api"
+import { api } from "@/service/api";
+import type {
+  ScheduleResponse,
+  ScheduleData,
+  ScheduleItem,
+  GetScheduleResult,
+} from "./types";
 
-export interface ScheduleResponse {
-    success: boolean;
-    message?: string;
-    data: ScheduleData[];
-}
-
-export interface ScheduleData {
-    class_id: number;
-    class_name: string;
-    subject_name: string;
-    teacher_name: string;
-    classroom_name: string;
-    start_date: string;
-    end_date: string;
-    schedules: ScheduleItem[];
-}
-
-export interface ScheduleItem {
-    schedule_id: number;
-    schedule_name: string;
-    day_of_week: string;
-    day_of_week_label: string;
-    start_hour: number;
-    end_hour: number;
-    start_time: string;
-    end_time: string;
-}
-
-export type GetScheduleResult = ScheduleResponse | { success: false; status?: number };
+export type {
+  ScheduleResponse,
+  ScheduleData,
+  ScheduleItem,
+  GetScheduleResult,
+};
 
 export const getSchedule = async (): Promise<GetScheduleResult> => {
     try {

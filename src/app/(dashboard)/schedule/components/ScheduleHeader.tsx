@@ -1,11 +1,11 @@
 "use client";
 
 import { Button } from "@/components/ui";
-import { ChevronLeftIcon, ChevronRightIcon } from "@/icon";
+import { ChevronLeftIcon, ChevronRightIcon, CalendarIcon } from "@/icon";
 import { memo } from "react";
 import styles from "../schedule.module.scss";
 
-export type ScheduleViewMode = "month" | "week";
+export type ScheduleViewMode = "week" | "month";
 
 interface ScheduleHeaderProps {
   label: string;
@@ -14,22 +14,20 @@ interface ScheduleHeaderProps {
   onToday: () => void;
   viewMode?: ScheduleViewMode;
   onViewModeChange?: (mode: ScheduleViewMode) => void;
+  showMonthCalendar?: boolean;
+  onToggleMonthCalendar?: () => void;
 }
-
-const NAV_LABELS = {
-  month: { prev: "Tháng trước", next: "Tháng sau" },
-  week: { prev: "Tuần trước", next: "Tuần sau" },
-} as const;
 
 export const ScheduleHeader = memo(function ScheduleHeader({
   label,
   onPrev,
   onNext,
   onToday,
-  viewMode = "month",
+  viewMode,
   onViewModeChange,
+  showMonthCalendar,
+  onToggleMonthCalendar,
 }: ScheduleHeaderProps) {
-  const nav = NAV_LABELS[viewMode];
   return (
     <header className={styles.header}>
       <div className={styles.headerLeft}>
@@ -37,43 +35,51 @@ export const ScheduleHeader = memo(function ScheduleHeader({
           Hôm nay
         </Button>
         <div className={styles.weekNav}>
-          <Button variant="secondary" onClick={onPrev} className={styles.monthNavBtn} aria-label={nav.prev}>
+          <Button variant="secondary" onClick={onPrev} className={styles.monthNavBtn} aria-label={viewMode === "month" ? "Tháng trước" : "Tuần trước"}>
             <ChevronLeftIcon />
-            <span className={styles.monthNavBtnText}>{nav.prev}</span>
+            <span className={styles.monthNavBtnText}>{viewMode === "month" ? "Tháng trước" : "Tuần trước"}</span>
           </Button>
           <span className={styles.monthNavLabel}>{label}</span>
-          <Button variant="secondary" onClick={onNext} className={styles.monthNavBtn} aria-label={nav.next}>
-            <span className={styles.monthNavBtnText}>{nav.next}</span>
+          <Button variant="secondary" onClick={onNext} className={styles.monthNavBtn} aria-label={viewMode === "month" ? "Tháng sau" : "Tuần sau"}>
+            <span className={styles.monthNavBtnText}>{viewMode === "month" ? "Tháng sau" : "Tuần sau"}</span>
             <ChevronRightIcon />
           </Button>
         </div>
+        {onToggleMonthCalendar && (
+          <Button
+            variant="secondary"
+            onClick={onToggleMonthCalendar}
+            className={`${styles.calendarToggleBtn} ${showMonthCalendar ? styles.calendarToggleBtnActive : ""}`}
+            aria-label={showMonthCalendar ? "Ẩn lịch tháng" : "Hiển thị lịch tháng"}
+          >
+            <CalendarIcon />
+          </Button>
+        )}
       </div>
-      <div className={styles.headerRight}>
-        {onViewModeChange && (
-          <div className={styles.viewToggle} role="tablist" aria-label="Chế độ xem">
+      {viewMode !== undefined && onViewModeChange && (
+        <div className={styles.headerRight}>
+          <div className={styles.viewToggle}>
             <Button
               type="button"
-              role="tab"
-              aria-selected={viewMode === "month"}
               variant="secondary"
-              className={`${styles.viewToggleSegment} ${viewMode === "month" ? styles.viewToggleSegmentActive : ""}`}
-              onClick={() => onViewModeChange("month")}
-            >
-              Tháng
-            </Button>
-            <Button
-              type="button"
-              role="tab"
-              aria-selected={viewMode === "week"}
-              variant="secondary"
-              className={`${styles.viewToggleSegment} ${viewMode === "week" ? styles.viewToggleSegmentActive : ""}`}
               onClick={() => onViewModeChange("week")}
+              className={viewMode === "week" ? `${styles.viewToggleSegment} ${styles.viewToggleSegmentActive}` : styles.viewToggleSegment}
             >
               Tuần
             </Button>
+            <Button
+              type="button"
+              variant="secondary"
+              onClick={() => onViewModeChange("month")}
+              className={viewMode === "month" ? `${styles.viewToggleSegment} ${styles.viewToggleSegmentActive}` : styles.viewToggleSegment}
+            >
+              Tháng
+            </Button>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </header>
   );
 });
+
+ScheduleHeader.displayName = "ScheduleHeader";

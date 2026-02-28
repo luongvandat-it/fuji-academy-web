@@ -1,12 +1,7 @@
 @reference "../../app/globals.css";
 
 .aside {
-  @apply fixed left-0 top-0 z-20 h-screen  rounded-l-xl shadow-[2px_0_12px_rgba(0,0,0,0.2)] transition-transform duration-200 ease-out;
-  background-color: #150601;
-
-  @media (min-width: 1024px) {
-    @apply translate-x-0;
-  }
+  @apply fixed left-0 top-0 z-20 h-screen rounded-l-xl bg-[#150601] shadow-[2px_0_12px_rgba(0,0,0,0.2)] transition-transform duration-200 ease-out lg:left-4 lg:top-4 lg:bottom-4 lg:h-auto lg:w-44 lg:translate-x-0;
 }
 
 .asideOpen {
@@ -14,11 +9,7 @@
 }
 
 .asideClosed {
-  @apply -translate-x-full;
-
-  @media (min-width: 1024px) {
-    @apply translate-x-0;
-  }
+  @apply -translate-x-full lg:translate-x-0;
 }
 
 .inner {
@@ -50,7 +41,7 @@
 }
 
 .linkActive {
-  @apply font-semibold text-white bg-[#3A140C];
+  @apply bg-[#3A140C] font-semibold text-white;
 
   &:hover {
     @apply text-white;

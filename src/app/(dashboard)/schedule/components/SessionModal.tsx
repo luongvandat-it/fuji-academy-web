@@ -1,6 +1,7 @@
 "use client";
 
 import { CloseIcon } from "@/icon";
+import { Button, Text } from "@/components/ui";
 import type { ClassSessionData } from "@/service/modules/class/logic";
 import { formatTimeFromDatetime } from "@/app/(dashboard)/schedule/utils";
 import styles from "../schedule.module.scss";
@@ -29,68 +30,143 @@ export function SessionModal({ session, onClose }: SessionModalProps) {
     >
       <div className={styles.sessionModal} onClick={(e) => e.stopPropagation()}>
         <div className={styles.sessionModalHeader}>
-          <h2 id="session-modal-title" className={styles.sessionModalTitle}>
+          <Text variant="HEADING.TWO" as="h2" id="session-modal-title" className={styles.sessionModalTitle}>
             {session.session_name}
-          </h2>
-          <button
+          </Text>
+          <Button
             type="button"
+            variant="secondary"
             className={styles.sessionModalClose}
             onClick={onClose}
             aria-label="Đóng"
           >
             <CloseIcon />
-          </button>
+          </Button>
         </div>
         <div className={styles.sessionModalBody}>
           <dl className={styles.sessionModalDl}>
             <div className={styles.sessionModalRow}>
-              <dt className={styles.sessionModalLabel}>Lớp</dt>
-              <dd className={styles.sessionModalValue}>{session.class_name}</dd>
-            </div>
-            <div className={styles.sessionModalRow}>
-              <dt className={styles.sessionModalLabel}>Môn học</dt>
-              <dd className={styles.sessionModalValue}>{session.subject_name}</dd>
-            </div>
-            <div className={styles.sessionModalRow}>
-              <dt className={styles.sessionModalLabel}>Giáo viên</dt>
-              <dd className={styles.sessionModalValue}>{session.teacher_name}</dd>
-            </div>
-            <div className={styles.sessionModalRow}>
-              <dt className={styles.sessionModalLabel}>Phòng</dt>
-              <dd className={styles.sessionModalValue}>{session.classroom_name}</dd>
-            </div>
-            <div className={styles.sessionModalRow}>
-              <dt className={styles.sessionModalLabel}>Ngày</dt>
-              <dd className={styles.sessionModalValue}>{formatDateVi(session.date)}</dd>
-            </div>
-            <div className={styles.sessionModalRow}>
-              <dt className={styles.sessionModalLabel}>Giờ</dt>
+              <dt className={styles.sessionModalLabel}>
+                <Text variant="LABEL.MEDIUM" as="span">
+                  Lớp
+                </Text>
+              </dt>
               <dd className={styles.sessionModalValue}>
-                {startTime} – {endTime}
+                <Text variant="BODY.MEDIUM" as="span">
+                  {session.class_name}
+                </Text>
               </dd>
             </div>
             <div className={styles.sessionModalRow}>
-              <dt className={styles.sessionModalLabel}>Hình thức</dt>
+              <dt className={styles.sessionModalLabel}>
+                <Text variant="LABEL.MEDIUM" as="span">
+                  Môn học
+                </Text>
+              </dt>
               <dd className={styles.sessionModalValue}>
-                {session.class_type === "online" ? "Trực tuyến" : "Trực tiếp"}
+                <Text variant="BODY.MEDIUM" as="span">
+                  {session.subject_name}
+                </Text>
               </dd>
             </div>
             <div className={styles.sessionModalRow}>
-              <dt className={styles.sessionModalLabel}>Trạng thái</dt>
-              <dd className={styles.sessionModalValue}>{session.status_label}</dd>
+              <dt className={styles.sessionModalLabel}>
+                <Text variant="LABEL.MEDIUM" as="span">
+                  Giáo viên
+                </Text>
+              </dt>
+              <dd className={styles.sessionModalValue}>
+                <Text variant="BODY.MEDIUM" as="span">
+                  {session.teacher_name}
+                </Text>
+              </dd>
+            </div>
+            <div className={styles.sessionModalRow}>
+              <dt className={styles.sessionModalLabel}>
+                <Text variant="LABEL.MEDIUM" as="span">
+                  Phòng
+                </Text>
+              </dt>
+              <dd className={styles.sessionModalValue}>
+                <Text variant="BODY.MEDIUM" as="span">
+                  {session.classroom_name}
+                </Text>
+              </dd>
+            </div>
+            <div className={styles.sessionModalRow}>
+              <dt className={styles.sessionModalLabel}>
+                <Text variant="LABEL.MEDIUM" as="span">
+                  Ngày
+                </Text>
+              </dt>
+              <dd className={styles.sessionModalValue}>
+                <Text variant="BODY.MEDIUM" as="span">
+                  {formatDateVi(session.date)}
+                </Text>
+              </dd>
+            </div>
+            <div className={styles.sessionModalRow}>
+              <dt className={styles.sessionModalLabel}>
+                <Text variant="LABEL.MEDIUM" as="span">
+                  Giờ
+                </Text>
+              </dt>
+              <dd className={styles.sessionModalValue}>
+                <Text variant="BODY.MEDIUM" as="span">
+                  {startTime} – {endTime}
+                </Text>
+              </dd>
+            </div>
+            <div className={styles.sessionModalRow}>
+              <dt className={styles.sessionModalLabel}>
+                <Text variant="LABEL.MEDIUM" as="span">
+                  Hình thức
+                </Text>
+              </dt>
+              <dd className={styles.sessionModalValue}>
+                <Text variant="BODY.MEDIUM" as="span">
+                  {session.class_type === "online" ? "Trực tuyến" : "Trực tiếp"}
+                </Text>
+              </dd>
+            </div>
+            <div className={styles.sessionModalRow}>
+              <dt className={styles.sessionModalLabel}>
+                <Text variant="LABEL.MEDIUM" as="span">
+                  Trạng thái
+                </Text>
+              </dt>
+              <dd className={styles.sessionModalValue}>
+                <Text variant="BODY.MEDIUM" as="span">
+                  {session.status_label}
+                </Text>
+              </dd>
             </div>
             {session.attendance?.has_attendance && (
               <div className={styles.sessionModalRow}>
-                <dt className={styles.sessionModalLabel}>Điểm danh</dt>
+                <dt className={styles.sessionModalLabel}>
+                  <Text variant="LABEL.MEDIUM" as="span">
+                    Điểm danh
+                  </Text>
+                </dt>
                 <dd className={styles.sessionModalValue}>
-                  {session.attendance.is_present ? "Có mặt" : session.attendance.is_absent ? "Vắng" : "—"}
+                  <Text variant="BODY.MEDIUM" as="span">
+                    {session.attendance.is_present === true ? "Có mặt" : session.attendance.is_absent === true ? "Vắng" : "—"}
+                  </Text>
                 </dd>
               </div>
             )}
             {session.notes?.trim() && (
               <div className={styles.sessionModalRow}>
-                <dt className={styles.sessionModalLabel}>Ghi chú</dt>
-                <dd className={styles.sessionModalValue}>{session.notes}</dd>
+                <dt className={styles.sessionModalLabel}>
+                  <Text variant="LABEL.MEDIUM" as="span">
+                    Ghi chú
+                  </Text>
+                </dt>
+                <dd className={styles.sessionModalValue}>
+                  <Text variant="BODY.MEDIUM" as="span">
+                    {session.notes}
+                  </Text>
+                </dd>
               </div>
             )}
           </dl>

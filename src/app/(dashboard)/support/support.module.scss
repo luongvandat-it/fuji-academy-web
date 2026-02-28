@@ -1,0 +1,315 @@
+@reference "../../globals.css";
+
+.page {
+  @apply flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden;
+  height: 100%;
+  max-height: 100%;
+  width: 100%;
+}
+
+.header {
+  @apply flex min-w-0 items-center justify-between gap-2;
+}
+
+.title {
+  @apply min-w-0 truncate text-lg font-bold tracking-tight text-gray-900;
+}
+
+.subtitle {
+  @apply mt-1 text-sm text-gray-600;
+}
+
+.contentScroll {
+  @apply relative flex-1 overflow-y-auto;
+  z-index: 0;
+}
+
+.grid {
+  @apply grid grid-cols-1 gap-6 p-4;
+  
+  @media (min-width: 1024px) {
+    @apply grid-cols-[1fr_400px];
+  }
+}
+
+.mainCol {
+  @apply min-w-0;
+}
+
+.sideCol {
+  @apply min-w-0;
+}
+
+.loading {
+  @apply flex items-center justify-center p-8;
+}
+
+// Form Card
+.formCard {
+  @apply relative rounded-xl border border-black/[0.06] bg-white p-6 shadow-[0_2px_8px_rgba(0,0,0,0.06)];
+  z-index: 1;
+}
+
+.formHeader {
+  @apply mb-6 flex items-center gap-3;
+}
+
+.formHeaderIcon {
+  @apply flex size-10 items-center justify-center rounded-full bg-blue-100 text-xl font-bold text-blue-600;
+}
+
+.formTitle {
+  @apply text-lg font-bold text-gray-900;
+}
+
+.formFields {
+  @apply mb-6 flex flex-col gap-4;
+}
+
+.fieldGroup {
+  @apply flex flex-col gap-2;
+}
+
+.label {
+  @apply text-sm font-medium text-gray-700;
+}
+
+
+.textarea {
+  @apply w-full resize-y rounded-xl border border-black/[0.06] bg-white px-4 py-2.5 text-sm text-gray-900 placeholder:text-gray-400 focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-0;
+}
+
+.errorText {
+  @apply text-sm text-red-600;
+}
+
+.priorityButtons {
+  @apply flex flex-wrap gap-2;
+}
+
+.priorityButton {
+  @apply rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-0;
+  
+  &:disabled {
+    @apply cursor-not-allowed opacity-50;
+  }
+}
+
+.priorityButtonActive {
+  @apply border-blue-600 bg-blue-600 text-white hover:bg-blue-700;
+}
+
+.priorityButtonUrgent {
+  @apply border-red-500 text-red-600;
+  
+  &.priorityButtonActive {
+    @apply border-red-600 bg-red-600 text-white hover:bg-red-700;
+  }
+}
+
+.submitButton {
+  @apply w-full;
+}
+
+// Tickets List Card
+.ticketsListCard {
+  @apply rounded-xl border border-black/[0.06] bg-white p-6 shadow-[0_2px_8px_rgba(0,0,0,0.06)];
+}
+
+.ticketsListHeader {
+  @apply mb-6 flex items-center justify-between gap-4;
+}
+
+.ticketsListHeaderLeft {
+  @apply flex items-center gap-3;
+}
+
+.ticketsListIcon {
+  @apply size-5 text-gray-600;
+}
+
+.ticketsListTitle {
+  @apply text-lg font-bold text-gray-900;
+}
+
+.viewAllLink {
+  @apply text-sm font-medium text-blue-600 hover:text-blue-700 focus:outline-none focus:underline;
+}
+
+.ticketsList {
+  @apply flex flex-col gap-4;
+}
+
+.ticketCard {
+  @apply rounded-lg border border-gray-200 bg-gray-50 p-4 transition-colors hover:bg-gray-100;
+}
+
+.ticketCardHeader {
+  @apply mb-2 flex items-center justify-between gap-2;
+}
+
+.ticketId {
+  @apply font-medium text-gray-900;
+}
+
+.statusBadge {
+  @apply rounded-full px-2.5 py-1 text-xs font-semibold uppercase text-white;
+}
+
+.statusDraft {
+  @apply bg-gray-500;
+}
+
+.statusOpen {
+  @apply bg-blue-600;
+}
+
+.statusInProgress {
+  @apply bg-yellow-500;
+}
+
+.statusResolved {
+  @apply bg-green-600;
+}
+
+.statusClosed {
+  @apply bg-gray-600;
+}
+
+.ticketTitle {
+  @apply mb-2 font-medium text-gray-900;
+}
+
+.ticketMeta {
+  @apply mb-2 flex flex-wrap items-center gap-3;
+}
+
+.ticketMetaItem {
+  @apply flex items-center gap-1.5;
+}
+
+.ticketMetaLabel {
+  @apply text-gray-600;
+}
+
+.ticketTypeBadge {
+  @apply rounded-full px-2.5 py-1 text-xs font-medium;
+}
+
+.ticketTypeBadgeBase {
+  @apply bg-blue-100 text-blue-700;
+}
+
+.priorityBadge {
+  @apply rounded-full px-2.5 py-1 text-xs font-medium;
+}
+
+.priorityLow {
+  @apply bg-gray-100 text-gray-700;
+}
+
+.priorityMedium {
+  @apply bg-yellow-100 text-yellow-700;
+}
+
+.priorityHigh {
+  @apply bg-orange-100 text-orange-700;
+}
+
+.priorityUrgent {
+  @apply bg-red-100 text-red-700;
+}
+
+.ticketTime {
+  @apply text-gray-600;
+}
+
+.emptyState {
+  @apply flex flex-col items-center justify-center py-12 text-center;
+}
+
+.emptyStateIcon {
+  @apply mb-3 text-4xl;
+}
+
+.emptyStateText {
+  @apply text-gray-600;
+}
+
+// Success Modal
+.successModalOverlay {
+  @apply fixed inset-0 z-[9999] flex items-center justify-center bg-black/50 p-4;
+  background: linear-gradient(135deg, rgba(255, 237, 213, 0.3) 0%, rgba(255, 237, 213, 0.1) 100%);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.successModal {
+  @apply relative w-full max-w-lg overflow-hidden rounded-2xl bg-white shadow-2xl;
+}
+
+.successModalContent {
+  @apply flex flex-col items-center px-6 py-8 text-center sm:px-8 sm:py-10;
+}
+
+.successLoadingContent {
+  @apply flex flex-col items-center px-6 py-8 text-center sm:px-8 sm:py-10;
+}
+
+.successLoadingBar {
+  @apply mb-4 h-2 w-full overflow-hidden rounded-full bg-gray-200;
+}
+
+.successLoadingBarFill {
+  @apply h-full bg-blue-600 transition-all duration-300 ease-out;
+}
+
+.successLoadingText {
+  @apply text-gray-600;
+}
+
+.successIconWrapper {
+  @apply mb-4;
+}
+
+.successIcon {
+  @apply flex h-20 w-20 items-center justify-center rounded-full bg-[#f59e0b] text-white;
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+}
+
+.successTitle {
+  @apply mb-2 text-[#f59e0b];
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.successMessage {
+  @apply mb-3 font-bold text-[#111827];
+}
+
+.successDescription {
+  @apply mb-6 text-[#6b7280];
+  max-width: 500px;
+}
+
+.successDetails {
+  @apply mb-6 w-full rounded-lg bg-gray-50 p-4 text-left;
+}
+
+.successDetailRow {
+  @apply flex items-center justify-between gap-4 py-2;
+  &:not(:last-child) {
+    @apply border-b border-gray-200;
+  }
+}
+
+.successDetailLabel {
+  @apply font-medium text-gray-600;
+}
+
+.successDetailValue {
+  @apply flex items-center gap-2 text-gray-900;
+}

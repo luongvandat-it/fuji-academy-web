@@ -9,11 +9,21 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@tiptap/extension-color": "^3.20.0",
+    "@tiptap/extension-highlight": "^3.20.0",
+    "@tiptap/extension-image": "^3.20.0",
+    "@tiptap/extension-placeholder": "^3.20.0",
+    "@tiptap/extension-text-style": "^3.20.0",
+    "@tiptap/extension-underline": "^3.20.0",
+    "@tiptap/pm": "^3.20.0",
+    "@tiptap/react": "^3.20.0",
+    "@tiptap/starter-kit": "^3.20.0",
     "axios": "^1.13.4",
     "next": "16.1.6",
     "react": "19.2.3",
     "react-dom": "19.2.3",
-    "react-player": "^3.4.0"
+    "react-player": "^3.4.0",
+    "react-quill-new": "^3.8.3"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

@@ -1,0 +1,181 @@
+.page {
+  @media (max-width: 1023px) {
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
+    height: 100vh;
+    max-height: 100vh;
+  }
+}
+
+@media (max-width: 1023px) {
+  body:has(.tuition-page) {
+    overflow: hidden;
+    height: 100vh;
+    max-height: 100vh;
+  }
+  
+  html:has(.tuition-page) {
+    overflow: hidden;
+    height: 100vh;
+    max-height: 100vh;
+  }
+}
+
+.header {
+  @apply sm:items-center sm:gap-3 sm:pb-5 md:pb-6;
+
+  @media (max-width: 419px) {
+    @apply flex-col items-start;
+  }
+}
+
+.headerIcon {
+  @apply sm:mt-0;
+}
+
+.title {
+  @apply sm:text-2xl md:text-3xl;
+}
+
+.summaryCard {
+  @apply sm:p-5;
+}
+
+.summaryLabel {
+  @apply sm:text-sm;
+}
+
+.summaryAmount {
+  @apply sm:text-2xl md:text-3xl;
+}
+
+.sectionTitle {
+  @apply sm:mb-3 sm:text-sm;
+}
+
+.debtList {
+  @apply sm:space-y-3;
+}
+
+.debtCard {
+  @apply sm:flex-row sm:flex-wrap sm:items-center sm:justify-between sm:gap-3 sm:p-4;
+}
+
+.debtName {
+  @apply sm:text-base;
+}
+
+.debtMeta {
+  @apply sm:gap-x-3 sm:text-sm;
+}
+
+.debtAmounts {
+  @apply sm:gap-3;
+}
+
+.debtBadge {
+  @apply sm:py-0.5;
+}
+
+.empty {
+  @apply sm:rounded-xl sm:py-12 sm:text-base;
+}
+
+.subtitle {
+  @apply sm:text-sm md:text-base;
+}
+
+.grid {
+  @apply md:grid-cols-[1fr_280px] md:gap-5 lg:grid-cols-[1fr_320px] lg:gap-6;
+  
+  @media (min-width: 768px) {
+    padding-right: 0.5rem;
+    margin-right: -0.5rem;
+  }
+}
+
+.mainCol {
+  @apply sm:gap-4 md:gap-5;
+}
+
+.sideCol {
+  @apply sm:gap-4 md:gap-5;
+}
+
+.upcomingPaymentCard {
+  @apply sm:rounded-2xl sm:p-4 md:p-5;
+}
+
+.upcomingPaymentAmount {
+  @apply sm:text-xl md:text-2xl;
+}
+
+.sectionHeadTitle {
+  @apply sm:text-base;
+}
+
+.invoiceCard {
+  @apply sm:rounded-xl sm:p-4;
+}
+
+.invoiceIconWrap {
+  @apply sm:size-11;
+
+  svg {
+    @apply sm:size-6;
+  }
+}
+
+.invoiceCourseName {
+  @apply sm:text-base;
+}
+
+.invoiceMeta {
+  @apply sm:text-xs md:text-sm;
+}
+
+.historyTable {
+  @apply sm:min-w-80 sm:text-sm;
+}
+
+.historyTable th {
+  @apply sm:px-3 sm:py-2.5 sm:px-4;
+}
+
+.historyTable td {
+  @apply sm:px-3 sm:py-2.5 sm:px-4;
+}
+
+.paymentPanel {
+  @apply sm:rounded-2xl sm:p-4 md:p-5;
+}
+
+.bankNumber {
+  @apply sm:text-sm;
+}
+
+.qrWrap {
+  @apply sm:mt-4 sm:rounded-xl sm:p-4;
+}
+
+.qrImage {
+  @apply sm:h-40 sm:w-40;
+}
+
+.qrDownloadBtn {
+  @apply sm:mt-4;
+}
+
+.uploadCard {
+  @apply sm:rounded-2xl sm:p-4 md:p-5;
+}
+
+.uploadZone {
+  @apply sm:mt-3 sm:rounded-xl sm:py-8 sm:text-sm;
+}
+
+.supportCard {
+  @apply sm:rounded-2xl sm:p-4 md:p-5;
+}

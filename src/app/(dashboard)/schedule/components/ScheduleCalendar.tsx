@@ -125,11 +125,12 @@ export const ScheduleCalendar = memo(function ScheduleCalendar({
                       {hasSessions
                         ? displayItems.map((item) => {
                             const isPast = dateKey < todayKey;
-                            const attended = item.session?.attendance?.is_present === true;
+                            const hasAttendance = item.session?.attendance?.has_attendance === true;
+                            const attended = hasAttendance && item.session?.attendance?.is_present === true;
                             const blockVariant =
-                              isPast && attended
+                              isPast && hasAttendance && attended
                                 ? styles.blockAttended
-                                : isPast && !attended
+                                : isPast && hasAttendance && !attended
                                   ? styles.blockNotAttended
                                   : styles.blockBlue;
                             const isClickable = !isPast;
@@ -182,3 +183,5 @@ export const ScheduleCalendar = memo(function ScheduleCalendar({
     </div>
   );
 });
+
+ScheduleCalendar.displayName = "ScheduleCalendar";

@@ -1,0 +1,103 @@
+.page {
+  @apply sm:gap-5 md:gap-6;
+}
+
+.header {
+  @apply sm:gap-3;
+}
+
+.title {
+  @apply sm:text-2xl md:text-3xl;
+}
+
+.subtitle {
+  @apply sm:text-sm md:text-base;
+}
+
+.summaryRow {
+  @apply sm:grid-cols-2 sm:gap-4;
+}
+
+.summaryCard {
+  @apply sm:rounded-2xl sm:p-4;
+}
+
+.summaryCardIcon {
+  @apply sm:right-4 sm:top-4;
+}
+
+.summaryLabel {
+  @apply sm:text-sm;
+}
+
+.summaryValue {
+  @apply sm:text-3xl;
+}
+
+.summaryChange {
+  @apply sm:text-sm;
+}
+
+.middleGrid {
+  @apply lg:grid-cols-[1fr_320px] lg:gap-6;
+}
+
+.chartsCol {
+  @apply sm:gap-5;
+}
+
+.chartCard {
+  @apply sm:rounded-2xl sm:p-4;
+}
+
+.chartCardTitle {
+  @apply sm:text-base;
+}
+
+.barChartRow {
+  @apply sm:flex-row sm:items-center sm:gap-3;
+}
+
+.barChartLabel {
+  @apply sm:w-40 sm:text-sm;
+}
+
+.barChartValue {
+  @apply sm:text-sm;
+}
+
+.activityCard {
+  @apply sm:rounded-2xl sm:p-4;
+}
+
+.activityCardTitle {
+  @apply sm:text-base;
+}
+
+.activityIconWrap {
+  @apply sm:size-9;
+}
+
+.activityTitle {
+  @apply sm:text-base;
+}
+
+.sectionTitle {
+  @apply sm:text-base;
+}
+
+.downloadBtn {
+  @apply sm:text-sm;
+}
+
+.table {
+  @apply sm:text-sm;
+}
+
+.table th {
+  @apply sm:px-3 sm:py-2.5;
+}
+
+.table td {
+  @apply sm:px-3 sm:py-2.5;
+}

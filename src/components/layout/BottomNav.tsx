@@ -1,14 +1,23 @@
 "use client";
 
-import { CalendarIcon, ClassIcon, GridIcon, TuitionIcon } from "@/icon";
+import {
+  BookIcon,
+  CalendarIcon,
+  GridIcon,
+  SupportIcon,
+  ReportIcon,
+  TuitionIcon,
+} from "@/icon";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import styles from "./BottomNav.module.scss";
 
 const items = [
   { href: "/", label: "Trang chủ", icon: GridIcon },
-  { href: "/courses", label: "Khóa học", icon: ClassIcon },
   { href: "/schedule", label: "Lịch", icon: CalendarIcon },
+  { href: "/homework", label: "Bài tập", icon: BookIcon },
+  { href: "/report", label: "Báo cáo", icon: ReportIcon },
+  { href: "/support", label: "Hỗ trợ", icon: SupportIcon },
   { href: "/tuition", label: "Học phí", icon: TuitionIcon },
 ] as const;
 

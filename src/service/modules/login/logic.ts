@@ -1,19 +1,10 @@
 import { api } from "@/service";
 import { AUTH_TOKEN_KEY } from "@/lib";
+import type { LoginResponse, InforResponse } from "./types";
+
+export type { LoginResponse, InforResponse };
 
 const USER_STORAGE_KEY = "user";
-
-export interface LoginResponse {
-    success: boolean;
-    message?: string;
-    data : InforResponse;
-}
-
-export interface InforResponse {
-    id: number;
-    email: string;
-    name: string
-}
 
 export const login = async (
   username: string,

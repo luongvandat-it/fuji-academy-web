@@ -1,5 +1,6 @@
 "use client";
 
+import { Text } from "@/components/ui";
 import { memo } from "react";
 import { BarChartIcon, BellIcon, CalendarIcon } from "@/icon";
 import styles from "../schedule.module.scss";
@@ -15,18 +16,28 @@ export const ScheduleCards = memo(function ScheduleCards() {
       <div className={styles.card}>
         <div className={styles.cardTitle}>
           <CalendarIcon className={styles.cardTitleIcon} />
-          Lớp sắp tới
+          <Text variant="LABEL.MEDIUM" as="span">
+            Lớp sắp tới
+          </Text>
         </div>
         <div className={styles.cardContent}>
-          <div className={styles.cardContentHighlight}>Hôm nay, 13:00</div>
-          <div>Workshop phát âm</div>
-          <div className={styles.cardContentMuted}>Phòng 105 • Bắt đầu sau 45 phút</div>
+          <Text variant="BODY.MEDIUM" as="div" className={styles.cardContentHighlight}>
+            Hôm nay, 13:00
+          </Text>
+          <Text variant="BODY.MEDIUM" as="div">
+            Workshop phát âm
+          </Text>
+          <Text variant="BODY.SMALL" as="div" className={styles.cardContentMuted}>
+            Phòng 105 • Bắt đầu sau 45 phút
+          </Text>
         </div>
       </div>
       <div className={styles.card}>
         <div className={styles.cardTitle}>
           <BarChartIcon className={styles.cardTitleIcon} />
-          Thống kê tuần
+          <Text variant="LABEL.MEDIUM" as="span">
+            Thống kê tuần
+          </Text>
         </div>
         <div className={styles.barChart}>
           {BAR_HOURS.map((h, i) => (
@@ -38,18 +49,32 @@ export const ScheduleCards = memo(function ScheduleCards() {
             />
           ))}
         </div>
-        <div className={styles.cardContent}>18,5 giờ học trong tuần này</div>
+        <Text variant="BODY.MEDIUM" as="div" className={styles.cardContent}>
+          18,5 giờ học trong tuần này
+        </Text>
       </div>
       <div className={styles.card}>
         <div className={styles.cardTitle}>
           <BellIcon className={styles.cardTitleIcon} />
-          Nhắc nhở
+          <Text variant="LABEL.MEDIUM" as="span">
+            Nhắc nhở
+          </Text>
         </div>
         <ul className={styles.reminderList}>
-          <li>Nộp bản nháp bài luận (Thứ 5, 17h)</li>
-          <li>Chuẩn bị thi thử (Thứ 6)</li>
+          <li>
+            <Text variant="BODY.SMALL" as="span">
+              Nộp bản nháp bài luận (Thứ 5, 17h)
+            </Text>
+          </li>
+          <li>
+            <Text variant="BODY.SMALL" as="span">
+              Chuẩn bị thi thử (Thứ 6)
+            </Text>
+          </li>
         </ul>
       </div>
     </div>
   );
 });
+
+ScheduleCards.displayName = "ScheduleCards";

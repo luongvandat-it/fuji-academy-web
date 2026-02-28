@@ -1,26 +1,45 @@
 @reference "../../app/globals.css";
 
 .bottomNav {
-  @apply fixed bottom-0 left-0 right-0 z-20 flex items-center justify-around border-t border-gray-200 bg-white py-2 shadow-[0_-2px_10px_rgba(0,0,0,0.05)] lg:hidden;
-  padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
+  @apply fixed bottom-0 left-0 right-0 z-20 flex min-h-[56px] items-stretch justify-between gap-0 bg-[#150601] shadow-[0_-2px_10px_rgba(0,0,0,0.05)] lg:hidden;
+  margin-bottom: max(0.1rem, env(safe-area-inset-bottom));
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
 }
 
 .item {
-  @apply flex flex-1 flex-col items-center gap-1 py-1;
+  @apply relative flex min-w-0 flex-1 flex-col items-center justify-center gap-0.5 py-2 text-white transition-colors sm:py-2.5;
+
+  &:hover {
+    @apply text-white/90;
+  }
 }
 
 .icon {
-  @apply size-6 text-gray-400;
+  @apply size-5 shrink-0 text-white/70 sm:size-6;
 }
 
 .iconActive {
-  @apply size-6 text-[var(--theme-focus)];
+  @apply size-5 shrink-0 text-white sm:size-6;
 }
 
 .label {
-  @apply text-[10px] font-medium text-gray-500;
+  @apply min-w-0 max-w-full truncate px-0.5 text-[9px] font-medium leading-tight text-white/70 min-[375px]:text-[10px] sm:text-[10px];
 }
 
-.itemActive .label {
-  @apply text-[var(--theme-focus)];
+.itemActive {
+  @apply bg-[#3A140C] font-semibold text-white;
+
+  &:hover {
+    @apply text-white;
+  }
+
+  &::before {
+    content: "";
+    @apply absolute top-0 left-1/2 h-0.5 w-9 -translate-x-1/2 rounded-full bg-white;
+  }
+
+  .label {
+    @apply text-white;
+  }
 }

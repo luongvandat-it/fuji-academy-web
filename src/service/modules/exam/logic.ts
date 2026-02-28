@@ -1,47 +1,23 @@
 import { api } from "@/service/api";
+import type {
+  ExamResponse,
+  ExamData,
+  ExamFileData,
+  GetExamParams,
+  SubmitExamResponse,
+  SubmitExamData,
+  SubmitExamError,
+} from "./types";
 
-export interface ExamResponse {
-    success: boolean;
-    message?: string;
-    data: ExamData[];
-}
-
-export interface ExamData {
-    exam_id: number;
-    exam_name: string;
-    class_id: number;
-    class_name: string;
-    subject_name: string;
-    open_datetime: string;
-    close_datetime: string;
-    classroom_id: number;
-    exam_file_ids: number [];
-    exam_files: ExamFileData[];
-    submitted: boolean;
-    submit_id: number | null;
-    score: number | null;
-    comment: string | null;
-}
-
-export interface ExamFileData {
-    id: number;
-    name: string;
-    url: string;
-}
-
-export type GetExamParams = Record<string, string>;
-
-export interface SubmitExamResponse {
-    success: boolean;
-    message?: string;
-    data: SubmitExamData;
-}
-
-export interface SubmitExamData {
-    id: number;
-    score: number;
-    comment: string;
-}
+export type {
+  ExamResponse,
+  ExamData,
+  ExamFileData,
+  GetExamParams,
+  SubmitExamResponse,
+  SubmitExamData,
+  SubmitExamError,
+};
 
 export const getExam = async (
     params?: GetExamParams
@@ -55,20 +31,75 @@ export const getExam = async (
     }
 };
 
-export type SubmitExamError = { success: false; status?: number; message?: string };
 
-export const submitExam = async (examId: number, files: File[]): Promise<SubmitExamResponse | SubmitExamError> => {
+export const submitExam = async (
+    examId: number, 
+    options?: { 
+        files?: File[]; 
+        answerText?: string;
+        suspectedAiUsed?: boolean;
+        aiSuspicionDetails?: string;
+    }
+): Promise<SubmitExamResponse | SubmitExamError> => {
     try {
         const formData = new FormData();
         formData.append("exam_id", String(examId));
-        files.forEach((file) => formData.append("files", file));
-        const response = await api.postFormData<SubmitExamResponse | SubmitExamData>("/class/exams/submit", formData);
-        if (response && typeof response === "object" && "id" in response) {
-            return { success: true, data: response as SubmitExamData };
+        
+        if (options?.files && options.files.length > 0) {
+            options.files.forEach((file) => formData.append("files", file));
         }
-        return response as SubmitExamResponse;
+        
+        if (options?.answerText) {
+            formData.append("answer_text", options.answerText);
+        }
+
+        if (options?.suspectedAiUsed !== undefined) {
+            formData.append("suspected_ai_used", String(options.suspectedAiUsed));
+        }
+
+        if (options?.aiSuspicionDetails) {
+            formData.append("ai_suspicion_details", options.aiSuspicionDetails);
+        }
+        
+        const response = await api.postFormData<{ success: boolean; code?: number; message?: string; data?: number | SubmitExamData }>("/class/exams/submit", formData);
+        
+        if (response && typeof response === "object" && response.success === true) {
+            if (typeof response.data === "number") {
+                return { 
+                    success: true, 
+                    data: { 
+                        id: response.data, 
+                        score: 0, 
+                        comment: "" 
+                    } as SubmitExamData 
+                };
+            }
+            if (response.data && typeof response.data === "object" && "id" in response.data) {
+                return { success: true, data: response.data as SubmitExamData };
+            }
+            return { 
+                success: true, 
+                data: { 
+                    id: Date.now(), 
+                    score: 0, 
+                    comment: "" 
+                } as SubmitExamData 
+            };
+        }
+        
+        return { success: false, status: response?.code, message: response?.message };
     } catch (error: unknown) {
         const status = (error as { status?: number })?.status;
         return { success: false, status };
     }
+};
+
+// Deprecated: Use submitExam with options.files instead
+export const submitExamWithFiles = async (examId: number, files: File[]): Promise<SubmitExamResponse | SubmitExamError> => {
+    return submitExam(examId, { files });
+};
+
+// Deprecated: Use submitExam with options.answerText instead
+export const submitExamWithText = async (examId: number, answerText: string): Promise<SubmitExamResponse | SubmitExamError> => {
+    return submitExam(examId, { answerText });
 };

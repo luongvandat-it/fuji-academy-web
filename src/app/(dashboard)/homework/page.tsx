@@ -1,26 +1,37 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
+import { Text, Loading } from "@/components/ui";
+import { getExam } from "@/service/modules/exam/logic";
+import type { ExamData } from "@/service/modules/exam/logic";
 import {
-  AssignmentsFilterTabs,
   AssignmentsSearchBar,
   AssignmentsList,
 } from "./components";
-import { MOCK_ASSIGNMENTS } from "./mockData";
-import type { Assignment, AssignmentFilterTab } from "./types";
+import type { Assignment } from "./types";
 import styles from "./homework.module.scss";
 
-function filterByTab(
-  list: Assignment[],
-  tab: AssignmentFilterTab
-): Assignment[] {
-  if (tab === "all") return list;
-  if (tab === "pending") {
-    return list.filter(
-      (a) => a.status === "pending_due" || a.status === "submitted"
-    );
+function parseExamsResponse(res: unknown): ExamData[] {
+  if (res && typeof res === "object" && "success" in res && "data" in res) {
+    const data = (res as { data: ExamData[] }).data;
+    return Array.isArray(data) ? data : [];
   }
-  return list.filter((a) => a.status === "graded");
+  return Array.isArray(res) ? (res as ExamData[]) : [];
+}
+
+function convertExamToAssignment(exam: ExamData): Assignment {
+  return {
+    id: String(exam.exam_id),
+    category: exam.subject_name,
+    title: exam.exam_name,
+    status: exam.submitted ? (exam.score != null ? "graded" : "submitted") : "pending_due",
+    dueDate: exam.close_datetime,
+    submittedAt: exam.submitted ? exam.close_datetime : undefined,
+    score: exam.score ?? undefined,
+    maxScore: 10,
+    feedback: exam.comment ?? undefined,
+  };
 }
 
 function filterBySearch(list: Assignment[], q: string): Assignment[] {
@@ -35,28 +46,75 @@ function filterBySearch(list: Assignment[], q: string): Assignment[] {
 }
 
 export default function HomeworkPage() {
-  const [activeTab, setActiveTab] = useState<AssignmentFilterTab>("all");
+  const router = useRouter();
   const [searchQuery, setSearchQuery] = useState("");
+  const [assignments, setAssignments] = useState<Assignment[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  const assignments = useMemo(() => {
-    const byTab = filterByTab(MOCK_ASSIGNMENTS, activeTab);
-    return filterBySearch(byTab, searchQuery);
-  }, [activeTab, searchQuery]);
+  useEffect(() => {
+    const signal = { cancelled: false };
+    
+    async function loadAssignments() {
+      setLoading(true);
+      try {
+        const res = await getExam();
+        if (signal.cancelled) return;
+        
+        const exams = parseExamsResponse(res);
+        const converted = exams.map(convertExamToAssignment);
+        setAssignments(converted);
+      } catch {
+        if (!signal.cancelled) {
+          setAssignments([]);
+        }
+      } finally {
+        if (!signal.cancelled) {
+          setLoading(false);
+        }
+      }
+    }
+    
+    loadAssignments();
+    return () => {
+      signal.cancelled = true;
+    };
+  }, []);
+
+  const filteredAssignments = useMemo(() => {
+    return filterBySearch(assignments, searchQuery);
+  }, [assignments, searchQuery]);
 
   const handleSubmit = (id: string) => {
-    console.log("Submit assignment", id);
+    router.push(`/homework/${id}`);
   };
   const handleDoAssignment = (id: string) => {
-    console.log("Do assignment", id);
+    router.push(`/homework/${id}`);
   };
   const handleViewSubmission = (id: string) => {
-    console.log("View submission", id);
+    router.push(`/homework/${id}`);
   };
 
+  if (loading) {
+    return (
+      <div className={`${styles.page} homework-page`}>
+        <header className={styles.header}>
+          <Text variant="HEADING.ONE" as="h1" className={styles.title}>
+            Bài tập
+          </Text>
+        </header>
+        <div className={styles.loading}>
+          <Loading />
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className={styles.page}>
+    <div className={`${styles.page} homework-page`}>
       <header className={styles.header}>
-        <h1 className={styles.title}>Bài tập</h1>
+        <Text variant="HEADING.ONE" as="h1" className={styles.title}>
+          Bài tập
+        </Text>
       </header>
 
       <div className={styles.toolbar}>
@@ -65,11 +123,10 @@ export default function HomeworkPage() {
           onChange={setSearchQuery}
           placeholder="Tìm kiếm bài tập..."
         />
-        <AssignmentsFilterTabs activeTab={activeTab} onTabChange={setActiveTab} />
       </div>
 
       <AssignmentsList
-        assignments={assignments}
+        assignments={filteredAssignments}
         onSubmit={handleSubmit}
         onDoAssignment={handleDoAssignment}
         onViewSubmission={handleViewSubmission}

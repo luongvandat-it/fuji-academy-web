@@ -5,3 +5,6 @@ export { ScheduleSidebar } from "./ScheduleSidebar";
 export { SessionModal } from "./SessionModal";
 export { ScheduleTabs } from "./ScheduleTabs";
 export { ScheduleWeekGrid } from "./ScheduleWeekGrid";
+export { MiniCalendar } from "./MiniCalendar";
+export { DayScheduleModal } from "./DayScheduleModal";
+export { TodaySchedule } from "./TodaySchedule";

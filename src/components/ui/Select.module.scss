@@ -1,0 +1,63 @@
+@reference "../../app/globals.css";
+
+.root {
+  @apply relative z-10 flex flex-col gap-1.5;
+}
+
+.label {
+  @apply text-gray-900;
+}
+
+.selectWrapper {
+  @apply relative;
+}
+
+.selectButton {
+  @apply flex w-full items-center justify-between rounded-lg border border-gray-300 bg-white px-3 py-2.5 text-left text-gray-900;
+  @apply focus:border-focus focus:outline-none focus:ring-1 focus:ring-focus;
+  @apply disabled:cursor-not-allowed disabled:opacity-50;
+  min-height: 2.5rem;
+}
+
+.selectValue {
+  @apply flex-1 truncate;
+}
+
+.selectChevron {
+  @apply ml-2 size-5 shrink-0 text-gray-500 transition-transform duration-200;
+}
+
+.selectChevronOpen {
+  @apply rotate-180;
+}
+
+.selectError {
+  @apply border-red-500 focus:border-red-500 focus:ring-red-500;
+}
+
+.selectDisabled {
+  @apply cursor-not-allowed opacity-50;
+}
+
+.dropdown {
+  @apply absolute left-0 right-0 top-full z-50 mt-1 max-h-60 overflow-y-auto rounded-lg border border-gray-200 bg-white py-1 shadow-lg;
+}
+
+.dropdownItem {
+  @apply w-full cursor-pointer px-3 py-2 text-left text-sm text-gray-700 transition-colors;
+  @apply hover:bg-gray-50 hover:text-gray-900;
+}
+
+.dropdownItemSelected {
+  @apply bg-blue-50 font-medium text-blue-700;
+}
+
+.hiddenSelect {
+  @apply absolute opacity-0 pointer-events-none;
+  position: absolute;
+  left: -9999px;
+}
+
+.errorText {
+  @apply text-red-600;
+}

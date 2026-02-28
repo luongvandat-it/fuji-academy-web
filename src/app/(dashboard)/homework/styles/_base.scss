@@ -1,0 +1,193 @@
+.page {
+  @apply flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden;
+  height: 100%;
+  max-height: 100%;
+  width: 100%;
+}
+
+.header {
+  @apply flex min-w-0 items-center justify-between gap-2;
+}
+
+.title {
+  @apply min-w-0 truncate text-lg font-bold tracking-tight text-gray-900;
+}
+
+.toolbar {
+  @apply mt-2 flex min-w-0 flex-col gap-3;
+}
+
+.searchWrap {
+  @apply relative flex w-full flex-1 items-center;
+  min-width: 0;
+}
+
+.searchWrapIcon {
+  @apply pointer-events-none absolute left-3 size-4 text-gray-400;
+}
+
+.searchInput {
+  @apply w-full rounded-xl border border-transparent bg-[#f5f5f5] py-2.5 pl-10 pr-4 text-sm text-gray-900 placeholder:text-gray-400 focus:border-gray-200 focus:bg-white focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-0;
+}
+
+.tabsRoot {
+  @apply flex w-full min-w-0 overflow-hidden rounded-xl bg-[#f0f2f5] p-0.5;
+}
+
+.tabBtn {
+  @apply flex-1 min-w-0 truncate px-3 py-2 text-xs font-medium transition-all duration-200 ease-out;
+
+  &:first-child {
+    @apply rounded-l-[11px];
+  }
+
+  &:last-child {
+    @apply rounded-r-[11px];
+  }
+}
+
+.tabBtnActive {
+  @apply font-medium text-[#333333] shadow-[0_2px_4px_rgba(0,0,0,0.05)];
+  background-color: #ffffff;
+}
+
+.tabBtnInactive {
+  @apply bg-transparent text-[#6c757d] hover:text-[#333333];
+}
+
+.listScroll {
+  @apply mt-3 min-h-0 min-w-0 flex-1 overflow-x-hidden overflow-y-auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.list {
+  @apply flex flex-col gap-3 pb-6;
+}
+
+.card {
+  @apply flex min-w-0 flex-row gap-3 rounded-lg bg-white p-3 shadow-[0_2px_8px_rgba(0,0,0,0.06)];
+}
+
+.cardLeft {
+  @apply flex min-w-0 flex-1 gap-3;
+}
+
+.cardIconWrap {
+  @apply flex size-10 shrink-0 items-center justify-center rounded-lg;
+
+  svg {
+    @apply size-5;
+  }
+}
+
+.cardIconWrapPending {
+  @apply bg-[#fff0e6] text-[#e67e22];
+}
+
+.cardIconWrapSubmitted {
+  @apply bg-[#e6e6ff] text-[#6c5ce7];
+}
+
+.cardIconWrapGraded {
+  @apply bg-[#e6ffe6] text-[#28a745];
+}
+
+.cardBody {
+  @apply flex min-w-0 flex-1 flex-col;
+}
+
+.cardCategory {
+  @apply mt-0.5 min-w-0 font-medium text-[#333333];
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+.cardTitleRow {
+  @apply flex items-center gap-2;
+}
+
+.cardTitle {
+  @apply mt-0.5 min-w-0 font-bold text-[#333333];
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.cardTitleActions {
+  @apply flex shrink-0 items-center;
+}
+
+.cardDesc,
+.cardMeta {
+  @apply mt-1 line-clamp-2 text-gray-600;
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+.cardRight {
+  @apply hidden shrink-0 items-center;
+}
+
+.cardFooter {
+  @apply flex items-center justify-end gap-2;
+  flex-wrap: nowrap;
+}
+
+.dueBadge {
+  @apply font-medium text-[#dc3545];
+  flex-shrink: 1;
+  min-width: 0;
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+.dueBadgeNormal {
+  @apply font-medium text-[#666666];
+  flex-shrink: 1;
+  min-width: 0;
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+.scoreLabel {
+  @apply font-semibold uppercase tracking-wide text-[#333333];
+  font-size: 0.625rem;
+  line-height: 1rem;
+}
+
+.scoreValue {
+  @apply font-bold text-[#28a745];
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
+.gradingLabel {
+  @apply font-medium text-[#666666];
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+.actionBtn {
+  @apply rounded-lg bg-[#212529] font-medium text-white shadow-[0_1px_2px_rgba(0,0,0,0.08)] transition-colors hover:bg-[#343a40];
+  white-space: nowrap;
+  flex-shrink: 0;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+.actionLink {
+  @apply font-medium text-[#007bff] underline-offset-2 hover:underline;
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+.gradedFooter {
+  @apply flex flex-col items-end gap-0.5;
+}
+
+.loading {
+  @apply flex items-center justify-center py-16 text-gray-500;
+}

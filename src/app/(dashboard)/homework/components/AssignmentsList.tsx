@@ -1,5 +1,6 @@
 "use client";
 
+import { Text } from "@/components/ui";
 import { AssignmentCard } from "./AssignmentCard";
 import type { Assignment } from "../types";
 import styles from "../homework.module.scss";
@@ -20,7 +21,9 @@ export function AssignmentsList({
   if (assignments.length === 0) {
     return (
       <div className={styles.listScroll}>
-        <p className={styles.cardMeta}>Chưa có bài tập nào.</p>
+        <Text variant="BODY.MEDIUM" as="p" className={styles.cardMeta}>
+          Chưa có bài tập nào.
+        </Text>
       </div>
     );
   }

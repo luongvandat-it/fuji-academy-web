@@ -1,0 +1,353 @@
+.page {
+  @apply flex min-h-0 min-w-0 max-w-full flex-1 flex-col overflow-hidden;
+  width: 100%;
+  background-color: white;
+  height: 100%;
+  max-height: 100%;
+}
+
+.contentScroll {
+  @apply flex min-h-0 min-w-0 flex-1 flex-col overflow-y-auto;
+  flex: 1 1 0%;
+  min-height: 0;
+  padding-bottom: 0;
+  -webkit-overflow-scrolling: touch;
+  
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    @apply rounded-full bg-gray-300;
+  }
+  
+  &::-webkit-scrollbar-thumb:hover {
+    @apply bg-gray-400;
+  }
+}
+
+.header {
+  @apply flex min-w-0 shrink-0 flex-wrap items-start justify-between gap-2 px-0 pb-3;
+}
+
+.headerIcon {
+  @apply mt-1 shrink-0 text-gray-500;
+}
+
+.title {
+  @apply min-w-0 truncate text-xl font-bold tracking-tight text-gray-900;
+}
+
+.summaryCard {
+  @apply min-w-0 rounded-2xl border border-black/[0.06] bg-white p-4 shadow-[0_2px_8px_rgba(0,0,0,0.06)];
+}
+
+.summaryLabel {
+  @apply text-xs font-medium text-gray-500;
+}
+
+.summaryAmount {
+  @apply mt-1 min-w-0 break-all text-xl font-bold text-gray-900;
+}
+
+.section {
+  @apply min-w-0;
+}
+
+.sectionTitle {
+  @apply mb-2 text-xs font-semibold text-gray-700;
+}
+
+.debtList {
+  @apply list-none space-y-2 p-0;
+}
+
+.debtCard {
+  @apply flex w-full min-w-0 flex-col gap-2 rounded-2xl border border-black/[0.06] bg-white p-3 shadow-[0_2px_8px_rgba(0,0,0,0.06)];
+}
+
+.debtCardBody {
+  @apply min-w-0 flex-1;
+}
+
+.debtName {
+  @apply min-w-0 truncate font-semibold text-gray-900;
+}
+
+.debtMeta {
+  @apply flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-gray-500;
+}
+
+.debtAmounts {
+  @apply flex min-w-0 flex-wrap items-baseline gap-2;
+}
+
+.debtRemaining {
+  @apply font-semibold text-gray-900;
+}
+
+.debtTotal {
+  @apply text-gray-500 line-through;
+}
+
+.debtBadge {
+  @apply shrink-0 self-start rounded-full px-2.5 py-1 text-xs font-medium;
+}
+
+.debtBadgePaid {
+  @apply bg-emerald-50 text-emerald-700;
+}
+
+.debtBadgePending {
+  @apply bg-amber-50 text-amber-700;
+}
+
+.debtBadgeOverdue {
+  @apply bg-red-50 text-red-700;
+}
+
+.loading {
+  @apply flex items-center justify-center py-16 text-gray-500;
+}
+
+.empty {
+  @apply rounded-lg border border-dashed border-gray-200 bg-gray-50/50 px-4 py-8 text-center text-sm text-gray-500;
+}
+
+.emptyTitle {
+  @apply text-sm font-medium text-gray-700;
+}
+
+.error {
+  @apply rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700;
+}
+
+.subtitle {
+  @apply min-w-0 text-xs text-gray-500;
+}
+
+.grid {
+  @apply grid min-h-0 min-w-0 gap-4;
+  align-content: start;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+.mainCol {
+  @apply flex min-w-0 flex-col gap-3;
+  padding-bottom: 0;
+  margin-bottom: 0;
+  
+  > *:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+}
+
+.sideCol {
+  @apply flex min-w-0 flex-col gap-3;
+  padding-bottom: 0;
+  margin-bottom: 0;
+  
+  > *:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+}
+
+.upcomingPaymentCard {
+  @apply relative min-w-0 rounded-xl border border-black/[0.06] bg-white p-3 shadow-[0_2px_8px_rgba(0,0,0,0.06)];
+}
+
+.upcomingPaymentAmount {
+  @apply min-w-0 break-all text-lg font-bold text-gray-900;
+}
+
+.sectionHead {
+  @apply flex min-w-0 flex-wrap items-center justify-between gap-2;
+}
+
+.sectionHeadTitle {
+  @apply min-w-0 truncate text-sm font-semibold text-gray-700;
+}
+
+.payAllBtn {
+  @apply rounded-lg px-3 py-1.5 text-sm font-medium bg-[#150601] text-white transition-colors hover:bg-[#3A140C];
+}
+
+.invoiceList {
+  @apply flex list-none flex-col gap-3 p-0;
+}
+
+.invoiceCard {
+  @apply flex min-w-0 flex-col gap-2 rounded-lg border border-black/[0.06] bg-white p-3 shadow-[0_2px_8px_rgba(0,0,0,0.06)];
+}
+
+.invoiceCardTop {
+  @apply flex min-w-0 gap-3;
+}
+
+.invoiceIconWrap {
+  @apply flex size-10 shrink-0 items-center justify-center rounded-lg bg-amber-50 text-amber-600;
+
+  svg {
+    @apply size-5;
+  }
+}
+
+.invoiceBody {
+  @apply min-w-0 flex-1;
+}
+
+.invoiceCourseName {
+  @apply min-w-0 truncate text-sm font-semibold text-gray-900;
+}
+
+.invoiceMeta {
+  @apply mt-0.5 text-[11px] text-gray-500;
+}
+
+.invoiceRow {
+  @apply flex flex-wrap items-center justify-between gap-2;
+}
+
+.invoiceAmount {
+  @apply font-semibold text-gray-900;
+}
+
+.invoiceBadgeUnpaid {
+  @apply shrink-0 rounded-full bg-amber-50 px-2.5 py-1 text-xs font-medium text-amber-700;
+}
+
+.invoiceBadgePaid {
+  @apply shrink-0 rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-medium text-emerald-700;
+}
+
+.installmentToggle {
+  @apply mt-2 flex w-full items-center justify-between gap-2 rounded-lg border border-gray-200 bg-gray-50/50 px-3 py-2 text-left text-sm text-gray-700 transition-colors hover:bg-gray-100;
+}
+
+.installmentList {
+  @apply mt-2 list-none space-y-1.5 rounded-lg border border-gray-200 bg-white p-2;
+}
+
+.installmentItem {
+  @apply flex items-center justify-between gap-2 rounded px-2 py-1.5 text-sm text-gray-700;
+}
+
+.chevronDown {
+  @apply shrink-0 transition-transform duration-200;
+}
+
+.chevronDownOpen {
+  @apply rotate-180;
+}
+
+.historyTableWrap {
+  @apply min-w-0 overflow-x-auto rounded-lg border border-black/[0.06] bg-white shadow-[0_2px_8px_rgba(0,0,0,0.06)];
+  -webkit-overflow-scrolling: touch;
+}
+
+.historyTable {
+  @apply w-full min-w-[260px] border-collapse text-left text-xs;
+}
+
+.historyTable th {
+  @apply border-b border-gray-200 bg-gray-50/80 px-3 py-2 font-semibold uppercase tracking-wide text-gray-600;
+}
+
+.historyTable td {
+  @apply border-b border-gray-100 px-3 py-2 text-gray-700 last:border-b-0;
+}
+
+.historyBadgePaid {
+  @apply inline-flex rounded-full bg-emerald-50 px-2 py-0.5 text-xs font-medium text-emerald-700;
+}
+
+.paymentPanel {
+  @apply min-w-0 rounded-xl border border-black/[0.06] bg-white p-4 shadow-[0_2px_8px_rgba(0,0,0,0.06)];
+}
+
+.bankList {
+  @apply flex list-none flex-col gap-2 p-0;
+
+  > li {
+    @apply min-w-0 w-full;
+  }
+}
+
+.bankItem {
+  @apply flex w-full min-w-0 cursor-pointer items-center gap-3 rounded-xl border border-gray-200 p-3 text-left transition-colors hover:border-[var(--theme-focus)] hover:bg-[var(--theme-primary-50)]/50;
+}
+
+.bankItemActive {
+  @apply border-[var(--theme-focus)] bg-[var(--theme-primary-50)];
+}
+
+.bankLogo {
+  @apply flex size-10 shrink-0 items-center justify-center rounded-full bg-amber-50 text-sm font-bold text-amber-700;
+}
+
+.bankInfo {
+  @apply min-w-0 flex-1;
+}
+
+.bankName {
+  @apply text-sm font-medium text-gray-900;
+}
+
+.bankNumber {
+  @apply truncate text-xs text-gray-500;
+}
+
+.qrWrap {
+  @apply mt-3 flex flex-col items-center justify-center rounded-lg border border-gray-200 bg-gray-50/50 p-4;
+}
+
+.qrImage {
+  @apply h-32 w-32 rounded-lg bg-white p-2 object-contain;
+}
+
+.qrLabel {
+  @apply mt-2 text-center text-xs text-gray-500;
+}
+
+.qrDownloadBtn {
+  @apply mt-3 rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50;
+}
+
+.uploadCard {
+  @apply min-w-0 rounded-xl border border-black/[0.06] bg-white p-4 shadow-[0_2px_8px_rgba(0,0,0,0.06)];
+}
+
+.uploadDesc {
+  @apply mt-1 text-sm text-gray-500;
+}
+
+.uploadZone {
+  @apply mt-2 flex flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-200 bg-gray-50/30 py-6 text-center text-xs text-gray-500 transition-colors hover:border-gray-300 hover:bg-gray-50/50;
+}
+
+.supportCard {
+  @apply min-w-0 rounded-xl border border-black/[0.06] bg-white p-4 shadow-[0_2px_8px_rgba(0,0,0,0.06)];
+}
+
+.supportLink {
+  @apply mt-2 inline-flex items-center gap-1 text-sm font-medium text-[var(--theme-focus)] hover:underline;
+}
+
+.uploadInput {
+  @apply sr-only;
+}
+
+.uploadZoneIcon {
+  @apply mx-auto size-8 text-gray-400;
+}
+
+.uploadZoneText {
+  @apply mt-2 block;
+}

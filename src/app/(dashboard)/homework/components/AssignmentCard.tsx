@@ -1,5 +1,6 @@
 "use client";
 
+import { Button, Text } from "@/components";
 import { CheckMarkIcon, DocumentIcon } from "@/icon";
 import type { Assignment } from "../types";
 import styles from "../homework.module.scss";
@@ -51,23 +52,90 @@ export function AssignmentCard({
           )}
         </div>
         <div className={styles.cardBody}>
-          <p className={styles.cardCategory}>{category}</p>
-          <h3 className={styles.cardTitle}>{title}</h3>
+          <Text variant="LABEL.SMALL" as="p" className={styles.cardCategory}>
+            {category}
+          </Text>
+          <div className={styles.cardTitleRow}>
+            <Text variant="HEADING.THREE" as="h3" className={styles.cardTitle}>
+              {title}
+            </Text>
+            {status === "pending_due" && (
+              <div className={styles.cardTitleActions}>
+                {assignment.dueInDays != null && assignment.dueInDays <= 3 ? (
+                  <Button
+                    type="button"
+                    variant="primary"
+                    className={styles.actionBtn}
+                    onClick={() => onSubmit?.(id)}
+                  >
+                    <Text variant="BUTTON_LABEL.SMALL" as="span">
+                      Nộp bài ngay
+                    </Text>
+                  </Button>
+                ) : (
+                  <Button
+                    type="button"
+                    variant="primary"
+                    className={styles.actionBtn}
+                    onClick={() => onDoAssignment?.(id)}
+                  >
+                    <Text variant="BUTTON_LABEL.SMALL" as="span">
+                      Làm bài
+                    </Text>
+                  </Button>
+                )}
+              </div>
+            )}
+            {status !== "pending_due" && (
+              <div className={styles.cardTitleActions}>
+                {status === "submitted" && (
+                  <>
+                    <Text variant="LABEL.SMALL" as="span" className={styles.gradingLabel}>
+                      Đang chấm điểm
+                    </Text>
+                    <Button
+                      type="button"
+                      variant="link"
+                      className={styles.actionLink}
+                      onClick={() => onViewSubmission?.(id)}
+                    >
+                      <Text variant="LABEL.SMALL" as="span">
+                        Xem bài đã nộp
+                      </Text>
+                    </Button>
+                  </>
+                )}
+                {status === "graded" && assignment.score != null && (
+                  <div className={styles.gradedFooter}>
+                    <Text variant="CAPTION" as="span" className={styles.scoreLabel}>
+                      ĐIỂM SỐ
+                    </Text>
+                    <Text variant="HEADING.TWO" as="span" className={styles.scoreValue}>
+                      {assignment.score}
+                      {assignment.maxScore != null ? `/${assignment.maxScore}` : ""}
+                    </Text>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
           {description && (
-            <p className={styles.cardDesc}>{description}</p>
+            <Text variant="BODY.SMALL" as="p" className={styles.cardDesc}>
+              {description}
+            </Text>
           )}
           {status === "graded" &&
             assignment.submittedAt &&
             assignment.feedback && (
-              <p className={styles.cardMeta}>
+              <Text variant="BODY.SMALL" as="p" className={styles.cardMeta}>
                 Đã nộp: {formatSubmittedDate(assignment.submittedAt)} • Phản hồi
                 từ giảng viên: {assignment.feedback}
-              </p>
+              </Text>
             )}
           {status === "submitted" && assignment.submittedAt && (
-            <p className={styles.cardMeta}>
+            <Text variant="BODY.SMALL" as="p" className={styles.cardMeta}>
               {formatSubmittedAt(assignment.submittedAt)}
-            </p>
+            </Text>
           )}
         </div>
       </div>
@@ -75,7 +143,9 @@ export function AssignmentCard({
         <div className={styles.cardFooter}>
           {status === "pending_due" && (
             <>
-              <span
+              <Text
+                variant="LABEL.SMALL"
+                as="span"
                 className={
                   assignment.dueInDays != null && assignment.dueInDays <= 2
                     ? styles.dueBadge
@@ -84,45 +154,58 @@ export function AssignmentCard({
               >
                 {assignment.dueInDays != null &&
                   `Hết hạn trong ${assignment.dueInDays} ngày`}
-              </span>
+              </Text>
               {assignment.dueInDays != null && assignment.dueInDays <= 3 ? (
-                <button
+                <Button
                   type="button"
+                  variant="primary"
                   className={styles.actionBtn}
                   onClick={() => onSubmit?.(id)}
                 >
-                  Nộp bài ngay
-                </button>
+                  <Text variant="BUTTON_LABEL.SMALL" as="span">
+                    Nộp bài ngay
+                  </Text>
+                </Button>
               ) : (
-                <button
+                <Button
                   type="button"
+                  variant="primary"
                   className={styles.actionBtn}
                   onClick={() => onDoAssignment?.(id)}
                 >
-                  Làm bài
-                </button>
+                  <Text variant="BUTTON_LABEL.SMALL" as="span">
+                    Làm bài
+                  </Text>
+                </Button>
               )}
             </>
           )}
           {status === "submitted" && (
             <>
-              <span className={styles.gradingLabel}>Đang chấm điểm</span>
-              <button
+              <Text variant="LABEL.SMALL" as="span" className={styles.gradingLabel}>
+                Đang chấm điểm
+              </Text>
+              <Button
                 type="button"
+                variant="link"
                 className={styles.actionLink}
                 onClick={() => onViewSubmission?.(id)}
               >
-                Xem bài đã nộp
-              </button>
+                <Text variant="LABEL.SMALL" as="span">
+                  Xem bài đã nộp
+                </Text>
+              </Button>
             </>
           )}
           {status === "graded" && assignment.score != null && (
             <div className={styles.gradedFooter}>
-              <span className={styles.scoreLabel}>ĐIỂM SỐ</span>
-              <span className={styles.scoreValue}>
+              <Text variant="CAPTION" as="span" className={styles.scoreLabel}>
+                ĐIỂM SỐ
+              </Text>
+              <Text variant="HEADING.TWO" as="span" className={styles.scoreValue}>
                 {assignment.score}
                 {assignment.maxScore != null ? `/${assignment.maxScore}` : ""}
-              </span>
+              </Text>
             </div>
           )}
         </div>
