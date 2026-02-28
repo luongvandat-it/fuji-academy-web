@@ -48,11 +48,6 @@ export function TodaySchedule({
           <Text variant="HEADING.TWO" as="h2" className={styles.todayScheduleTitle}>
             Lịch học hôm nay
           </Text>
-          <div className={styles.todayScheduleIcon}>
-            <Text variant="HEADING.TWO" as="span" className={styles.todayScheduleIconText}>
-              D
-            </Text>
-          </div>
         </div>
       </div>
 

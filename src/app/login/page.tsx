@@ -37,7 +37,7 @@ export default function LoginPage() {
           <div className={styles.heroBlur1} />
           <div className={styles.heroBlur2} />
           <Text variant="HEADING.ONE" className={styles.heroTitle}>
-              Làm chủ tiếng Anh hôm nay
+              Welcome to Fourier LMS
             </Text>
           <div className={styles.heroLogo}>
             <Logo />

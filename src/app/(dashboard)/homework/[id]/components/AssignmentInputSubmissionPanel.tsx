@@ -102,12 +102,6 @@ export function AssignmentInputSubmissionPanel({
     
     const text = content.replace(/<[^>]*>/g, "").trim();
     const newCharCount = text.length;
-    const charDiff = newCharCount - lastCharCountRef.current;
-
-    if (charDiff > 1) {
-      console.log("dangerous");
-      setSuspectedAiUsed(true);
-    }
 
     lastCharCountRef.current = newCharCount;
     setCharCount(newCharCount);
@@ -118,21 +112,47 @@ export function AssignmentInputSubmissionPanel({
   useEffect(() => {
     if (typeof window === "undefined") return;
     
+    let cleanup: (() => void) | null = null;
+    
     const timer = setTimeout(() => {
       const editorElement = document.querySelector(".ql-editor");
       if (!editorElement) return;
 
-      const handlePaste = () => {
+      const handlePaste = (e: ClipboardEvent) => {
+        console.log("dangerous");
         setSuspectedAiUsed(true);
       };
 
-      editorElement.addEventListener("paste", handlePaste);
-      return () => {
-        editorElement.removeEventListener("paste", handlePaste);
+      editorElement.addEventListener("paste", handlePaste as EventListener, true);
+      window.addEventListener("paste", handlePaste, true);
+      
+      cleanup = () => {
+        editorElement.removeEventListener("paste", handlePaste as EventListener, true);
+        window.removeEventListener("paste", handlePaste, true);
       };
-    }, 100);
+    }, 500);
 
-    return () => clearTimeout(timer);
+    return () => {
+      clearTimeout(timer);
+      if (cleanup) cleanup();
+    };
+  }, [value]);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const handleVisibilityChange = () => {
+      if (document.hidden || document.visibilityState === "hidden") {
+        console.log("dangerous");
+        setSuspectedAiUsed(true);
+      }
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
   }, []);
 
   const handleConfirm = useCallback(async () => {
