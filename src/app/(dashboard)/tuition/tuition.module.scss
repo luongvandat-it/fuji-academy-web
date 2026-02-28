@@ -1,4 +1,4 @@
-@reference "../../globals.css";
+@use "./styles/_base.scss" as *;
+@use "./styles/_responsive.scss" as *;
 
-@import "./styles/_base.scss";
-@import "./styles/_responsive.scss";
+@reference "../../globals.css";
