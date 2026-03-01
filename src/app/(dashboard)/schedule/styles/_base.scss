@@ -222,7 +222,7 @@
 }
 
 .dayHeaderToday {
-  @apply bg-primary-50 text-primary-700;
+  @apply bg-primary-100 text-primary-800;
 }
 
 .cellInner {
@@ -417,7 +417,15 @@
 }
 
 .miniCalendarWeekDayToday {
-  @apply border-blue-500;
+  @apply border-primary-500 bg-primary-100 text-primary-800;
+}
+
+.miniCalendarWeekDaySelected.miniCalendarWeekDayToday {
+  @apply border-blue-600 bg-blue-600 text-white;
+  .miniCalendarWeekDayLabel,
+  .miniCalendarWeekDayNumber {
+    @apply text-white;
+  }
 }
 
 .miniCalendarWeekDayWeekend {
@@ -501,7 +509,7 @@
 }
 
 .miniCalendarDayInWeek {
-  @apply bg-primary-50/70 text-primary-800;
+  @apply bg-primary-100 text-primary-800;
 }
 
 .miniCalendarDayToday {
@@ -556,7 +564,7 @@
 }
 
 .dayHeaderToday {
-  @apply bg-primary-50 text-primary-700;
+  @apply bg-primary-100 text-primary-800;
 }
 
 .weekDayHeader {
@@ -564,7 +572,7 @@
 }
 
 .weekDayHeaderToday {
-  @apply bg-primary-50 text-primary-700;
+  @apply bg-primary-100 text-primary-800;
 }
 
 .weekDayHeaderHasEvents {
@@ -621,7 +629,7 @@
 }
 
 .weekCellToday {
-  @apply bg-primary-50/30;
+  @apply bg-primary-100/50;
 }
 
 .weekCellInner {
