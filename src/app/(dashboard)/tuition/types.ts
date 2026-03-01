@@ -6,11 +6,23 @@ export interface UpcomingInvoice {
   amount: number;
   currencySymbol: string;
   status: "unpaid" | "paid" | "partial";
+  installments?: Array<{
+    id: string;
+    label: string;
+    dueDate: string;
+    amount: number;
+    paid: boolean;
+  }>;
+}
+
 export interface CenterBankAccount {
   id: string;
   bankName: string;
   accountNumber: string;
   accountName: string;
+  qrContent: string;
+}
+
 export interface PaymentHistoryItem {
   id: string;
   serviceName: string;
