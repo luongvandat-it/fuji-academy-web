@@ -57,6 +57,15 @@ export default function LoginPage() {
               className={styles.form}
               onSubmit={(e) => e.preventDefault()}
             >
+               <Input
+                label="Mã trung tâm"
+                name="dbname"
+                type="text"
+                placeholder="Tên cơ sở dữ liệu"
+                autoComplete="database-name"
+                value={dbname}
+                readOnly
+              />
               <Input
                 label="Địa chỉ email"
                 name="email"
@@ -74,15 +83,6 @@ export default function LoginPage() {
                 autoComplete="current-password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-              />
-              <Input
-                label="Mã trung tâm"
-                name="dbname"
-                type="text"
-                placeholder="Tên cơ sở dữ liệu"
-                autoComplete="database-name"
-                value={dbname}
-                readOnly
               />
               {error && (
                 <p className={styles.errorText} role="alert">
@@ -116,13 +116,6 @@ export default function LoginPage() {
                 </Text>
               </Button>
             </form>
-
-            <Text variant="BODY.SMALL" as="p" className={styles.footerText}>
-              Chưa có tài khoản?{" "}
-              <Link href="/signup" className={styles.signUpLink}>
-                Đăng ký miễn phí
-              </Link>
-            </Text>
           </div>
         </section>
       </main>
