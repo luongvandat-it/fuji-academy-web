@@ -19,7 +19,7 @@
     "@tiptap/react": "^3.20.0",
     "@tiptap/starter-kit": "^3.20.0",
     "axios": "^1.13.4",
-    "next": "16.1.6",
+    "next": "16.2.3",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "react-player": "^3.4.0",
